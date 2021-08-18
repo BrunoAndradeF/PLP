@@ -9,13 +9,8 @@ type Pokemons = [Pokemon]
 type Nome = String
 type Vida = Int
 type Tipo = String
-type Vantagem = Int --valor a ser multiplicado quando o pokemon rival é inferior
-data Pokemon = Pokemon Nome Vida Tipo Vantagem
+data Pokemon = Pokemon Nome Vida Tipo
         deriving (Show, Read) 
-
-
-
-
 
 
 --funcao que inicia o jogo
@@ -25,18 +20,26 @@ iniciar = do
         system "cls"
         menuInicial
 
-
 --funcao que grava os principais dados do jogo
 gravaDados :: Pokemons -> IO Pokemons
 gravaDados dados = do        
-        arq <- openFile "dados.txt" WriteMode
-        hPutStrLn arq (show ((Pokemon "Zeca skull" 100 "Fogo" 2):dados))
-        hPutStrLn arq (show ((Pokemon "Pikachu" 100 "Fogo" 2):dados))
-        hPutStrLn arq (show ((Pokemon "SeaHourse" 100 "Fogo" 2):dados))
-        hPutStrLn arq (show ((Pokemon "Kakuna" 100 "Fogo" 2):dados))
-        hPutStrLn arq (show ((Pokemon "Digglet" 100 "Fogo" 2):dados))
-        hPutStrLn arq (show ((Pokemon "Eevee" 100 "Fogo" 2):dados))
-        hClose arq
+        arq1 <- openFile "dadosPlayer1.txt" WriteMode
+        hPutStrLn arq1 (show ((Pokemon "Zeca skull" 100 "Fogo"):dados))
+        hPutStrLn arq1 (show ((Pokemon "Pikachu" 100 "Fogo"):dados))
+        hPutStrLn arq1 (show ((Pokemon "SeaHourse" 100 "Fogo"):dados))
+        hPutStrLn arq1 (show ((Pokemon "Kakuna" 100 "Fogo"):dados))
+        hPutStrLn arq1 (show ((Pokemon "Digglet" 100 "Fogo"):dados))
+        hPutStrLn arq1 (show ((Pokemon "Eevee" 100 "Fogo"):dados))
+        hClose arq1
+
+        arq2 <- openFile "dadosPlayer2.txt" WriteMode
+        hPutStrLn arq2 (show ((Pokemon "Zeca skull" 100 "Fogo"):dados))
+        hPutStrLn arq2 (show ((Pokemon "Pikachu" 100 "Fogo"):dados))
+        hPutStrLn arq2 (show ((Pokemon "SeaHourse" 100 "Fogo"):dados))
+        hPutStrLn arq2 (show ((Pokemon "Kakuna" 100 "Fogo"):dados))
+        hPutStrLn arq2 (show ((Pokemon "Digglet" 100 "Fogo"):dados))
+        hPutStrLn arq2 (show ((Pokemon "Eevee" 100 "Fogo"):dados))
+        hClose arq2
         return dados
         
 
@@ -85,9 +88,15 @@ menuInicial = do
 
 --Função que identifica e invoca o modo de jogo escolhido pelo usuário
 designaModo :: Char -> IO()
-designaModo '1' = inicioPvBot
-designaModo '2' = inicioPvP
-designaModo '3' = inicioHistoria
+designaModo '1' = do
+        system "cls"
+        inicioPvBot
+designaModo '2' = do
+        system "cls"
+        inicioPvP
+designaModo '3' = do
+        system "cls"
+        inicioHistoria
 designaModo _ = do
         system "cls" 
         putStrLn "comando invalido"

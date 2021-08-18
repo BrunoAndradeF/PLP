@@ -1,0 +1,6 @@
+[Pokemon "Zeca skull" 100 "Fogo"]
+[Pokemon "Pikachu" 100 "Fogo"]
+[Pokemon "SeaHourse" 100 "Fogo"]
+[Pokemon "Kakuna" 100 "Fogo"]
+[Pokemon "Digglet" 100 "Fogo"]
+[Pokemon "Eevee" 100 "Fogo"]
