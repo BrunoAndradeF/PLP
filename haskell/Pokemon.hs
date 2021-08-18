@@ -2,14 +2,18 @@ import System.IO
 import Data.Char
 import System.Process
 import System.FilePath.Posix
+import System.Random
+import System.IO.Unsafe
 
 --Definicao de tipos
 
 type Pokemons = [Pokemon]
 type Nome = String
 type Vida = Int
+type  PerdeTurno  =  Bool
+type  TomaDano  =  Bool
 type Tipo = String
-data Pokemon = Pokemon Nome Vida Tipo
+data Pokemon = Pokemon Nome Vida PerdeTurno TomaDano Tipo
         deriving (Show, Read) 
 
 
@@ -22,23 +26,23 @@ iniciar = do
 
 --funcao que grava os principais dados do jogo
 gravaDados :: Pokemons -> IO Pokemons
-gravaDados dados = do        
+gravaDados dados = do
         arq1 <- openFile "dadosPlayer1.txt" WriteMode
-        hPutStrLn arq1 (show ((Pokemon "Zeca skull" 100 "Fogo"):dados))
-        hPutStrLn arq1 (show ((Pokemon "Pikachu" 100 "Fogo"):dados))
-        hPutStrLn arq1 (show ((Pokemon "SeaHourse" 100 "Fogo"):dados))
-        hPutStrLn arq1 (show ((Pokemon "Kakuna" 100 "Fogo"):dados))
-        hPutStrLn arq1 (show ((Pokemon "Digglet" 100 "Fogo"):dados))
-        hPutStrLn arq1 (show ((Pokemon "Eevee" 100 "Fogo"):dados))
+        hPrint arq1 (Pokemon "Zeca skull" 100 False False  "Fogo":dados)
+        hPrint arq1 (Pokemon "Pikachu" 100 False False  "Fogo":dados)
+        hPrint arq1 (Pokemon "SeaHourse" 100 False False  "Fogo":dados)
+        hPrint arq1 (Pokemon "Kakuna" 100 False False  "Fogo":dados)
+        hPrint arq1 (Pokemon "Digglet" 100 False False "Fogo":dados)
+        hPrint arq1 (Pokemon "Eevee" 100 False  False "Fogo":dados)
         hClose arq1
 
         arq2 <- openFile "dadosPlayer2.txt" WriteMode
-        hPutStrLn arq2 (show ((Pokemon "Zeca skull" 100 "Fogo"):dados))
-        hPutStrLn arq2 (show ((Pokemon "Pikachu" 100 "Fogo"):dados))
-        hPutStrLn arq2 (show ((Pokemon "SeaHourse" 100 "Fogo"):dados))
-        hPutStrLn arq2 (show ((Pokemon "Kakuna" 100 "Fogo"):dados))
-        hPutStrLn arq2 (show ((Pokemon "Digglet" 100 "Fogo"):dados))
-        hPutStrLn arq2 (show ((Pokemon "Eevee" 100 "Fogo"):dados))
+        hPrint arq2 (Pokemon "Zeca skull" 100 False False  "Fogo":dados)
+        hPrint arq2 (Pokemon "Pikachu" 100 False False "Fogo":dados)
+        hPrint arq2 (Pokemon "SeaHourse" 100 False False "Fogo":dados)
+        hPrint arq2 (Pokemon "Kakuna" 100 False False "Fogo":dados)
+        hPrint arq2 (Pokemon "Digglet" 100 False False "Fogo":dados)
+        hPrint arq2 (Pokemon "Eevee" 100 False False "Fogo":dados)
         hClose arq2
         return dados
         
@@ -217,21 +221,53 @@ menuDeSelecao '1' = do
 batalhaPvBot :: Char -> IO()
 batalhaPvBot '1' = do
         putStrLn "Pokemon selecionado: Zeca skull"
+        menuExibeZeca
+        exibeAtaques
+        op <- getChar
+        getChar
+        let valorAtaque = designaAtaque op
+        print valorAtaque
+
         return()
+        
 batalhaPvBot '2' = do
         putStrLn "Pokemon selecionado: Pikachu"
+        exibeAtaques
+        op <- getChar
+        getChar
+        let valorAtaque = designaAtaque op
         return()
+        
 batalhaPvBot '3' = do
         putStrLn "Pokemon selecionado: SeaHourse"
+        exibeAtaques
+        op <- getChar
+        getChar
+        let valorAtaque = designaAtaque op
         return()
+
 batalhaPvBot '4' = do
         putStrLn "Pokemon selecionado: Kakuna"
+        exibeAtaques
+        op <- getChar
+        getChar
+        let valorAtaque = designaAtaque op
         return()
+
 batalhaPvBot '5' = do
         putStrLn "Pokemon selecionado: Digglet"
+        exibeAtaques
+        op <- getChar
+        getChar
+        let valorAtaque = designaAtaque op
         return()
+
 batalhaPvBot '6' = do
         putStrLn "Pokemon selecionado: Eevee"
+        exibeAtaques
+        op <- getChar
+        getChar
+        let valorAtaque = designaAtaque op
         return()
 
 batalhaPvBot _ = do 
@@ -239,4 +275,89 @@ batalhaPvBot _ = do
         putStrLn "comando invalido"
         cabecalhoPvBot
 
+
+
+
+
+{-___________________________________________________ metodo para designar ataques ___________________________________________________-}
+
+menuExibeZeca :: IO()
+menuExibeZeca = do
+        system "cls"
+        putStrLn " ______________________________________________________________________"
+        putStrLn "|                                                                      |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                                         ,-,,-,                       |"
+        putStrLn "|                                   _____/     /_____                  |"
+        putStrLn "|                                  (_________________)                 |"
+        putStrLn "|                                       |() () |                       |"
+        putStrLn "|                                    (  | oo   |                       |"
+        putStrLn "|_____________________________________)_`|  |--'_______________________|"
+        putStrLn "|                -                   (___^^^^|                         |"
+        putStrLn "|         __          _                 (____'    -- Elmar Kurgpold    |"
+        putStrLn "|        (  )_              ____                    __                 |"
+        putStrLn "|       (___( )                   -                                    |"
+        putStrLn "|                       __                                             |"
+        putStrLn "|     ___                                                              |"
+        putStrLn "|                -                           __                        |"
+        putStrLn "|                                         _                            |"
+        putStrLn "|                                                                      |"
+        putStrLn "|______________________________________________________________________|"
+
+exibeAtaques :: IO()
+exibeAtaques = do
+        putStrLn "                                                                        "
+        putStrLn "                                                                        "
+        putStrLn "                         ~ESCOLHA O SEU ATAQUE~                         "
+        putStrLn "                                                                        "
+        putStrLn " ________________________________   ___________________________________ "
+        putStrLn "|                                | |                                   |"
+        putStrLn "|        Digite 1 para Cura      | |       Digite 2 para Ataque        |"
+        putStrLn "|________________________________| |___________________________________|"
+        putStrLn " ________________________________   ___________________________________ "
+        putStrLn "|                                | |                                   |"
+        putStrLn "|      Digite 3 para Critico     | |   Digite 4 para alterar Status    |"
+        putStrLn "|________________________________| |___________________________________|"
+        putStrLn "                                                                        "
+
+
+designaAtaque :: Char -> Int
+designaAtaque '1' = curar
+designaAtaque '2' = atacar
+designaAtaque '3' = ataqueCritico
+designaAtaque _ = 0
+--designaAtaque '4' = alteraStatus
+{-designaAtaque _ = do
+        putStrLn " ______________________________________________________________________ "
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Opcao invalida, tente novamente!                  |"
+        putStrLn "|______________________________________________________________________|"
+        exibeAtaques-}
+
+
+
+{- ___________________________________________________sessão de metodos de ataque___________________________________________________-}
+
+{-Possibilitam curar a própria vida
+Infligem dano no adversário
+Causem dano Critical
+Alteram status de Pokémons (como paralisia e envenenamento )
+-}
+
+opcoesDeCura = [15,10,5]
+curar :: Int
+curar = opcoesDeCura !!unsafePerformIO (getStdRandom (randomR (0, 2)))
+
+
+
+opcoesDeAtaqueNormal = [25,15,5]
+atacar :: Int
+atacar = opcoesDeAtaqueNormal !!unsafePerformIO (getStdRandom (randomR (0, 2)))
+
+
+opcoesDeCritico = [0,0,0,0,40]
+ataqueCritico :: Int
+ataqueCritico = opcoesDeCritico !!unsafePerformIO (getStdRandom (randomR (0, 4)))
 
