@@ -146,6 +146,37 @@ cabecalhoPvBot = do
 cabecalhoPvP :: IO()
 cabecalhoPvP = do
 
+        putStrLn " ______________________________________________________________________"
+        putStrLn "|  8888888b.  888                                                      |"
+        putStrLn "|  888   Y88b 888                                                      |"
+        putStrLn "|  888    888 888                                                      |"
+        putStrLn "|  888   d88P 888  8888b.  888  888  .d88b.  888d888                   |"
+        putStrLn "|  8888888P°  888     _88b 888  888 d8P  Y8b 888P°                     |"
+        putStrLn "|  888        888 .d888888 888  888 88888888 888                       |"
+        putStrLn "|  888        888 888  888 Y88b 888 Y8b.     888                       |"
+        putStrLn "|  888        888 °Y888888  °Y88888  °Y8888  888                       |"
+        putStrLn "|                               888                                    |"
+        putStrLn "|  888     888  .d8888b.   Y8b d88P                                    |"
+        putStrLn "|  888     888 d88P  Y88b   °Y88P°                                     |"
+        putStrLn "|  888     888 Y88b.                                                   |"
+        putStrLn "|  Y88b   d88P  °Y888b.                                                |"
+        putStrLn "|   Y88b d88P      °Y88b.                                              |"
+        putStrLn "|    Y88o88P         °888                                              |"
+        putStrLn "|     Y888P    Y88b  d88P                                              |"
+        putStrLn "|      Y8P      °Y8888P°                                               |"
+        putStrLn "|  8888888b.  888                                                      |"
+        putStrLn "|  888   Y88b 888                                                      |"
+        putStrLn "|  888    888 888                                                      |"
+        putStrLn "|  888   d88P 888  8888b.  888  888  .d88b.  888d888                   |"
+        putStrLn "|  8888888P°  888     _88b 888  888 d8P  Y8b 888P°                     |"
+        putStrLn "|  888        888 .d888888 888  888 88888888 888                       |"
+        putStrLn "|  888        888 888  888 Y88b 888 Y8b.     888                       |"
+        putStrLn "|  888        888 °Y888888  °Y88888  °Y8888  888                       |"
+        putStrLn "|                               888                                    |"
+        putStrLn "|                          Y8b d88P                                    |"
+        putStrLn "|                           °Y88P°                                     |"
+        putStrLn "|______________________________________________________________________|"
+
         menuDeSelecao '2'
 
 
