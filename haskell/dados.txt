@@ -1,6 +1,0 @@
-[Pokemon "Zeca skull" 100 "Fogo" 2]
-[Pokemon "Pikachu" 100 "Fogo" 2]
-[Pokemon "SeaHourse" 100 "Fogo" 2]
-[Pokemon "Kakuna" 100 "Fogo" 2]
-[Pokemon "Digglet" 100 "Fogo" 2]
-[Pokemon "Eevee" 100 "Fogo" 2]
