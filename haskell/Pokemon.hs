@@ -4,6 +4,8 @@ import System.Process
 import System.FilePath.Posix
 import System.Random
 import System.IO.Unsafe
+import System.IO.Error
+import Control.Exception
 
 --Definicao de tipos
 
@@ -20,7 +22,6 @@ data Pokemon = Pokemon Nome Vida PerdeTurno TomaDano Tipo
 --funcao que inicia o jogo
 iniciar :: IO()
 iniciar = do
-        gravaDados []
         system "cls"
         menuInicial
 
@@ -89,7 +90,6 @@ menuInicial = do
         designaModo op
 
 
-
 --Função que identifica e invoca o modo de jogo escolhido pelo usuário
 designaModo :: Char -> IO()
 designaModo '1' = do
@@ -104,7 +104,7 @@ designaModo '3' = do
 designaModo _ = do
         system "cls" 
         putStrLn "comando invalido"
-        menuInicial        
+        menuInicial 
 
 
 inicioHistoria :: IO()
@@ -214,13 +214,66 @@ menuDeSelecao '1' = do
         putStrLn "|______________________________________________________________________|"
         op <- getChar
         getChar
-        batalhaPvBot op
+        batalhaPvBot op escolhePokemonBot
 
 
 
-batalhaPvBot :: Char -> IO()
-batalhaPvBot '1' = do
-        putStrLn "Pokemon selecionado: Zeca skull"
+
+
+{-______________________________________MOVIMENTOS DO BOT DO SISTEMA______________________________________-}
+
+-- funcao que escolhe pokemon do bot
+
+opcoesDePokemon = ["Zeca skull","Pikachu","SeaHourse","Kakuna","Digglet","Eevee"]
+escolhePokemonBot :: String
+escolhePokemonBot = opcoesDePokemon !!unsafePerformIO (getStdRandom (randomR (0, 5)))
+
+
+--funcao que altera o estado do pokemon do bot (String = nome do pokemon, Char = tipo de ataque, int = dano ou cura causado)
+
+curaBot :: String -> Int -> IO()
+curaBot p a = do
+        {catch (ler_arquivo) tratar_erro;}
+        where
+                -- tenta ler o arquivo
+                ler_arquivo = do
+                {
+                        arq <- openFile "dadosPlayer2.txt" ReadMode; -- abre o arquivo para leitura
+                        dados <- hGetLine arq; -- ler o conteúdo do arquivo
+                        hClose arq; -- fecha o arquivo
+                        atualizaPokemon (read dados) p a "cura"; -- passa os dados para a função menu
+                        return ()
+                }
+                tratar_erro erro = if isDoesNotExistError erro then do
+                {
+                        return ()
+                }
+                else
+                        ioError erro
+
+
+
+atualizaPokemon :: Pokemons -> String -> Int -> String -> Pokemons
+atualizaPokemon ((Pokemon nome vida pT tD ty):xs) p a m
+        |(nome == p) = [(Pokemon nome (vida+a) pT tD ty)] ++ xs
+        |otherwise = (Pokemon nome vida pT tD ty):(atualizaPokemon xs p a m)
+
+
+--funcao que escolhe ataque do bot
+opcoesDeAtqueBot = [1,2,3,4]
+escolheAtaqueBot :: Int
+escolheAtaqueBot = opcoesDeAtqueBot !!unsafePerformIO (getStdRandom (randomR (0, 3)))
+
+
+
+{-______________________________________FIM DOS MOVIMENTOS DO BOT DO SISTEMA______________________________________-}
+
+
+
+
+batalhaPvBot :: Char -> String -> IO()
+batalhaPvBot '1' x = do
+        system "cls" 
         menuExibeZeca
         exibeAtaques
         op <- getChar
@@ -228,9 +281,9 @@ batalhaPvBot '1' = do
         let valorAtaque = designaAtaque op
         print valorAtaque
 
-        return()
+        batalhaPvBot '1' x
         
-batalhaPvBot '2' = do
+batalhaPvBot '2' x = do
         putStrLn "Pokemon selecionado: Pikachu"
         exibeAtaques
         op <- getChar
@@ -238,7 +291,7 @@ batalhaPvBot '2' = do
         let valorAtaque = designaAtaque op
         return()
         
-batalhaPvBot '3' = do
+batalhaPvBot '3' x = do
         putStrLn "Pokemon selecionado: SeaHourse"
         exibeAtaques
         op <- getChar
@@ -246,7 +299,7 @@ batalhaPvBot '3' = do
         let valorAtaque = designaAtaque op
         return()
 
-batalhaPvBot '4' = do
+batalhaPvBot '4' x = do
         putStrLn "Pokemon selecionado: Kakuna"
         exibeAtaques
         op <- getChar
@@ -254,7 +307,7 @@ batalhaPvBot '4' = do
         let valorAtaque = designaAtaque op
         return()
 
-batalhaPvBot '5' = do
+batalhaPvBot '5' x = do
         putStrLn "Pokemon selecionado: Digglet"
         exibeAtaques
         op <- getChar
@@ -262,7 +315,7 @@ batalhaPvBot '5' = do
         let valorAtaque = designaAtaque op
         return()
 
-batalhaPvBot '6' = do
+batalhaPvBot '6' x = do
         putStrLn "Pokemon selecionado: Eevee"
         exibeAtaques
         op <- getChar
@@ -270,7 +323,7 @@ batalhaPvBot '6' = do
         let valorAtaque = designaAtaque op
         return()
 
-batalhaPvBot _ = do 
+batalhaPvBot _ x = do 
         system "cls"
         putStrLn "comando invalido"
         cabecalhoPvBot
@@ -279,11 +332,8 @@ batalhaPvBot _ = do
 
 
 
-{-___________________________________________________ metodo para designar ataques ___________________________________________________-}
-
 menuExibeZeca :: IO()
 menuExibeZeca = do
-        system "cls"
         putStrLn " ______________________________________________________________________"
         putStrLn "|                                                                      |"
         putStrLn "|                                                                      |"
@@ -306,6 +356,42 @@ menuExibeZeca = do
         putStrLn "|                                                                      |"
         putStrLn "|______________________________________________________________________|"
 
+menuExibePikachu :: IO()
+menuExibePikachu = do
+        system "cls"
+        putStrLn "Pikachu"
+
+menuExibeSeaHourse :: IO()
+menuExibeSeaHourse = do
+        system "cls"
+        putStrLn "SeaHourse"
+
+menuExibeKakuna :: IO()
+menuExibeKakuna = do
+        system "cls"
+        putStrLn "Kakuna"
+
+menuExibeDigglet :: IO()
+menuExibeDigglet = do
+        system "cls"
+        putStrLn "Digglet"
+
+menuExibeEevee :: IO()
+menuExibeEevee = do
+        system "cls"
+        putStrLn "Eevee"
+
+
+
+
+
+
+
+
+
+
+
+
 exibeAtaques :: IO()
 exibeAtaques = do
         putStrLn "                                                                        "
@@ -322,6 +408,7 @@ exibeAtaques = do
         putStrLn "|________________________________| |___________________________________|"
         putStrLn "                                                                        "
 
+{-___________________________________________________ metodo para designar ataques ___________________________________________________-}
 
 designaAtaque :: Char -> Int
 designaAtaque '1' = curar
@@ -329,13 +416,6 @@ designaAtaque '2' = atacar
 designaAtaque '3' = ataqueCritico
 designaAtaque _ = 0
 --designaAtaque '4' = alteraStatus
-{-designaAtaque _ = do
-        putStrLn " ______________________________________________________________________ "
-        putStrLn "|                                                                      |"
-        putStrLn "|                    Opcao invalida, tente novamente!                  |"
-        putStrLn "|______________________________________________________________________|"
-        exibeAtaques-}
-
 
 
 {- ___________________________________________________sessão de metodos de ataque___________________________________________________-}
