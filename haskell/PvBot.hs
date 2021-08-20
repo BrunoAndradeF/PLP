@@ -16,16 +16,16 @@ menuDeSelecaoPvBot = do
         aux <- readLn :: IO Int
         let op = aux - 1
 
-        if  op >= 0 && op <= 5 then
+        if  op >= 0 && op <= 5 then do
+                putStrLn ("Pokemon selecionado: " ++ (nomesPokemons !! op))
                 batalhaPvBot (nomesPokemons !! op)
         else do
                 exibeOpcaoInvalida
                 menuDeSelecaoPvBot
-        where nomesPokemons = ["Zeca", "Pikachu", "SeaHourse", "Kakuna", "Digglet", "Eevee"]
+        where nomesPokemons = ["Zeca Skull", "Pikachu", "SeaHourse", "Kakuna", "Digglet", "Eevee"]
 
 batalhaPvBot :: String -> IO()
 batalhaPvBot p = do
-        putStrLn ("Pokemon selecionado: " ++ p ++ "skull")
         exibePokemons p
         exibeAtaques
 

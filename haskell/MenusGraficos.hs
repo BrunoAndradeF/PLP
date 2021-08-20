@@ -119,7 +119,7 @@ exibeMenuDeSelecao = do
         putStrLn "|______________________________________________________________________|"
 
 exibePokemons :: String -> IO()
-exibePokemons "Zeca" = exibeZeca
+exibePokemons "Zeca Skull" = exibeZeca
 exibePokemons "Pikachu" = exibePikachu
 exibePokemons "SeaHourse" = exibeSeaHourse
 exibePokemons "Kakuna" = exibeKakuna
