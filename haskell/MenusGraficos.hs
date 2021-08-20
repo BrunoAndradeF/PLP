@@ -118,6 +118,15 @@ exibeMenuDeSelecao = do
         putStrLn "|                    Digite 6 para Eevee                               |"
         putStrLn "|______________________________________________________________________|"
 
+exibePokemons :: String -> IO()
+exibePokemons "Zeca" = exibeZeca
+exibePokemons "Pikachu" = exibePikachu
+exibePokemons "SeaHourse" = exibeSeaHourse
+exibePokemons "Kakuna" = exibeKakuna
+exibePokemons "Digglet" = exibeDigglet
+exibePokemons "Eevee" = exibeEevee
+exibePokemons _ = exibeOpcaoInvalida
+
 exibeZeca :: IO()
 exibeZeca = do
         putStrLn " ______________________________________________________________________"
@@ -142,6 +151,21 @@ exibeZeca = do
         putStrLn "|                                                                      |"
         putStrLn "|______________________________________________________________________|"
 
+exibeEevee :: IO ()
+exibeEevee = error "not implemented"
+
+exibeDigglet :: IO ()
+exibeDigglet = error "not implemented"
+
+exibeKakuna :: IO ()
+exibeKakuna = error "not implemented"
+
+exibeSeaHourse :: IO ()
+exibeSeaHourse = error "not implemented"
+
+exibePikachu :: IO ()
+exibePikachu = error "not implemented"
+
 exibeAtaques :: IO()
 exibeAtaques = do
         putStrLn "                                                                        "
@@ -158,8 +182,8 @@ exibeAtaques = do
         putStrLn "|________________________________| |___________________________________|"
         putStrLn "                                                                        "               
 
-exibeObcaoInvalida :: IO()
-exibeObcaoInvalida = do
+exibeOpcaoInvalida :: IO()
+exibeOpcaoInvalida = do
         putStrLn " ______________________________________________________________________ "
         putStrLn "|                                                                      |"
         putStrLn "|                    Opcao invalida, tente novamente!                  |"

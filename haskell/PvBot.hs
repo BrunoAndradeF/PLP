@@ -2,72 +2,39 @@ module PvBot where
 import MenusGraficos
 import Ataques
 import System.Process
+import System.IO
+
 
 inicioPvBot :: IO()
 inicioPvBot = do
-        exibeCabecalhoPvBot 
+        exibeCabecalhoPvBot
         menuDeSelecaoPvBot
 
 menuDeSelecaoPvBot :: IO()
 menuDeSelecaoPvBot = do
         exibeMenuDeSelecao
-        op <- getChar
-        getChar
-        batalhaPvBot op
+        aux <- readLn :: IO Int
+        let op = aux - 1
 
-batalhaPvBot :: Char -> IO()
-batalhaPvBot '1' = do
-        putStrLn "Pokemon selecionado: Zeca skull"
-        exibeZeca
-        exibeAtaques
-        op <- getChar
-        getChar
-        let valorAtaque = designaAtaque op
-        print valorAtaque
+        if  op >= 0 && op <= 5 then
+                batalhaPvBot (nomesPokemons !! op)
+        else do
+                exibeOpcaoInvalida
+                menuDeSelecaoPvBot
+        where nomesPokemons = ["Zeca", "Pikachu", "SeaHourse", "Kakuna", "Digglet", "Eevee"]
 
-        return()
-        
-batalhaPvBot '2' = do
-        putStrLn "Pokemon selecionado: Pikachu"
+batalhaPvBot :: String -> IO()
+batalhaPvBot p = do
+        putStrLn ("Pokemon selecionado: " ++ p ++ "skull")
+        exibePokemons p
         exibeAtaques
-        op <- getChar
-        getChar
-        let valorAtaque = designaAtaque op
-        return()
-        
-batalhaPvBot '3' = do
-        putStrLn "Pokemon selecionado: SeaHourse"
-        exibeAtaques
-        op <- getChar
-        getChar
-        let valorAtaque = designaAtaque op
-        return()
 
-batalhaPvBot '4' = do
-        putStrLn "Pokemon selecionado: Kakuna"
-        exibeAtaques
-        op <- getChar
-        getChar
-        let valorAtaque = designaAtaque op
-        return()
+        aux <- readLn :: IO Int
+        let op = aux
 
-batalhaPvBot '5' = do
-        putStrLn "Pokemon selecionado: Digglet"
-        exibeAtaques
-        op <- getChar
-        getChar
-        let valorAtaque = designaAtaque op
-        return()
-
-batalhaPvBot '6' = do
-        putStrLn "Pokemon selecionado: Eevee"
-        exibeAtaques
-        op <- getChar
-        getChar
-        let valorAtaque = designaAtaque op
-        return()
-
-batalhaPvBot _ = do 
-        system "cls"
-        putStrLn "comando invalido"
-        inicioPvBot
+        if  op >= 1 && op <= 4 then do
+                let valorAtaque = designaAtaque op
+                print valorAtaque
+        else do
+                exibeOpcaoInvalida
+                batalhaPvBot p

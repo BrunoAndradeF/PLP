@@ -2,8 +2,6 @@ import System.IO
 import Data.Char
 import System.Process
 import System.FilePath.Posix
---import System.Random
-import System.IO.Unsafe
 import MenusGraficos
 import PvBot
 import PvP

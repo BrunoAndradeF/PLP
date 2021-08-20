@@ -1,15 +1,15 @@
+
 module Ataques where
+import System.Random
+import System.IO.Unsafe
+import MenusGraficos
 
 {-___________________________________________________ metodo para designar ataques ___________________________________________________-}
-designaAtaque :: Char -> Int
---designaAtaque '1' = curar
---designaAtaque '2' = atacar
---designaAtaque '3' = ataqueCritico
-designaAtaque _ = 0
---designaAtaque '4' = alteraStatus
-{-designaAtaque _ = do
-        exibeOpcaoInvalida
-        exibeAtaques-}
+designaAtaque :: Int -> Int 
+designaAtaque 1 = curar
+designaAtaque 2 = atacar
+designaAtaque 3 = ataqueCritico
+designaAtaque 4 = alteraStatus
 
 
 
@@ -19,7 +19,7 @@ designaAtaque _ = 0
 Infligem dano no adversário
 Causem dano Critical
 Alteram status de Pokémons (como paralisia e envenenamento )
-
+-}
 
 opcoesDeCura = [15,10,5]
 curar :: Int
@@ -36,4 +36,6 @@ opcoesDeCritico = [0,0,0,0,40]
 ataqueCritico :: Int
 ataqueCritico = opcoesDeCritico !!unsafePerformIO (getStdRandom (randomR (0, 4)))
 
--}
+
+alteraStatus :: Int
+alteraStatus = error "not implemented"
