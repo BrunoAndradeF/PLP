@@ -1,5 +1,6 @@
 module MovimentosBot where
 import System.Random
+import System.IO.Unsafe
 
 -- funcao que escolhe pokemon do bot
 opcoesDePokemon = ["Zeca skull","Pikachu","SeaHourse","Kakuna","Digglet","Eevee"]
