@@ -3,11 +3,10 @@ import System.Random
 import System.IO.Unsafe
 
 -- funcao que escolhe pokemon do bot
-opcoesDePokemon = ["Zeca skull","Pikachu","SeaHourse","Kakuna","Digglet","Eevee"]
-escolhePokemonBot :: String
-escolhePokemonBot = opcoesDePokemon !!unsafePerformIO (getStdRandom (randomR (0, 5)))
+
+escolhePokemonBot :: Int
+escolhePokemonBot = unsafePerformIO (getStdRandom (randomR (0, 5)))
 
 --funcao que escolhe ataque do bot
-opcoesDeAtqueBot = [1,2,3,4]
 escolheAtaqueBot :: Int
-escolheAtaqueBot = opcoesDeAtqueBot !!unsafePerformIO (getStdRandom (randomR (0, 3)))
+escolheAtaqueBot = unsafePerformIO (getStdRandom (randomR (1, 4)))

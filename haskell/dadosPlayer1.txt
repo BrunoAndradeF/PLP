@@ -4,4 +4,3 @@
 [Pokemon "Kakuna" 100 False False "Fogo"]
 [Pokemon "Digglet" 100 False False "Fogo"]
 [Pokemon "Eevee" 100 False False "Fogo"]
-[Pokemon "Eevee" 55 False False "Fogo"]

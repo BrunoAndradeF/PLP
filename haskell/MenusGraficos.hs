@@ -152,19 +152,19 @@ exibeZeca = do
         putStrLn "|______________________________________________________________________|"
 
 exibeEevee :: IO ()
-exibeEevee = error "not implemented"
+exibeEevee = putStrLn "Eevee"
 
 exibeDigglet :: IO ()
-exibeDigglet = error "not implemented"
+exibeDigglet = putStrLn "Digglet"
 
 exibeKakuna :: IO ()
-exibeKakuna = error "not implemented"
+exibeKakuna = putStrLn "Kakuna"
 
 exibeSeaHourse :: IO ()
-exibeSeaHourse = error "not implemented"
+exibeSeaHourse = putStrLn "SeaHourse"
 
 exibePikachu :: IO ()
-exibePikachu = error "not implemented"
+exibePikachu = putStrLn "Pikachu"
 
 exibeAtaques :: IO()
 exibeAtaques = do
