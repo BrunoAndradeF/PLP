@@ -44,7 +44,7 @@ tiraStatus=[false,true,true,true,false]
 --Pensar como pegar os tipos do pokemon da batalha no txt
 danoPorTipo :: String -> String -> Int
 danoPorTipo a b
-  | a=="Fogo" && b=="Gelo" || (a=="Terrestre" && b=="Fogo") || ((a=="Terrestre" && b=="Elétrico") || (a=="Terrestre" && b=="Poison")) = 10
-  | a=="Terrestre" && b=="Gelo" || a=="Poison" && b=="Terrestre" = -5
-  | a=="Elétrico" && b=="Terrestre" || a=="Fogo" && b=="Terrestre" = -5
+  | (a=="Fogo" && b=="Gelo") || (a=="Terrestre" && b=="Fogo") || ((a=="Terrestre" && b=="Elétrico") || (a=="Terrestre" && b=="Poison")) = 10
+  | (a=="Terrestre" && b=="Gelo") || (a=="Poison" && b=="Terrestre") = -5
+  | (a=="Elétrico" && b=="Terrestre") || (a=="Fogo" && b=="Terrestre") = -5
   | otherwise =0
