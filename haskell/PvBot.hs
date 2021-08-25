@@ -32,17 +32,18 @@ batalhaPvBot player1 bot vez = do
         if vez == 1 then do
                 exibePokemons player1
                 exibeAtaques
-                --funcao de atualização do pokemon apos ataque aqui
-                --funcao de verificacao se o pokemon do bot ta vivo aq
                 aux <- readLn :: IO Int
                 let op = aux
                 if  op >= 1 && op <= 4 then do
                         let valorAtaque = designaAtaque op
+                        atualizaVidaBot op valorAtaque
                         print valorAtaque
                         batalhaPvBot player1 bot 2
                 else do
                         exibeOpcaoInvalida
                         batalhaPvBot player1 bot 1
+                
+                
         else do
                 exibePokemons bot
                 --funcao de atualização do pokemon apos ataque aqui

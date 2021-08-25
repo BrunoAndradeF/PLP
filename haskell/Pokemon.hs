@@ -6,6 +6,7 @@ import MenusGraficos
 import PvBot
 import PvP
 import Historia
+import MovimentosBot
 
 --Definicao de tipos
 
@@ -22,6 +23,7 @@ data Pokemon = Pokemon Nome Vida PerdeTurno TomaDano Tipo
 --funcao que inicia o jogo
 iniciar :: IO()
 iniciar = do
+        guardaDadosVidaBot 100
         gravaDados []
         system "cls"
         menuInicial
