@@ -4,6 +4,7 @@ import Ataques
 import MovimentosBot
 import System.Process
 import System.IO
+import PlayerOneMovimentos
 
 --Define a vez de jogar (1 para Player1 e 2 para o bot)
 type Vez = Int
@@ -37,18 +38,30 @@ batalhaPvBot player1 bot vez = do
                 if  op >= 1 && op <= 4 then do
                         let valorAtaque = designaAtaque op
                         atualizaVidaBot op valorAtaque
+                        putStrLn "valor do ataque Player1:"
                         print valorAtaque
-                        batalhaPvBot player1 bot 2
+                        arq <- openFile "pokemonVidaBot.txt" ReadMode
+                        aux <- hGetLine arq
+                        hClose arq
+                        if ((read aux)<=0) then putStrLn "Pokemon do bot morreu" else batalhaPvBot player1 bot 2
+                        
                 else do
                         exibeOpcaoInvalida
                         batalhaPvBot player1 bot 1
-                
-                
+                              
         else do
+                
                 exibePokemons bot
-                --funcao de atualização do pokemon apos ataque aqui
-                --funcao de verificacao se o pokemon do player1 ta vivo aq
-                --batalhaPvBot player1 bot 1
+                let atq = escolheAtaqueBot
+                let valorAtaquebot = designaAtaque atq
+                atualizaVidaPlayer1 atq valorAtaquebot
+                putStrLn "valor do ataque do bot:"
+                print valorAtaquebot
+                arq2 <- openFile "pokemonVidaPlayer1.txt" ReadMode
+                aux2 <- hGetLine arq2
+                hClose arq2
+                if ((read aux2)<=0) then putStrLn "Pokemon do Player1 morreu" else batalhaPvBot player1 bot 1
+
 
         
 

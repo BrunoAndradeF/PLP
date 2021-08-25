@@ -7,6 +7,7 @@ import PvBot
 import PvP
 import Historia
 import MovimentosBot
+import PlayerOneMovimentos
 
 --Definicao de tipos
 
@@ -24,6 +25,7 @@ data Pokemon = Pokemon Nome Vida PerdeTurno TomaDano Tipo
 iniciar :: IO()
 iniciar = do
         guardaDadosVidaBot 100
+        guardaDadosVidaPlayer1 100
         gravaDados []
         system "cls"
         menuInicial
