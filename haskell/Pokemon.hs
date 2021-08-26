@@ -8,6 +8,7 @@ import PvP
 import Historia
 import MovimentosBot
 import PlayerOneMovimentos
+import PlayerTwoMovimentos
 
 --Definicao de tipos
 
@@ -26,6 +27,7 @@ iniciar :: IO()
 iniciar = do
         guardaDadosVidaBot 100
         guardaDadosVidaPlayer1 100
+        guardaDadosVidaPlayer2 100
         gravaDados []
         system "cls"
         menuInicial

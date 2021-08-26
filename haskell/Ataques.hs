@@ -23,7 +23,7 @@ atacar :: Int
 atacar = unsafePerformIO (getStdRandom (randomR (5, 25)))
 
 ataqueCritico :: Int
-ataqueCritico = unsafePerformIO (getStdRandom (randomR (10, 40)))
+ataqueCritico = unsafePerformIO (getStdRandom (randomR (10, 35)))
 
 opcoesDeStatus=[0,0,0,10,10]
 alteraStatus :: Int
