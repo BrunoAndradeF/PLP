@@ -11,6 +11,7 @@ type Vez = Int
 
 inicioPvBot :: IO()
 inicioPvBot = do
+        system "cls"
         exibeCabecalhoPvBot
         menuDeSelecaoPvBot
 
@@ -18,10 +19,11 @@ menuDeSelecaoPvBot :: IO()
 menuDeSelecaoPvBot = do
         exibeMenuDeSelecao
         aux <- readLn :: IO Int
+        system "cls"
         let op = aux - 1
 
         if  op >= 0 && op <= 5 then do
-                putStrLn ("Pokemon selecionado: " ++ (nomesPokemons !! op))
+                putStrLn ("Pokemon selecionado Player1: " ++ (nomesPokemons !! op))
                 batalhaPvBot (nomesPokemons !! op) (nomesPokemons !!escolhePokemonBot) 1
         else do
                 exibeOpcaoInvalida
@@ -38,20 +40,32 @@ batalhaPvBot player1 bot vez = do
                 if  op >= 1 && op <= 4 then do
                         let valorAtaque = designaAtaque op
                         atualizaVidaBot op valorAtaque
+                        system "cls"
+                        putStrLn ""
                         putStrLn "valor do ataque Player1:"
                         print valorAtaque
                         arq <- openFile "pokemonVidaBot.txt" ReadMode
                         aux <- hGetLine arq
                         hClose arq
-                        if ((read aux)<=0) then putStrLn "Pokemon do bot morreu" else batalhaPvBot player1 bot 2
-                        
+                        if ((read aux)<=0) then do
+                                exibePlayerGanha
+                                guardaDadosVidaBot 100
+                                guardaDadosVidaPlayer1 100
+                                putStr "Tecle Enter para jogar novamente"
+                                putStr ""
+                        else do
+                                batalhaPvBot player1 bot 2       
                 else do
                         exibeOpcaoInvalida
                         batalhaPvBot player1 bot 1
                               
         else do
-                
+                putStrLn ("Pokemon selecionado pelo Bot: " ++ bot)
                 exibePokemons bot
+                putStr "Tecle Enter para continuar"
+                getLine
+                putStr ""
+                system "cls"
                 let atq = escolheAtaqueBot
                 let valorAtaquebot = designaAtaque atq
                 atualizaVidaPlayer1 atq valorAtaquebot
@@ -60,7 +74,16 @@ batalhaPvBot player1 bot vez = do
                 arq2 <- openFile "pokemonVidaPlayer1.txt" ReadMode
                 aux2 <- hGetLine arq2
                 hClose arq2
-                if ((read aux2)<=0) then putStrLn "Pokemon do Player1 morreu" else batalhaPvBot player1 bot 1
+                if ((read aux2)<=0) then do 
+                        exibeBotGanha
+                        guardaDadosVidaBot 100
+                        guardaDadosVidaPlayer1 100
+                        putStr "Tecle Enter para jogar novamente"
+                        getChar
+                        putStr ""
+                else do
+                        batalhaPvBot player1 bot 1
+
 
 
         

@@ -29,6 +29,7 @@ iniciar = do
         gravaDados []
         system "cls"
         menuInicial
+        iniciar
 
 --funcao que grava os principais dados do jogo
 gravaDados :: Pokemons -> IO Pokemons
