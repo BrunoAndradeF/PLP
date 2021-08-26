@@ -36,6 +36,9 @@ exibeMenuInicial = do
         putStrLn "|                                                                      |"
         putStrLn "|                  Digite 3 para modo historia                         |"
         putStrLn "|                                                                      |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                  Digite Ctrl+c para sair                             |"
+        putStrLn "|                                                                      |"
         putStrLn "|______________________________________________________________________|"
 
 exibeCabecalhoPvBot :: IO()
