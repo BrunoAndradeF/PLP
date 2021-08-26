@@ -39,23 +39,31 @@ batalhaPvBot player1 bot vez = do
                 let op = aux
                 if  op >= 1 && op <= 4 then do
                         let valorAtaque = designaAtaque op
-                        atualizaVidaBot op valorAtaque
-                        system "cls"
-                        putStrLn ""
-                        putStrLn "valor do ataque Player1:"
-                        print valorAtaque
-                        arq <- openFile "pokemonVidaBot.txt" ReadMode
-                        aux <- hGetLine arq
-                        hClose arq
-                        if ((read aux)<=0) then do
-                                exibePlayerGanha
-                                guardaDadosVidaBot 100
-                                guardaDadosVidaPlayer1 100
-                                putStr "Tecle Enter para jogar novamente"
-                                getLine
-                                putStr ""
+                        if (op == 1) then do
+                                atualizaVidaPlayer1 op valorAtaque
+                                system "cls"
+                                putStrLn ""
+                                putStrLn "valor do ataque Player1:"
+                                print valorAtaque
+                                batalhaPvBot player1 bot 2
                         else do
-                                batalhaPvBot player1 bot 2       
+                                atualizaVidaBot op valorAtaque
+                                system "cls"
+                                putStrLn ""
+                                putStrLn "valor do ataque Player1:"
+                                print valorAtaque
+                                arq <- openFile "pokemonVidaBot.txt" ReadMode
+                                aux <- hGetLine arq
+                                hClose arq
+                                if ((read aux)<=0) then do
+                                        exibePlayerGanha
+                                        guardaDadosVidaBot 100
+                                        guardaDadosVidaPlayer1 100
+                                        putStr "Tecle Enter para jogar novamente"
+                                        getLine
+                                        putStr ""
+                                else do
+                                        batalhaPvBot player1 bot 2       
                 else do
                         exibeOpcaoInvalida
                         batalhaPvBot player1 bot 1
@@ -67,23 +75,35 @@ batalhaPvBot player1 bot vez = do
                 getLine
                 putStr ""
                 system "cls"
-                let atq = escolheAtaqueBot
-                let valorAtaquebot = designaAtaque atq
-                atualizaVidaPlayer1 atq valorAtaquebot
-                putStrLn "valor do ataque do bot:"
-                print valorAtaquebot
-                arq2 <- openFile "pokemonVidaPlayer1.txt" ReadMode
-                aux2 <- hGetLine arq2
-                hClose arq2
-                if ((read aux2)<=0) then do 
-                        exibeBotGanha
-                        guardaDadosVidaBot 100
-                        guardaDadosVidaPlayer1 100
-                        putStr "Tecle Enter para jogar novamente"
-                        getLine
-                        putStr ""
-                else do
+                arquivo <- openFile "pokemonVidaBot.txt" ReadMode
+                vida <- hGetLine arquivo
+                hClose arquivo
+                if (((read vida)+15) <= 30) then do
+                        let cura = designaAtaque 1
+                        atualizaVidaBot 1 cura
+                        system "cls"
+                        putStrLn ""
+                        putStrLn "valor da cura do bot:"
+                        print cura
                         batalhaPvBot player1 bot 1
+                else do
+                        let atq = escolheAtaqueBot
+                        let valorAtaquebot = designaAtaque atq
+                        atualizaVidaPlayer1 atq valorAtaquebot
+                        putStrLn "valor do ataque do bot:"
+                        print valorAtaquebot
+                        arq2 <- openFile "pokemonVidaPlayer1.txt" ReadMode
+                        aux2 <- hGetLine arq2
+                        hClose arq2
+                        if ((read aux2)<=0) then do 
+                                exibeBotGanha
+                                guardaDadosVidaBot 100
+                                guardaDadosVidaPlayer1 100
+                                putStr "Tecle Enter para jogar novamente"
+                                getLine
+                                putStr ""
+                        else do
+                                batalhaPvBot player1 bot 1
 
 
 
