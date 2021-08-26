@@ -52,6 +52,7 @@ batalhaPvBot player1 bot vez = do
                                 guardaDadosVidaBot 100
                                 guardaDadosVidaPlayer1 100
                                 putStr "Tecle Enter para jogar novamente"
+                                getLine
                                 putStr ""
                         else do
                                 batalhaPvBot player1 bot 2       
@@ -79,7 +80,7 @@ batalhaPvBot player1 bot vez = do
                         guardaDadosVidaBot 100
                         guardaDadosVidaPlayer1 100
                         putStr "Tecle Enter para jogar novamente"
-                        getChar
+                        getLine
                         putStr ""
                 else do
                         batalhaPvBot player1 bot 1
