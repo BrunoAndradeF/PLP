@@ -15,7 +15,7 @@ atualizaVidaPlayer2 tipoDeMovimento valorDanoOuCura
 --funcao que atualiza a vida do pokemon do bot quando se cura
 atualizaArqCuraPlayer2 :: Int -> IO()
 atualizaArqCuraPlayer2 valorCura = do
-	arq <- openFile "pokemonVidaPlayer2.txt" ReadMode
+	arq <- openFile "ArquivosPlayerTwo/pokemonVidaPlayer2.txt" ReadMode
 	aux <- hGetLine arq
 	hClose arq
 	if (podeCurar (read aux)) then do guardaDadosVidaPlayer2 (soma (read aux) valorCura) else do putStrLn "Pokemon com a vida cheia"
@@ -24,20 +24,20 @@ atualizaArqCuraPlayer2 valorCura = do
 --funcao que atualiza a vida do pokemon do bot quando é atacado
 atualizaArqAtaquePlayer2 :: Int -> IO()
 atualizaArqAtaquePlayer2 valorCura = do
-	arq <- openFile "pokemonVidaPlayer2.txt" ReadMode
+	arq <- openFile "ArquivosPlayerTwo/pokemonVidaPlayer2.txt" ReadMode
 	aux <- hGetLine arq
 	hClose arq
 	guardaDadosVidaPlayer2 (subtracao (read aux) valorCura)
 
 guardaDadosVidaPlayer2 :: Int -> IO()
 guardaDadosVidaPlayer2 vidaAtual = do
-	arq <- openFile "pokemonVidaPlayer2.txt" WriteMode
+	arq <- openFile "ArquivosPlayerTwo/pokemonVidaPlayer2.txt" WriteMode
 	hPrint arq vidaAtual
 	hClose arq
 
 getVidaPlayer2 :: IO String 
 getVidaPlayer2 = do
-	arq <- openFile "pokemonVidaPlayer2.txt" ReadMode
+	arq <- openFile "ArquivosPlayerTwo/pokemonVidaPlayer2.txt" ReadMode
 	aux <- hGetLine arq
 	hClose arq
 	return aux
