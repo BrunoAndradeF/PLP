@@ -127,6 +127,8 @@ exibeMenuDeSelecao 0 = do
         putStrLn "|                    Digite 5 para Digglet                             |"
         putStrLn "|                                                                      |"
         putStrLn "|                    Digite 6 para Eevee                               |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 7 para voltar                              |"
         putStrLn "|______________________________________________________________________|"
 exibeMenuDeSelecao 1 = do
         putStrLn "                                                                        "
@@ -144,6 +146,8 @@ exibeMenuDeSelecao 1 = do
         putStrLn "|                    Digite 5 para Digglet                             |"
         putStrLn "|                                                                      |"
         putStrLn "|                    Digite 6 para Eevee                               |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 7 para voltar                              |"
         putStrLn "|______________________________________________________________________|"
 exibeMenuDeSelecao 2 = do
         putStrLn "                                                                        "
@@ -161,6 +165,8 @@ exibeMenuDeSelecao 2 = do
         putStrLn "|                    Digite 5 para Digglet                             |"
         putStrLn "|                                                                      |"
         putStrLn "|                    Digite 6 para Eevee                               |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 7 para voltar                              |"
         putStrLn "|______________________________________________________________________|"
 
 exibePokemons :: String -> IO()

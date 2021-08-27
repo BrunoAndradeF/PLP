@@ -14,6 +14,7 @@ inicioPvP = do
         exibeCabecalhoPvP
         menuDeSelecaoPlayer1
         
+        
 menuDeSelecaoPlayer1 :: IO()
 menuDeSelecaoPlayer1 = do
         exibeMenuDeSelecao 1
@@ -25,12 +26,15 @@ menuDeSelecaoPlayer1 = do
                 putStrLn ("Player 1 escolheu o: " ++ (nomesPokemons !! op1))
                 exibePokemons (nomesPokemons !! op1)
                 pausa
-        else do
-                exibeOpcaoInvalida
-                pausa
-                menuDeSelecaoPlayer1
+                menuDeSelecaoPlayer2 op1
 
-        menuDeSelecaoPlayer2 op1
+        else do
+                if op1 == 6 then return ()
+                else do
+                        exibeOpcaoInvalida
+                        pausa
+                        menuDeSelecaoPlayer1
+
         where nomesPokemons = ["Zeca Skull", "Pikachu", "SeaHourse", "Kakuna", "Digglet", "Eevee"]
 
 menuDeSelecaoPlayer2 :: Int -> IO()
@@ -45,12 +49,14 @@ menuDeSelecaoPlayer2 op1 = do
                 putStrLn ("Player 2 escolheu o: " ++ (nomesPokemons !! op2))
                 exibePokemons (nomesPokemons !! op2)
                 pausa
-        else do
-                exibeOpcaoInvalida
-                pausa
-                menuDeSelecaoPlayer2 op1
+                batalhaPvP (nomesPokemons !! op1) (nomesPokemons !! op2) 1
 
-        batalhaPvP (nomesPokemons !! op1) (nomesPokemons !! op2) 1
+        else do
+                if op2 == 6 then menuDeSelecaoPlayer1
+                else do
+                        exibeOpcaoInvalida
+                        pausa
+                        menuDeSelecaoPlayer2 op1
 
         where nomesPokemons = ["Zeca Skull", "Pikachu", "SeaHourse", "Kakuna", "Digglet", "Eevee"]
 

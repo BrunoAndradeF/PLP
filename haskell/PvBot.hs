@@ -38,8 +38,11 @@ menuDeSelecaoPvBot = do
 
                 batalhaPvBot (nomesPokemons !! op) pokeDoBot 1
         else do
-                exibeOpcaoInvalida
-                menuDeSelecaoPvBot
+                if op == 6 then return ()
+                else do
+                        exibeOpcaoInvalida
+                        pausa
+                        menuDeSelecaoPvBot
         where nomesPokemons = ["Zeca Skull", "Pikachu", "SeaHourse", "Kakuna", "Digglet", "Eevee"]
 
 batalhaPvBot :: String -> String-> Vez -> IO()
