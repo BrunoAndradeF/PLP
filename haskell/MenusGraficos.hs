@@ -110,8 +110,8 @@ exibeCabecalhoHistoria = do
         putStrLn "|______________________________________________________________________|"
 
 
-exibeMenuDeSelecao :: IO()
-exibeMenuDeSelecao = do
+exibeMenuDeSelecao :: Int -> IO()
+exibeMenuDeSelecao 0 = do
         putStrLn "                                                                        "
         putStrLn "                      ~ESCOLHA O SEU POKEMON~                           "
         putStrLn " ______________________________________________________________________ "
@@ -127,6 +127,46 @@ exibeMenuDeSelecao = do
         putStrLn "|                    Digite 5 para Digglet                             |"
         putStrLn "|                                                                      |"
         putStrLn "|                    Digite 6 para Eevee                               |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 7 para voltar                              |"
+        putStrLn "|______________________________________________________________________|"
+exibeMenuDeSelecao 1 = do
+        putStrLn "                                                                        "
+        putStrLn "                  ~PLAYER 1 ESCOLHA O SEU POKEMON~                      "
+        putStrLn " ______________________________________________________________________ "
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 1 para Zeca skull                          |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 2 para Pikachu                             |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 3 para SeaHourse                           |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 4 para Kakuna                              |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 5 para Digglet                             |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 6 para Eevee                               |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 7 para voltar                              |"
+        putStrLn "|______________________________________________________________________|"
+exibeMenuDeSelecao 2 = do
+        putStrLn "                                                                        "
+        putStrLn "                  ~PLAYER 2 ESCOLHA O SEU POKEMON~                      "
+        putStrLn " ______________________________________________________________________ "
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 1 para Zeca skull                          |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 2 para Pikachu                             |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 3 para SeaHourse                           |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 4 para Kakuna                              |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 5 para Digglet                             |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 6 para Eevee                               |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 7 para voltar                              |"
         putStrLn "|______________________________________________________________________|"
 
 exibePokemons :: String -> IO()
@@ -376,12 +416,27 @@ exibePikachu = do
         putStrLn "|                                                                      |"
         putStrLn "|______________________________________________________________________|"
 
+exibeEstadoBatalhaPvBot :: String -> String -> IO()
+exibeEstadoBatalhaPvBot playerHP botHP = do
+        putStrLn "                                                                        "
+        putStrLn "                            ~VEZ DO PLAYER~                             "
+        putStrLn "                                                                        "
+        putStrLn ("| HP do Pokemon do player: " ++ playerHP)
+        putStrLn ("| HP do Pokemon do bot: " ++ botHP)
+
+exibeEstadoBatalhaPvp :: String -> String -> Int -> IO()
+exibeEstadoBatalhaPvp player1HP player2HP vez = do
+        putStrLn "                                                                        "
+        putStrLn ("                           ~VEZ DO PLAYER " ++ show vez ++ "~                             ")
+        putStrLn "                                                                        "
+        putStrLn ("| HP do Pokemon do player 1: " ++ player1HP)
+        putStrLn ("| HP do Pokemon do player 2: " ++ player2HP)
+ 
+
 exibeAtaques :: IO()
 exibeAtaques = do
         putStrLn "                                                                        "
-        putStrLn "                                                                        "
         putStrLn "                         ~ESCOLHA O SEU ATAQUE~                         "
-        putStrLn "                                                                        "
         putStrLn " ________________________________   ___________________________________ "
         putStrLn "|                                | |                                   |"
         putStrLn "|        Digite 1 para Cura      | |       Digite 2 para Ataque        |"
@@ -401,6 +456,9 @@ exibeOpcaoInvalida = do
 
 exibePlayerGanha :: IO()
 exibePlayerGanha = do
+        putStrLn ""
+        putStrLn "Você derrotou o bot"
+        putStrLn ""
         putStrLn " ______________________________________________________________________ "
         putStrLn "|  8888888b.  888                                                      |"
         putStrLn "|  888   Y88b 888                                                      |"
@@ -423,6 +481,9 @@ exibePlayerGanha = do
 
 exibeBotGanha :: IO()
 exibeBotGanha = do
+        putStrLn ""
+        putStrLn "O bot te derrotou"
+        putStrLn ""
         putStrLn " ______________________________________________________________________ "
         putStrLn "|  888888b.    .d88888b. 88888888888                                   |"
         putStrLn "|  888  °88b  d88P° °Y88b    888                                       |"
@@ -498,3 +559,10 @@ exibePlayer2Ganha = do
         putStrLn "|  8888P   Y8888 888 888  888      X88                                 |"
         putStrLn "|  888P     Y888 888 888  888  88888P'                                 |"
         putStrLn "|______________________________________________________________________|"
+
+pausa :: IO()
+pausa = do
+        putStrLn ""
+        putStr "Tecle Enter para continuar"
+        getLine
+        putStr ""

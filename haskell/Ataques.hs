@@ -27,9 +27,9 @@ ataqueCritico = unsafePerformIO (getStdRandom (randomR (10, 35)))
 
 opcoesDeStatus=[0,0,0,10,10]
 alteraStatus :: Int
-alteraStatus = opcoesDeCritico !!unsafePerformIO (getStdRandom (randomR (0, 4)))
+alteraStatus = opcoesDeStatus !!unsafePerformIO (getStdRandom (randomR (0, 4)))
 --Usar para rodar nos turnos e ver se o efeito sai depois nos rounds
-tiraStatus=[false,true,true,true,false]
+tiraStatus=[False,True,True,True,False]
 --Pensar como pegar os tipos do pokemon da batalha no txt
 danoPorTipo :: String -> String -> Int
 danoPorTipo a b

@@ -34,3 +34,10 @@ guardaDadosVidaPlayer2 vidaAtual = do
 	arq <- openFile "pokemonVidaPlayer2.txt" WriteMode
 	hPrint arq vidaAtual
 	hClose arq
+
+getVidaPlayer2 :: IO String 
+getVidaPlayer2 = do
+	arq <- openFile "pokemonVidaPlayer2.txt" ReadMode
+	aux <- hGetLine arq
+	hClose arq
+	return aux

@@ -9,7 +9,7 @@ import MovimentosBot
 -- funcao que atualiza um pokemon parametros(tipoDeMovimento, valorDanoOuCura)
 atualizaVidaPlayer1 :: Int -> Int -> IO()
 atualizaVidaPlayer1 tipoDeMovimento valorDanoOuCura
-	| (tipoDeMovimento == 1) = atualizaArqCuraPlayer1 valorDanoOuCura
+	| tipoDeMovimento == 1 = atualizaArqCuraPlayer1 valorDanoOuCura
 	| otherwise = atualizaArqAtaquePlayer1 valorDanoOuCura
 
 --funcao que atualiza a vida do pokemon do bot quando se cura
@@ -34,3 +34,11 @@ guardaDadosVidaPlayer1 vidaAtual = do
 	arq <- openFile "pokemonVidaPlayer1.txt" WriteMode
 	hPrint arq vidaAtual
 	hClose arq
+
+
+getVidaPlayer1 :: IO String 
+getVidaPlayer1 = do
+	arq <- openFile "pokemonVidaPlayer1.txt" ReadMode
+	aux <- hGetLine arq
+	hClose arq
+	return aux
