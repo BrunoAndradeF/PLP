@@ -158,3 +158,5 @@ batalhaPvP player1 player2 vez = do
                 else do
                         exibeOpcaoInvalida
                         batalhaPvP player1 player2 2
+
+
