@@ -57,7 +57,7 @@ batalhaPvBot player1 bot vez = do
                 aux <- readLn :: IO Int
                 let op = aux
                 if  op >= 1 && op <= 4 then do
-                        let valorAtaque = designaAtaque op
+                        let valorAtaque = designaAtaque op player1 bot
 
                         if op == 1 then do
                                 atualizaVidaPlayer1 op valorAtaque
@@ -100,7 +100,7 @@ batalhaPvBot player1 bot vez = do
                 hClose arquivo
 
                 if read vida +15 <= 20 then do
-                        let cura = designaAtaque 1
+                        let cura = designaAtaque 1 bot player1
                         atualizaVidaBot 1 cura
 
                         putStrLn ("O bot se cura em "++ show cura) 
@@ -108,7 +108,7 @@ batalhaPvBot player1 bot vez = do
 
                 else do
                         let atq = escolheAtaqueBot
-                        let valorAtaquebot = designaAtaque atq
+                        let valorAtaquebot = designaAtaque atq bot player1
                         atualizaVidaPlayer1 atq valorAtaquebot
 
                         putStrLn ("O bot ataca em " ++ show valorAtaquebot)
