@@ -4,13 +4,6 @@ import System.IO.Unsafe
 import MenusGraficos
 
 {-___________________________________________________ metodo para designar ataques ___________________________________________________-}
-{-designaAtaque :: Int -> Int
-designaAtaque 1 = curar
-designaAtaque 2 = atacar
-designaAtaque 3 = ataqueCritico
---designaAtaque 4 = alteraStatus-}
-
-
 
 designaAtaque :: Int -> String -> String -> Int
 designaAtaque movimento pokemonAtacando pokemonDefendendo
@@ -18,12 +11,6 @@ designaAtaque movimento pokemonAtacando pokemonDefendendo
   | (movimento == 2) = atacar + danoPorTipo pokemonAtacando pokemonDefendendo
   | (movimento == 3) = ataqueCritico + danoPorTipo pokemonAtacando pokemonDefendendo
 
-
-
-
-{-designaAtaqueTeste 1 x y = curar
-designaAtaqueTeste 2 x y = atacar
-designaAtaqueTeste 3 x y = ataqueCritico-}
 {- ___________________________________________________sessão de metodos de ataque___________________________________________________-}
 
 
