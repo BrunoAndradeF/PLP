@@ -1,4 +1,3 @@
-
 module Ataques where
 import System.Random
 import System.IO.Unsafe
@@ -14,11 +13,6 @@ designaAtaque 3 = ataqueCritico
 
 
 {- ___________________________________________________sessão de metodos de ataque___________________________________________________-}
-
-
--- funcao recebe no primeiro parametro o pokemon que esta atacando e o no segundo o que esta apanhando
-
-
 
 
 curar :: Int
