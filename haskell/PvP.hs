@@ -74,7 +74,7 @@ batalhaPvP player1 player2 vez = do
                 aux <- readLn :: IO Int
                 let op = aux
                 if  op >= 1 && op <= 4 then do
-                        let valorAtaque = designaAtaque op
+                        let valorAtaque = designaAtaque op player1 player2
 
                         if op == 1 then do 
                                 atualizaVidaPlayer1 op valorAtaque
@@ -122,7 +122,7 @@ batalhaPvP player1 player2 vez = do
                 aux <- readLn :: IO Int
                 let op = aux
                 if  op >= 1 && op <= 4 then do
-                        let valorAtaque = designaAtaque op
+                        let valorAtaque = designaAtaque op player2 player1
 
                         if op == 1 then do
                                 atualizaVidaPlayer2 op valorAtaque
