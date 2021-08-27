@@ -16,8 +16,8 @@ escolheAtaqueBot = unsafePerformIO (getStdRandom (randomR (2, 3)))
 -- funcao que atualiza um pokemon parametros(tipoDeMovimento, valorDanoOuCura)
 atualizaVidaBot :: Int -> Int -> IO()
 atualizaVidaBot tipoDeMovimento valorDanoOuCura
-    | tipoDeMovimento == 1 = atualizaArqCura valorDanoOuCura
-    | otherwise = atualizaArqAtaque valorDanoOuCura
+	| (tipoDeMovimento == 1) = atualizaArqCura valorDanoOuCura
+	| otherwise = atualizaArqAtaque valorDanoOuCura
 
 --funcao que atualiza a vida do pokemon do bot quando se cura
 atualizaArqCura :: Int -> IO()
@@ -55,11 +55,5 @@ guardaDadosVidaBot vidaAtual = do
 	hPrint arq vidaAtual
 	hClose arq
 
-getVidaBot :: IO String 
-getVidaBot = do
-	arq <- openFile "pokemonVidaBot.txt" ReadMode
-	aux <- hGetLine arq
-	hClose arq
-	return aux
 
  	

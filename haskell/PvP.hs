@@ -12,108 +12,142 @@ type Vez = Int
 inicioPvP :: IO()
 inicioPvP = do
         exibeCabecalhoPvP
-        menuDeSelecaoPvP
+        menuDeSelecaoPlayer1
         
-menuDeSelecaoPvP :: IO()
-menuDeSelecaoPvP = do
-        exibeMenuDeSelecao
+menuDeSelecaoPlayer1 :: IO()
+menuDeSelecaoPlayer1 = do
+        exibeMenuDeSelecao 1
         aux <- readLn :: IO Int
         system "cls"
-        let op = aux - 1
+        let op1 = aux - 1
 
-        if  op >= 0 && op <= 5 then do
-                putStrLn ("Pokemon selecionado Player1: " ++ (nomesPokemons !! op))
+        if  op1 >= 0 && op1 <= 5 then do
+                putStrLn ("Player 1 escolheu o: " ++ (nomesPokemons !! op1))
+                exibePokemons (nomesPokemons !! op1)
+                pausa
         else do
                 exibeOpcaoInvalida
-                menuDeSelecaoPvP
+                pausa
+                menuDeSelecaoPlayer1
 
-        exibeMenuDeSelecao
-        aux2 <- readLn :: IO Int
+        menuDeSelecaoPlayer2 op1
+        where nomesPokemons = ["Zeca Skull", "Pikachu", "SeaHourse", "Kakuna", "Digglet", "Eevee"]
+
+menuDeSelecaoPlayer2 :: Int -> IO()
+menuDeSelecaoPlayer2 op1 = do
         system "cls"
-        let op2 = aux2 - 1
+        exibeMenuDeSelecao 2
+        aux <- readLn :: IO Int
+        system "cls"
+        let op2 = aux - 1
 
         if  op2 >= 0 && op2 <= 5 then do
-                putStrLn ("Pokemon selecionado Player2: " ++ (nomesPokemons !! op2))
+                putStrLn ("Player 2 escolheu o: " ++ (nomesPokemons !! op2))
+                exibePokemons (nomesPokemons !! op2)
+                pausa
         else do
                 exibeOpcaoInvalida
-                menuDeSelecaoPvP
+                pausa
+                menuDeSelecaoPlayer2 op1
 
-        batalhaPvP (nomesPokemons !! op) (nomesPokemons !! op2) 1
+        batalhaPvP (nomesPokemons !! op1) (nomesPokemons !! op2) 1
 
         where nomesPokemons = ["Zeca Skull", "Pikachu", "SeaHourse", "Kakuna", "Digglet", "Eevee"]
 
 
-
 batalhaPvP :: String -> String-> Vez -> IO()
 batalhaPvP player1 player2 vez = do
+        system "cls"
         if vez == 1 then do
                 exibePokemons player1
+                player1HP <- getVidaPlayer1
+                player2HP <- getVidaPlayer2
+                exibeEstadoBatalhaPvp player1HP player2HP vez
                 exibeAtaques
+
                 aux <- readLn :: IO Int
                 let op = aux
                 if  op >= 1 && op <= 4 then do
                         let valorAtaque = designaAtaque op
-                        if (op == 1) then do 
+
+                        if op == 1 then do 
                                 atualizaVidaPlayer1 op valorAtaque
                                 system "cls"
                                 putStrLn ""
-                                putStrLn "valor do ataque Player1:"
-                                print valorAtaque
-                                batalhaPvP player1 player2 2
+                                putStrLn ("Player 1 se cura em " ++ show valorAtaque)
+                                
                         else do 
                                 atualizaVidaPlayer2 op valorAtaque
                                 system "cls"
                                 putStrLn ""
-                                putStrLn "valor do ataque Player1:"
-                                print valorAtaque
+                                putStrLn ("Player 1 ataca em " ++ show valorAtaque)
+
                                 arq <- openFile "pokemonVidaPlayer2.txt" ReadMode
                                 vidaP2 <- hGetLine arq
                                 hClose arq
-                                if ((read vidaP2)<=0) then do
-                                        exibePlayer1Ganha
+
+                                if read vidaP2 <= 0 then do
                                         guardaDadosVidaPlayer1 100
                                         guardaDadosVidaPlayer2 100
-                                        putStr "Tecle Enter para jogar novamente"
-                                        getLine
-                                        putStr ""
+
+                                        exibePlayer1Ganha
+                                        pausa
+                                        system "cls"
+                                        inicioPvP
                                 else do
-                                        batalhaPvP player1 player2 2   
+                                        putStr ""
+
+                        putStrLn ""
+                        exibePokemons player1   
+                        pausa
+                        system "cls"
+                        batalhaPvP player1 player2 2   
                 else do
                         exibeOpcaoInvalida
                         batalhaPvP player1 player2 1
                               
         else do
                 exibePokemons player2
+                player1HP <- getVidaPlayer1
+                player2HP <- getVidaPlayer2
+                exibeEstadoBatalhaPvp player1HP player2HP vez
                 exibeAtaques
+
                 aux <- readLn :: IO Int
                 let op = aux
                 if  op >= 1 && op <= 4 then do
                         let valorAtaque = designaAtaque op
-                        if (op == 1) then do
+
+                        if op == 1 then do
                                 atualizaVidaPlayer2 op valorAtaque
                                 system "cls"
                                 putStrLn ""
-                                putStrLn "valor do ataque Player2:"
-                                print valorAtaque
-                                batalhaPvP player1 player2 1
+                                putStrLn ("Player 2 se cura em " ++ show valorAtaque)
+                                
                         else do
                                 atualizaVidaPlayer1 op valorAtaque
                                 system "cls"
                                 putStrLn ""
-                                putStrLn "valor do ataque Player2:"
-                                print valorAtaque
+                                putStrLn ("Player 2 ataca em " ++ show valorAtaque)
+
                                 arq <- openFile "pokemonVidaPlayer1.txt" ReadMode
                                 vidaP1 <- hGetLine arq
                                 hClose arq
-                                if ((read vidaP1)<=0) then do
-                                        exibePlayer2Ganha
+
+                                if read vidaP1 <= 0 then do
                                         guardaDadosVidaPlayer1 100
                                         guardaDadosVidaPlayer2 100
-                                        putStr "Tecle Enter para jogar novamente"
-                                        getLine
-                                        putStr ""
+
+                                        exibePlayer2Ganha
+                                        pausa
+                                        inicioPvP
                                 else do
-                                        batalhaPvP player1 player2 1 
+                                        putStr ""
+                        putStrLn ""
+                        exibePokemons player2   
+                        pausa
+                        system "cls"
+                        batalhaPvP player1 player2 1  
                 else do
                         exibeOpcaoInvalida
                         batalhaPvP player1 player2 2
