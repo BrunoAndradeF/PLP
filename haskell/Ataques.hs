@@ -1,4 +1,3 @@
-
 module Ataques where
 import System.Random
 import System.IO.Unsafe
@@ -37,3 +36,4 @@ danoPorTipo a b
   | (a=="Digglet" && b=="SeaHourse") || (a=="Kakuna" && b=="Digglet") = -5
   | (a=="Pikachu" && b=="Digglet") || (a=="Zeca Skull" && b=="Digglet") = -5
   | otherwise =0
+
