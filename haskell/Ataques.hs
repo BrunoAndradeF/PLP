@@ -24,12 +24,17 @@ atacar = unsafePerformIO (getStdRandom (randomR (5, 25)))
 ataqueCritico :: Int
 ataqueCritico = unsafePerformIO (getStdRandom (randomR (10, 35)))
 
+
+
 opcoesDeStatus=[0,0,0,10,10]
 alteraStatus :: Int
 alteraStatus = opcoesDeStatus !!unsafePerformIO (getStdRandom (randomR (0, 4)))
+
+
 --Usar para rodar nos turnos e ver se o efeito sai depois nos rounds
 tiraStatus=[False,True,True,True,False]
---Pensar como pegar os tipos do pokemon da batalha no txt
+
+--Pensar como pegar os tipos do pokemon da batalha
 danoPorTipo :: String -> String -> Int
 danoPorTipo a b
   | (a=="Zeca Skull" && b=="SeaHourse") || (a=="Digglet" && b=="Zeca Skull") || ((a=="Digglet" && b=="Pikachu") || (a=="Digglet" && b=="Kakuna")) = 10
