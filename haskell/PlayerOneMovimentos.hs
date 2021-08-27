@@ -1,4 +1,4 @@
-module PlayerOneMovimentos where
+	module PlayerOneMovimentos where
 import System.IO
 import Data.Char
 import System.Process
@@ -15,7 +15,7 @@ atualizaVidaPlayer1 tipoDeMovimento valorDanoOuCura
 --funcao que atualiza a vida do pokemon do bot quando se cura
 atualizaArqCuraPlayer1 :: Int -> IO()
 atualizaArqCuraPlayer1 valorCura = do
-	arq <- openFile "pokemonVidaPlayer1.txt" ReadMode
+	arq <- openFile "ArquivosPlayerOne/pokemonVidaPlayer1.txt" ReadMode
 	aux <- hGetLine arq
 	hClose arq
 	if (podeCurar (read aux)) then do guardaDadosVidaPlayer1 (soma (read aux) valorCura) else do putStrLn "Pokemon com a vida cheia"
@@ -24,21 +24,21 @@ atualizaArqCuraPlayer1 valorCura = do
 --funcao que atualiza a vida do pokemon do bot quando é atacado
 atualizaArqAtaquePlayer1 :: Int -> IO()
 atualizaArqAtaquePlayer1 valorCura = do
-	arq <- openFile "pokemonVidaPlayer1.txt" ReadMode
+	arq <- openFile "ArquivosPlayerOne/pokemonVidaPlayer1.txt" ReadMode
 	aux <- hGetLine arq
 	hClose arq
 	guardaDadosVidaPlayer1 (subtracao (read aux) valorCura)
 
 guardaDadosVidaPlayer1 :: Int -> IO()
 guardaDadosVidaPlayer1 vidaAtual = do
-	arq <- openFile "pokemonVidaPlayer1.txt" WriteMode
+	arq <- openFile "ArquivosPlayerOne/pokemonVidaPlayer1.txt" WriteMode
 	hPrint arq vidaAtual
 	hClose arq
 
 
 getVidaPlayer1 :: IO String 
 getVidaPlayer1 = do
-	arq <- openFile "pokemonVidaPlayer1.txt" ReadMode
+	arq <- openFile "ArquivosPlayerOne/pokemonVidaPlayer1.txt" ReadMode
 	aux <- hGetLine arq
 	hClose arq
 	return aux

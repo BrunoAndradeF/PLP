@@ -88,7 +88,7 @@ batalhaPvP player1 player2 vez = do
                                 putStrLn ""
                                 putStrLn ("Player 1 ataca em " ++ show valorAtaque)
 
-                                arq <- openFile "pokemonVidaPlayer2.txt" ReadMode
+                                arq <- openFile "ArquivosPlayerTwo/pokemonVidaPlayer2.txt" ReadMode
                                 vidaP2 <- hGetLine arq
                                 hClose arq
 
@@ -136,7 +136,7 @@ batalhaPvP player1 player2 vez = do
                                 putStrLn ""
                                 putStrLn ("Player 2 ataca em " ++ show valorAtaque)
 
-                                arq <- openFile "pokemonVidaPlayer1.txt" ReadMode
+                                arq <- openFile "ArquivosPlayerOne/pokemonVidaPlayer1.txt" ReadMode
                                 vidaP1 <- hGetLine arq
                                 hClose arq
 

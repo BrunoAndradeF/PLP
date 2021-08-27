@@ -71,7 +71,7 @@ batalhaPvBot player1 bot vez = do
                                 putStrLn ""
                                 putStrLn ("Você ataca em " ++ show valorAtaque)
                                 
-                                arq <- openFile "pokemonVidaBot.txt" ReadMode
+                                arq <- openFile "ArquivosBot/pokemonVidaBot.txt" ReadMode
                                 aux <- hGetLine arq
                                 hClose arq
 
@@ -95,11 +95,11 @@ batalhaPvBot player1 bot vez = do
                         exibeOpcaoInvalida
                         batalhaPvBot player1 bot 1                          
         else do
-                arquivo <- openFile "pokemonVidaBot.txt" ReadMode
+                arquivo <- openFile "ArquivosBot/pokemonVidaBot.txt" ReadMode
                 vida <- hGetLine arquivo
                 hClose arquivo
 
-                if read vida +15 <= 30 then do
+                if read vida +15 <= 20 then do
                         let cura = designaAtaque 1
                         atualizaVidaBot 1 cura
 
@@ -113,7 +113,7 @@ batalhaPvBot player1 bot vez = do
 
                         putStrLn ("O bot ataca em " ++ show valorAtaquebot)
 
-                        arq2 <- openFile "pokemonVidaPlayer1.txt" ReadMode
+                        arq2 <- openFile "ArquivosPlayerOne/pokemonVidaPlayer1.txt" ReadMode
                         aux2 <- hGetLine arq2
                         hClose arq2
 
