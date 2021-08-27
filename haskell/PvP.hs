@@ -146,6 +146,7 @@ batalhaPvP player1 player2 vez = do
 
                                         exibePlayer2Ganha
                                         pausa
+                                        system "cls"
                                         inicioPvP
                                 else do
                                         putStr ""
