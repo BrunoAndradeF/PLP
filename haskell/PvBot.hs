@@ -67,14 +67,13 @@ batalhaPvBot player1 bot vez = do
 
                         if op == 1 then do
                                 atualizaVidaPlayer1 op valorAtaque
-                                {- system "cls"
-                                putStrLn "" -}
                                 putStrLn ("Você se cura em " ++ show valorAtaque)
+                                pausa
+                                system "cls"
+                                batalhaPvBot player1 bot 2 
 
                         else do
                                 atualizaVidaBot op valorAtaque
-                                {- system "cls"
-                                putStrLn "" -}
                                 putStrLn ("Você ataca em " ++ show valorAtaque)
                                 
                                 arq <- openFile "ArquivosBot/pokemonVidaBot.txt" ReadMode
@@ -86,19 +85,15 @@ batalhaPvBot player1 bot vez = do
                                         guardaDadosVidaPlayer1 100
 
                                         system "cls"
-                                        
+
                                         exibePlayerGanha
                                         pausa
                                         system "cls"
                                         inicioPvBot
                                 else do
-                                        putStr ""
-
-                        {- putStrLn ""
-                        exibePokemons player1  -}  
-                        pausa
-                        system "cls"
-                        batalhaPvBot player1 bot 2  
+                                        pausa
+                                        system "cls"
+                                        batalhaPvBot player1 bot 2  
                 else do
                         system "cls"
                         putStrLn ""
@@ -139,12 +134,10 @@ batalhaPvBot player1 bot vez = do
                                 system "cls"
                                 inicioPvBot
                         else do
-                                putStr ""
-                
-                putStrLn ""
-                exibePokemons bot   
-                pausa
-                system "cls"
-                batalhaPvBot player1 bot 1
+                                putStrLn ""
+                                exibePokemons bot
+                                pausa
+                                system "cls"
+                                batalhaPvBot player1 bot 1
         
         

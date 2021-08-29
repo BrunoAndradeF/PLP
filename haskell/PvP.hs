@@ -101,9 +101,7 @@ batalhaPvP player1 player2 vez = do
                                         pausa
                                         system "cls"
                                         print ""
-                                        --inicioPvP
                                 else do
-                                        --putStr ""
                                         putStrLn ""
                                         exibePokemons player1
                                         pausa
@@ -149,9 +147,7 @@ batalhaPvP player1 player2 vez = do
                                         pausa
                                         system "cls"
                                         print ""
-                                        --inicioPvP
                                 else do
-                                        --putStr ""
                                         putStrLn ""
                                         exibePokemons player2
                                         pausa
