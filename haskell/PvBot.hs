@@ -5,6 +5,7 @@ import MovimentosBot
 import System.Process
 import System.IO
 import PlayerOneMovimentos
+import Control.Concurrent
 
 
 --Define a vez de jogar (1 para Player1 e 2 para o bot)
@@ -59,16 +60,21 @@ batalhaPvBot player1 bot vez = do
                 if  op >= 1 && op <= 4 then do
                         let valorAtaque = designaAtaque op player1 bot
 
+                        system "cls"
+                        putStrLn "\n\n"
+                        exibePokemons player1 
+                        putStrLn "\n\n"
+
                         if op == 1 then do
                                 atualizaVidaPlayer1 op valorAtaque
-                                system "cls"
-                                putStrLn ""
+                                {- system "cls"
+                                putStrLn "" -}
                                 putStrLn ("Você se cura em " ++ show valorAtaque)
 
                         else do
                                 atualizaVidaBot op valorAtaque
-                                system "cls"
-                                putStrLn ""
+                                {- system "cls"
+                                putStrLn "" -}
                                 putStrLn ("Você ataca em " ++ show valorAtaque)
                                 
                                 arq <- openFile "ArquivosBot/pokemonVidaBot.txt" ReadMode
@@ -79,6 +85,8 @@ batalhaPvBot player1 bot vez = do
                                         guardaDadosVidaBot 100
                                         guardaDadosVidaPlayer1 100
 
+                                        system "cls"
+                                        
                                         exibePlayerGanha
                                         pausa
                                         system "cls"
@@ -86,13 +94,18 @@ batalhaPvBot player1 bot vez = do
                                 else do
                                         putStr ""
 
-                        putStrLn ""
-                        exibePokemons player1   
+                        {- putStrLn ""
+                        exibePokemons player1  -}  
                         pausa
                         system "cls"
                         batalhaPvBot player1 bot 2  
                 else do
+                        system "cls"
+                        putStrLn ""
+                        exibePokemons player1
                         exibeOpcaoInvalida
+                        threadDelay 1000000
+                        system "cls"
                         batalhaPvBot player1 bot 1                          
         else do
                 arquivo <- openFile "ArquivosBot/pokemonVidaBot.txt" ReadMode
