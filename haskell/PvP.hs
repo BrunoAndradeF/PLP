@@ -88,26 +88,24 @@ batalhaPvP player1 player2 vez = do
                                 putStrLn ""
                                 putStrLn ("Player 1 ataca em " ++ show valorAtaque)
 
-                                arq <- openFile "ArquivosPlayerTwo/pokemonVidaPlayer2.txt" ReadMode
-                                vidaP2 <- hGetLine arq
-                                hClose arq
+                        arq <- openFile "ArquivosPlayerTwo/pokemonVidaPlayer2.txt" ReadMode
+                        vidaP2 <- hGetLine arq
+                        hClose arq
 
-                                if read vidaP2 <= 0 then do
-                                        guardaDadosVidaPlayer1 100
-                                        guardaDadosVidaPlayer2 100
+                        if read vidaP2 <= 0 then do
+                                guardaDadosVidaPlayer1 100
+                                guardaDadosVidaPlayer2 100
 
-                                        exibePlayer1Ganha
-                                        pausa
-                                        system "cls"
-                                        inicioPvP
-                                else do
-                                        putStr ""
-
-                        putStrLn ""
-                        exibePokemons player1   
-                        pausa
-                        system "cls"
-                        batalhaPvP player1 player2 2   
+                                exibePlayer1Ganha
+                                pausa
+                                system "cls"
+                                inicioPvP
+                        else do
+                                putStrLn ""
+                                exibePokemons player1   
+                                pausa
+                                system "cls"
+                                batalhaPvP player1 player2 2   
                 else do
                         exibeOpcaoInvalida
                         batalhaPvP player1 player2 1
@@ -136,25 +134,24 @@ batalhaPvP player1 player2 vez = do
                                 putStrLn ""
                                 putStrLn ("Player 2 ataca em " ++ show valorAtaque)
 
-                                arq <- openFile "ArquivosPlayerOne/pokemonVidaPlayer1.txt" ReadMode
-                                vidaP1 <- hGetLine arq
-                                hClose arq
+                        arq <- openFile "ArquivosPlayerOne/pokemonVidaPlayer1.txt" ReadMode
+                        vidaP1 <- hGetLine arq
+                        hClose arq
 
-                                if read vidaP1 <= 0 then do
-                                        guardaDadosVidaPlayer1 100
-                                        guardaDadosVidaPlayer2 100
+                        if read vidaP1 <= 0 then do
+                                guardaDadosVidaPlayer1 100
+                                guardaDadosVidaPlayer2 100
 
-                                        exibePlayer2Ganha
-                                        pausa
-                                        system "cls"
-                                        inicioPvP
-                                else do
-                                        putStr ""
-                        putStrLn ""
-                        exibePokemons player2   
-                        pausa
-                        system "cls"
-                        batalhaPvP player1 player2 1  
+                                exibePlayer2Ganha
+                                pausa
+                                system "cls"
+                                inicioPvP
+                        else do
+                                putStrLn ""
+                                exibePokemons player2   
+                                pausa
+                                system "cls"
+                                batalhaPvP player1 player2 1  
                 else do
                         exibeOpcaoInvalida
                         batalhaPvP player1 player2 2
