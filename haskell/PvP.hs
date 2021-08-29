@@ -5,6 +5,7 @@ import System.Process
 import System.IO
 import PlayerOneMovimentos
 import PlayerTwoMovimentos
+import Control.Concurrent
 
 --Define a vez de jogar (1 para Player1 e 2 para o bot)
 type Vez = Int
@@ -31,8 +32,12 @@ menuDeSelecaoPlayer1 = do
         else do
                 if op1 == 6 then return ()
                 else do
+                        system "cls"
+                        putStrLn ""
+                        exibeCabecalhoPvP
                         exibeOpcaoInvalida
-                        pausa
+                        threadDelay 2000000
+                        system "cls"
                         menuDeSelecaoPlayer1
 
         where nomesPokemons = ["Zeca Skull", "Pikachu", "SeaHourse", "Kakuna", "Digglet", "Eevee"]
@@ -55,8 +60,12 @@ menuDeSelecaoPlayer2 op1 = do
         else do
                 if op2 == 6 then menuDeSelecaoPlayer1
                 else do
+                        system "cls"
+                        putStrLn ""
+                        exibeCabecalhoPvP
                         exibeOpcaoInvalida
-                        pausa
+                        threadDelay 2000000
+                        system "cls"
                         menuDeSelecaoPlayer2 op1
 
         where nomesPokemons = ["Zeca Skull", "Pikachu", "SeaHourse", "Kakuna", "Digglet", "Eevee"]
@@ -108,7 +117,12 @@ batalhaPvP player1 player2 vez = do
                                         system "cls"
                                         batalhaPvP player1 player2 2   
                 else do
+                        system "cls"
+                        putStrLn ""
+                        exibePokemons player1
                         exibeOpcaoInvalida
+                        threadDelay 2000000
+                        system "cls"
                         batalhaPvP player1 player2 1
                               
         else do
@@ -154,7 +168,12 @@ batalhaPvP player1 player2 vez = do
                                         system "cls"
                                         batalhaPvP player1 player2 1  
                 else do
+                        system "cls"
+                        putStrLn ""
+                        exibePokemons player1
                         exibeOpcaoInvalida
+                        threadDelay 2000000
+                        system "cls"
                         batalhaPvP player1 player2 2
 
 

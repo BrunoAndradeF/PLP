@@ -14,11 +14,11 @@ type Vez = Int
 inicioPvBot :: IO()
 inicioPvBot = do
         system "cls"
-        exibeCabecalhoPvBot
         menuDeSelecaoPvBot
 
 menuDeSelecaoPvBot :: IO()
 menuDeSelecaoPvBot = do
+        exibeCabecalhoPvBot
         exibeMenuDeSelecao 0
         aux <- readLn :: IO Int
         system "cls"
@@ -41,8 +41,12 @@ menuDeSelecaoPvBot = do
         else do
                 if op == 6 then return ()
                 else do
+                        system "cls"
+                        putStrLn ""
+                        exibeCabecalhoPvBot
                         exibeOpcaoInvalida
-                        pausa
+                        threadDelay 2000000
+                        system "cls"
                         menuDeSelecaoPvBot
         where nomesPokemons = ["Zeca Skull", "Pikachu", "SeaHourse", "Kakuna", "Digglet", "Eevee"]
 
@@ -99,7 +103,7 @@ batalhaPvBot player1 bot vez = do
                         putStrLn ""
                         exibePokemons player1
                         exibeOpcaoInvalida
-                        threadDelay 1000000
+                        threadDelay 2000000
                         system "cls"
                         batalhaPvBot player1 bot 1                          
         else do
@@ -107,11 +111,18 @@ batalhaPvBot player1 bot vez = do
                 vida <- hGetLine arquivo
                 hClose arquivo
 
+                system "cls"
+                putStrLn "\n\n"
+                exibePokemons bot 
+                putStrLn "\n\n"
+
                 if read vida +15 <= 20 then do
                         let cura = designaAtaque 1 bot player1
                         atualizaVidaBot 1 cura
 
                         putStrLn ("O bot se cura em "++ show cura) 
+                        pausa
+                        system "cls"
                         batalhaPvBot player1 bot 1
 
                 else do
@@ -129,13 +140,15 @@ batalhaPvBot player1 bot vez = do
                                 guardaDadosVidaBot 100
                                 guardaDadosVidaPlayer1 100
 
-                                exibeBotGanha        
+                                threadDelay 1500000
+                                system "cls"
+
+                                exibeBotGanha 
+                                threadDelay 0800000       
                                 pausa
                                 system "cls"
                                 inicioPvBot
                         else do
-                                putStrLn ""
-                                exibePokemons bot
                                 pausa
                                 system "cls"
                                 batalhaPvBot player1 bot 1

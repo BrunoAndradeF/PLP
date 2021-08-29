@@ -482,7 +482,7 @@ exibePlayerGanha = do
 exibeBotGanha :: IO()
 exibeBotGanha = do
         putStrLn ""
-        putStrLn "O bot te derrotou"
+        putStrLn "                          O bot te derrotou"
         putStrLn ""
         putStrLn " ______________________________________________________________________ "
         putStrLn "|  888888b.    .d88888b. 88888888888                                   |"
