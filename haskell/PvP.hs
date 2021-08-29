@@ -11,12 +11,12 @@ type Vez = Int
 
 inicioPvP :: IO()
 inicioPvP = do
-        exibeCabecalhoPvP
         menuDeSelecaoPlayer1
         
         
 menuDeSelecaoPlayer1 :: IO()
 menuDeSelecaoPlayer1 = do
+        exibeCabecalhoPvP
         exibeMenuDeSelecao 1
         aux <- readLn :: IO Int
         system "cls"
@@ -40,6 +40,7 @@ menuDeSelecaoPlayer1 = do
 menuDeSelecaoPlayer2 :: Int -> IO()
 menuDeSelecaoPlayer2 op1 = do
         system "cls"
+        exibeCabecalhoPvP
         exibeMenuDeSelecao 2
         aux <- readLn :: IO Int
         system "cls"
@@ -99,15 +100,15 @@ batalhaPvP player1 player2 vez = do
                                         exibePlayer1Ganha
                                         pausa
                                         system "cls"
-                                        inicioPvP
+                                        print ""
+                                        --inicioPvP
                                 else do
-                                        putStr ""
-
-                        putStrLn ""
-                        exibePokemons player1   
-                        pausa
-                        system "cls"
-                        batalhaPvP player1 player2 2   
+                                        --putStr ""
+                                        putStrLn ""
+                                        exibePokemons player1
+                                        pausa
+                                        system "cls"
+                                        batalhaPvP player1 player2 2   
                 else do
                         exibeOpcaoInvalida
                         batalhaPvP player1 player2 1
@@ -147,14 +148,15 @@ batalhaPvP player1 player2 vez = do
                                         exibePlayer2Ganha
                                         pausa
                                         system "cls"
-                                        inicioPvP
+                                        print ""
+                                        --inicioPvP
                                 else do
-                                        putStr ""
-                        putStrLn ""
-                        exibePokemons player2   
-                        pausa
-                        system "cls"
-                        batalhaPvP player1 player2 1  
+                                        --putStr ""
+                                        putStrLn ""
+                                        exibePokemons player2
+                                        pausa
+                                        system "cls"
+                                        batalhaPvP player1 player2 1  
                 else do
                         exibeOpcaoInvalida
                         batalhaPvP player1 player2 2
