@@ -18,7 +18,7 @@ atualizaArqCuraPlayer1 valorCura = do
 	arq <- openFile "ArquivosPlayerOne/pokemonVidaPlayer1.txt" ReadMode
 	aux <- hGetLine arq
 	hClose arq
-	if (podeCurar (read aux)) then do guardaDadosVidaPlayer1 (soma (read aux) valorCura) else do putStrLn "Pokemon com a vida cheia"
+	if podeCurar (read aux) then do guardaDadosVidaPlayer1 (soma (read aux) valorCura) else do putStrLn "Pokemon com a vida cheia"
 	
 
 --funcao que atualiza a vida do pokemon do bot quando é atacado

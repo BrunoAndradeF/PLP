@@ -132,22 +132,22 @@ batalhaPvBot player1 bot vez = do
 
                         putStrLn ("O bot ataca em " ++ show valorAtaquebot)
 
-                        arq2 <- openFile "ArquivosPlayerOne/pokemonVidaPlayer1.txt" ReadMode
-                        aux2 <- hGetLine arq2
-                        hClose arq2
+                arq2 <- openFile "ArquivosPlayerOne/pokemonVidaPlayer1.txt" ReadMode
+                aux2 <- hGetLine arq2
+                hClose arq2
 
-                        if read aux2 <= 0 then do 
-                                guardaDadosVidaBot 100
-                                guardaDadosVidaPlayer1 100
+                if read aux2 <= 0 then do 
+                        guardaDadosVidaBot 100
+                        guardaDadosVidaPlayer1 100
 
-                                threadDelay 1500000
-                                system "cls"
+                        threadDelay 1500000
+                        system "cls"
 
-                                exibeBotGanha 
-                                threadDelay 0800000       
-                                pausa
-                                system "cls"
-                                inicioPvBot
+                        exibeBotGanha 
+                        threadDelay 0800000       
+                        pausa
+                        system "cls"
+                        inicioPvBot
                         else do
                                 pausa
                                 system "cls"

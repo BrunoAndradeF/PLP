@@ -15,8 +15,8 @@ escolheAtaqueBot = unsafePerformIO (getStdRandom (randomR (2, 3)))
 
 -- funcao que atualiza um pokemon parametros(tipoDeMovimento, valorDanoOuCura)
 atualizaVidaBot :: Int -> Int -> IO()
-atualizaVidaBot tipoDeMovimento valorDanoOuCura
-	| (tipoDeMovimento == 1) = atualizaArqCura valorDanoOuCura
+atualizaVidaBot tipoDeMovimento valorDanoOuCura 
+	| tipoDeMovimento == 1 = atualizaArqCura valorDanoOuCura
 	| otherwise = atualizaArqAtaque valorDanoOuCura
 
 --funcao que atualiza a vida do pokemon do bot quando se cura
@@ -25,12 +25,12 @@ atualizaArqCura valorCura = do
 	arq <- openFile "pokemonVidaBot.txt" ReadMode
 	aux <- hGetLine arq
 	hClose arq
-	if (podeCurar (read aux)) then guardaDadosVidaBot (soma (read aux) valorCura) else putStrLn "Pokemon com a vida cheia"
+	if podeCurar (read aux) then guardaDadosVidaBot (soma (read aux) valorCura) else putStrLn "Pokemon com a vida cheia"
 	return()
 
 --funcao que diz se o bot pode curar
 podeCurar :: Int -> Bool
-podeCurar a = if (a>=100) then False else True
+podeCurar a = a < 100
 
 -- funcao que soma a vida do bot
 soma :: Int -> Int -> Int
