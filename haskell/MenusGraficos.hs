@@ -433,7 +433,7 @@ exibeEstadoBatalhaPvp player1HP player2HP vez = do
         putStrLn ("| HP do Pokemon do player 2: " ++ player2HP)
  
 
-exibeAtaques :: IO()
+{-exibeAtaques :: IO()
 exibeAtaques = do
         putStrLn "                                                                        "
         putStrLn "                         ~ESCOLHA O SEU ATAQUE~                         "
@@ -445,6 +445,20 @@ exibeAtaques = do
         putStrLn "|                                | |                                   |"
         putStrLn "|      Digite 3 para Critico     | |   Digite 4 para alterar Status    |"
         putStrLn "|________________________________| |___________________________________|"
+        putStrLn "                                                                        "-} 
+
+exibeAtaques :: IO()
+exibeAtaques = do
+        putStrLn "                                                                        "
+        putStrLn "                         ~ESCOLHA O SEU ATAQUE~                         "
+        putStrLn " ________________________________   ___________________________________ "
+        putStrLn "|                                | |                                   |"
+        putStrLn "|        Digite 1 para Cura      | |       Digite 2 para Ataque        |"
+        putStrLn "|________________________________| |___________________________________|"
+        putStrLn "                   ________________________________                     "
+        putStrLn "                  |                                |                    "
+        putStrLn "                  |      Digite 3 para Critico     |                    "
+        putStrLn "                  |________________________________|                    "
         putStrLn "                                                                        "               
 
 exibeOpcaoInvalida :: IO()
