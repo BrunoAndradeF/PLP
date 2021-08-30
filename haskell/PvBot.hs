@@ -23,13 +23,8 @@ menuDeSelecaoPvBot pokesP1 pokesBot = do
                 let pokeDoBot = nomesPokemons !! escolhePokemonBot
                 let pokeDoPlayer = nomesPokemons !! op
 
-                arq <- openFile "ArquivosTimes/timePlayer1.txt" WriteMode
-                hPutStrLn arq (show (Pokemon pokeDoPlayer 100 False False:pokesP1))
-                hClose arq
-
-                arq2 <- openFile "ArquivosTimes/timeBot.txt" WriteMode
-                hPutStrLn arq2 (show (Pokemon pokeDoBot 100 False False:pokesBot))
-                hClose arq2
+                addPokemon  pokesP1 (Pokemon pokeDoPlayer 100 False False) "p1"
+                addPokemon  pokesBot (Pokemon pokeDoBot 100 False False) "bot"
 
                 putStrLn ("Você escolheu o: " ++ pokeDoPlayer)
                 exibePokemons pokeDoPlayer
@@ -77,31 +72,20 @@ batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
                                 putStrLn ""
                                 putStrLn ("Você ataca em " ++ show (-1 * valorAtaque))
 
-                        arq <- openFile "ArquivosTimes/timeBot.txt" ReadMode
-                        aux <- hGetLine arq
-                        hClose arq
+                        aux <- getTime "p1"
+                        aux2 <- getTime "bot"
 
-                        arq2 <- openFile "ArquivosTimes/timePlayer1.txt" ReadMode
-                        aux2 <- hGetLine arq2
-                        hClose arq2
-
-                        let vidaAtualBot = getVida (read aux) 1
-                        let vidaAtualPlayer = getVida (read aux2) 1
+                        let vidaAtualPlayer = getVida  aux 1
+                        let vidaAtualBot = getVida aux2 1
 
 
                         if  vidaAtualBot <= 0 then do
-                                arq <- openFile "ArquivosTimes/timePlayer1.txt" WriteMode;
-                                hPutStrLn arq "[]";
-                                hClose arq
-
-                                arq <- openFile "ArquivosTimes/timeBot.txt" WriteMode;
-                                hPutStrLn arq "[]";
-                                hClose arq
-
+                                limpaTimes
                                 exibePlayerGanha
                                 pausa
                                 system "cls"
                                 inicioPvBot [] []
+
                         else do
                                 putStrLn ""
                                 exibePokemons nomeP
@@ -111,15 +95,12 @@ batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
                                    (Pokemon nomeBot vidaAtualBot s1Bot s2Bot:timeBot) 2
                 else do
                         exibeOpcaoInvalida
+                        pausa
                         batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
                            (Pokemon nomeBot botHP s1Bot s2Bot:timeBot) 1
         else do
-                arq <- openFile "ArquivosTimes/timeBot.txt" ReadMode
-                aux <- hGetLine arq
-                hClose arq
-                let vidaBot = getVida (read aux) 1
 
-                if vidaBot + 15 <= 20 then do
+                if botHP + 15 <= 20 then do
                         let cura = designaAtaque 1 nomeP nomeBot
                         setVida (Pokemon nomeBot botHP s1Bot s2Bot:timeBot) cura "bot" 1
 
@@ -132,30 +113,19 @@ batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
 
                         putStrLn ("O bot ataca em " ++ show (-1 * valorAtaque))
 
-                arq <- openFile "ArquivosTimes/timeBot.txt" ReadMode
-                aux <- hGetLine arq
-                hClose arq
+                aux <- getTime "p1"
+                aux2 <- getTime "bot"
 
-                arq2 <- openFile "ArquivosTimes/timePlayer1.txt" ReadMode
-                aux2 <- hGetLine arq2
-                hClose arq2
-
-                let vidaAtualBot = getVida (read aux) 1
-                let vidaAtualPlayer = getVida (read aux2) 1
+                let vidaAtualPlayer = getVida  aux 1
+                let vidaAtualBot = getVida aux2 1
 
                 if vidaAtualPlayer <= 0 then do
-                        arq <- openFile "ArquivosTimes/timePlayer1.txt" WriteMode;
-                        hPutStrLn arq "[]";
-                        hClose arq
-
-                        arq <- openFile "ArquivosTimes/timeBot.txt" WriteMode;
-                        hPutStrLn arq "[]";
-                        hClose arq
-
+                        limpaTimes
                         exibeBotGanha
                         pausa
                         system "cls"
                         inicioPvBot [] []
+
                 else do
                         putStrLn ""
                         exibePokemons nomeBot

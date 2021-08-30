@@ -12,7 +12,8 @@ data Pokemon = Pokemon Nome Vida PerdeTurno TomaDano
 
 --num representa o número do pokemon na fila
 getVida :: Pokemons -> Int -> Int
-getVida (Pokemon nome vida s1 s2:xs) num = getVidaRecursivo (Pokemon nome vida s1 s2:xs) num 1
+getVida time num = do
+        getVidaRecursivo time num 1
 
 getVidaRecursivo :: Pokemons -> Int -> Int -> Int
 getVidaRecursivo (Pokemon nome vida s1 s2:xs) num cont 
@@ -48,3 +49,34 @@ getDiretorio :: String -> String
 getDiretorio "p1" = "ArquivosTimes/timePlayer1.txt"
 getDiretorio "p2" = "ArquivosTimes/timePlayer2.txt"
 getDiretorio _  = "ArquivosTimes/timeBot.txt"
+
+getTime :: String -> IO Pokemons
+getTime player = do
+        let diretorio = getDiretorio player
+        arq <- openFile diretorio ReadMode;
+        time <- hGetLine arq;
+        hClose arq;
+        return (read time)
+
+addPokemon :: Pokemons -> Pokemon -> String -> IO()
+addPokemon time pokemon player = do
+        let diretorio = getDiretorio player
+        arq <- openFile diretorio WriteMode;
+        hPutStrLn arq (show (pokemon:time))
+        hClose arq
+
+limpaTimes :: IO()
+limpaTimes = do
+        arq <- openFile "ArquivosTimes/timePlayer1.txt" WriteMode;
+        hPutStrLn arq "[]";
+        hClose arq
+
+        arq <- openFile "ArquivosTimes/timePlayer1.txt" WriteMode;
+        hPutStrLn arq "[]";
+        hClose arq
+
+        arq <- openFile "ArquivosTimes/timeBot.txt" WriteMode;
+        hPutStrLn arq "[]";
+        hClose arq
+
+

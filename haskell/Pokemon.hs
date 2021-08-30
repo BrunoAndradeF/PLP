@@ -18,20 +18,11 @@ iniciar = do
         system "cls"
 
         verificaArquivos
+        pokesP1 <- getTime "p1"
+        pokesP2 <- getTime "p2"
+        pokesBot <- getTime "bot"
 
-        arq <- openFile "ArquivosTimes/timePlayer1.txt" ReadMode;
-        pokesP1 <- hGetLine arq;
-        hClose arq;
-
-        arq <- openFile "ArquivosTimes/timePlayer2.txt" ReadMode;
-        pokesP2 <- hGetLine arq;
-        hClose arq;
-
-        arq <- openFile "ArquivosTimes/timeBot.txt" ReadMode;
-        pokesBot <- hGetLine arq;
-        hClose arq;
-
-        menuInicial (read pokesP1) (read pokesP2) (read pokesBot)
+        menuInicial pokesP1 pokesP2 pokesBot
         iniciar
 
 
