@@ -1,6 +1,0 @@
-[Pokemon "Zeca skull" 100 False False "Fogo"]
-[Pokemon "Pikachu" 100 False False "Fogo"]
-[Pokemon "SeaHourse" 100 False False "Fogo"]
-[Pokemon "Kakuna" 100 False False "Fogo"]
-[Pokemon "Digglet" 100 False False "Fogo"]
-[Pokemon "Eevee" 100 False False "Fogo"]
