@@ -7,75 +7,80 @@ import PvBot
 import PvP
 import Historia
 import MovimentosBot
-import PlayerOneMovimentos
-import PlayerTwoMovimentos
-
---Definicao de tipos
-
-type Pokemons = [Pokemon]
-type Nome = String
-type Vida = Int
-type PerdeTurno  =  Bool
-type TomaDano  =  Bool
-type Tipo = String
-data Pokemon = Pokemon Nome Vida PerdeTurno TomaDano Tipo
-        deriving (Show, Read) 
+import Control.Exception
+import System.IO.Error
+import System.Directory
+import Util
 
 
---funcao que inicia o jogo
 iniciar :: IO()
 iniciar = do
-        guardaDadosVidaBot 100
-        guardaDadosVidaPlayer1 100
-        guardaDadosVidaPlayer2 100
-        gravaDados []
         system "cls"
-        menuInicial
+
+        verificaArquivos
+
+        arq <- openFile "ArquivosTimes/timePlayer1.txt" ReadMode;
+        pokesP1 <- hGetLine arq;
+        hClose arq;
+
+        arq <- openFile "ArquivosTimes/timePlayer2.txt" ReadMode;
+        pokesP2 <- hGetLine arq;
+        hClose arq;
+
+        arq <- openFile "ArquivosTimes/timeBot.txt" ReadMode;
+        pokesBot <- hGetLine arq;
+        hClose arq;
+
+        menuInicial (read pokesP1) (read pokesP2) (read pokesBot)
         iniciar
 
---funcao que grava os principais dados do jogo
-gravaDados :: Pokemons -> IO Pokemons
-gravaDados dados = do
-        arq1 <- openFile "dadosPlayer1.txt" WriteMode
-        hPrint arq1 (Pokemon "Zeca skull" 100 False False  "Fogo":dados)
-        hPrint arq1 (Pokemon "Pikachu" 100 False False  "Fogo":dados)
-        hPrint arq1 (Pokemon "SeaHourse" 100 False False  "Fogo":dados)
-        hPrint arq1 (Pokemon "Kakuna" 100 False False  "Fogo":dados)
-        hPrint arq1 (Pokemon "Digglet" 100 False False "Fogo":dados)
-        hPrint arq1 (Pokemon "Eevee" 100 False  False "Fogo":dados)
-        hClose arq1
 
-        arq2 <- openFile "dadosPlayer2.txt" WriteMode
-        hPrint arq2 (Pokemon "Zeca skull" 100 False False  "Fogo":dados)
-        hPrint arq2 (Pokemon "Pikachu" 100 False False "Fogo":dados)
-        hPrint arq2 (Pokemon "SeaHourse" 100 False False "Fogo":dados)
-        hPrint arq2 (Pokemon "Kakuna" 100 False False "Fogo":dados)
-        hPrint arq2 (Pokemon "Digglet" 100 False False "Fogo":dados)
-        hPrint arq2 (Pokemon "Eevee" 100 False False "Fogo":dados)
-        hClose arq2
-        return dados
-        
-
-menuInicial :: IO()
-menuInicial = do
+menuInicial :: Pokemons -> Pokemons -> Pokemons -> IO()
+menuInicial pokesP1 pokesP2 pokesBot = do
         exibeMenuInicial 
         op <- getChar
         getChar
-        designaModo op
+        designaModo pokesP1 pokesP2 pokesBot op
 
 
 --Função que identifica e invoca o modo de jogo escolhido pelo usuário
-designaModo :: Char -> IO()
-designaModo '1' = do
+designaModo :: Pokemons -> Pokemons -> Pokemons -> Char -> IO()
+designaModo pokesP1 pokesP2 pokesBot '1' = do
         system "cls"
-        inicioPvBot
-designaModo '2' = do
+        inicioPvBot pokesP1 pokesBot
+designaModo pokesP1 pokesP2 pokesBot '2' = do
         system "cls"
-        inicioPvP
-designaModo '3' = do
+        inicioPvP pokesP1 pokesP2
+designaModo pokesP1 pokesP2 pokesBot '3' = do
         system "cls"
-        inicioHistoria
-designaModo _ = do
+        inicioHistoria pokesP1 pokesBot
+designaModo pokesP1 pokesP2 pokesBot _ = do
         system "cls" 
         putStrLn "comando invalido"
-        menuInicial 
+        menuInicial pokesP1 pokesP2 pokesBot
+
+
+verificaArquivos :: IO ()
+verificaArquivos = do
+        createDirectoryIfMissing True $ takeDirectory "ArquivosTimes"
+        existsP1team <- doesFileExist "ArquivosTimes/timePlayer1.txt"
+        existsP2team <- doesFileExist "ArquivosTimes/timePlayer2.txt"
+        existsBotTeam <- doesFileExist "ArquivosTimes/timeBot.txt"
+
+        if  existsP1team then putStr ""
+        else do 
+                arq <- openFile "ArquivosTimes/timePlayer1.txt" WriteMode;
+                hPutStrLn arq "[]";
+                hClose arq
+
+        if  existsP2team then putStr ""
+        else do 
+                arq <- openFile "ArquivosTimes/timePlayer2.txt" WriteMode;
+                hPutStrLn arq "[]";
+                hClose arq
+
+        if  existsBotTeam then putStr ""
+        else do 
+                arq <- openFile "ArquivosTimes/timeBot.txt" WriteMode;
+                hPutStrLn arq "[]";
+                hClose arq

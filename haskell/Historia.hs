@@ -1,7 +1,8 @@
 module Historia where
 import MenusGraficos
 import Ataques
+import Util
 
-inicioHistoria :: IO()
-inicioHistoria = do
+inicioHistoria :: Pokemons -> Pokemons -> IO()
+inicioHistoria pokesP1 pokesBot = do
         exibeCabecalhoHistoria
