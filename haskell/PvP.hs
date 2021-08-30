@@ -96,11 +96,9 @@ batalhaPvP (Pokemon nomeP1 player1HP s1P1 s2P1:pokesP1)
                                 putStrLn ("Player 1 ataca em " ++ show (-1 * valorAtaque))
 
 
-                        aux <- getTime "p1"
-                        aux2 <- getTime "p2"
-
-                        let vidaAtualPlayer1 = getVida aux 1
-                        let vidaAtualPlayer2 = getVida aux2 1
+                        timeP1Atualizado <- getTime "p1"
+                        timeP2Atualizado <- getTime "p2"
+                        let vidaAtualPlayer2 = getVida timeP2Atualizado 1
 
                         if vidaAtualPlayer2 <= 0 then do
                                 limpaTimes
@@ -114,8 +112,7 @@ batalhaPvP (Pokemon nomeP1 player1HP s1P1 s2P1:pokesP1)
                                 exibePokemons nomeP1
                                 pausa
                                 system "cls"
-                                batalhaPvP (Pokemon nomeP1 vidaAtualPlayer1 s1P1 s2P1:pokesP1)
-                                        (Pokemon nomeP2 vidaAtualPlayer2 s1P2 s2P2:pokesP2)  2
+                                batalhaPvP timeP1Atualizado timeP2Atualizado  2
                 else do
                         exibeOpcaoInvalida
                         pausa
@@ -144,11 +141,9 @@ batalhaPvP (Pokemon nomeP1 player1HP s1P1 s2P1:pokesP1)
                                 putStrLn ""
                                 putStrLn ("Player 2 ataca em " ++ show (-1 * valorAtaque))
 
-                        aux <- getTime "p1"
-                        aux2 <- getTime "p2"
-
-                        let vidaAtualPlayer1 = getVida aux 1
-                        let vidaAtualPlayer2 = getVida aux2 1
+                        timeP1Atualizado <- getTime "p1"
+                        timeP2Atualizado <- getTime "p2"
+                        let vidaAtualPlayer1 = getVida timeP1Atualizado 1
 
                         if vidaAtualPlayer1 <= 0 then do
                                 limpaTimes
@@ -162,8 +157,7 @@ batalhaPvP (Pokemon nomeP1 player1HP s1P1 s2P1:pokesP1)
                                 exibePokemons nomeP2
                                 pausa
                                 system "cls"
-                                batalhaPvP (Pokemon nomeP1 vidaAtualPlayer1 s1P1 s2P1:pokesP1)
-                                        (Pokemon nomeP2 vidaAtualPlayer2 s1P2 s2P2:pokesP2)  1
+                                batalhaPvP timeP1Atualizado timeP2Atualizado  1
                 else do
                         exibeOpcaoInvalida
                         pausa

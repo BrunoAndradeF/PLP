@@ -1,6 +1,7 @@
 module Util where
 
 import System.IO
+import MenusGraficos
 type Pokemons = [Pokemon]
 type Nome = String
 type Vida = Int
@@ -16,29 +17,29 @@ getVida time num = do
         getVidaRecursivo time num 1
 
 getVidaRecursivo :: Pokemons -> Int -> Int -> Int
-getVidaRecursivo (Pokemon nome vida s1 s2:xs) num cont 
+getVidaRecursivo (Pokemon nome vida s1 s2:xs) num cont
         | num == cont = vida
         | otherwise = getVidaRecursivo xs num (cont + 1)
 
 setVida :: Pokemons -> Int -> String -> Int -> IO ()
-setVida (Pokemon nome vida s1 s2:xs) alteracao player num = do
+setVida time alteracao player num = do
         let diretorio = getDiretorio player
         arq <- openFile diretorio WriteMode;
 
         if alteracao > 0 then do
-                let novaVida = calculaCura vida alteracao
-                let retorno = retornaListaAtualizada (Pokemon nome vida s1 s2:xs) novaVida num 1
+                let novaVida = calculaCura (getVida time num) alteracao
+                let retorno = retornaListaAtualizada time novaVida num 1
                 hPutStrLn arq (show retorno);
 
         else do
-                let retorno = retornaListaAtualizada (Pokemon nome vida s1 s2:xs) (vida + alteracao) num 1
+                let retorno = retornaListaAtualizada time (getVida time num + alteracao) num 1
                 hPutStrLn arq (show retorno);
         hClose arq
 
 retornaListaAtualizada :: Pokemons -> Int -> Int -> Int -> Pokemons
 retornaListaAtualizada ((Pokemon nome vida s1 s2):xs) novaVida num cont
         | num == cont = Pokemon nome novaVida s1 s2 : xs
-        | otherwise = retornaListaAtualizada xs novaVida num (cont + 1)
+        | otherwise = Pokemon nome vida s1 s2 : retornaListaAtualizada xs novaVida num (cont + 1)
 
 calculaCura :: Int -> Int -> Int
 calculaCura vidaAtual a = do
@@ -58,11 +59,20 @@ getTime player = do
         hClose arq;
         return (read time)
 
+getPokemon :: Pokemons -> Int -> Pokemon
+getPokemon pokemons num = getPokemonRecursivo pokemons num 1
+
+getPokemonRecursivo :: Pokemons -> Int -> Int -> Pokemon
+getPokemonRecursivo ((Pokemon nome vida s1 s2):xs) num cont
+        | cont == num = Pokemon nome vida s1 s2
+        | otherwise = getPokemonRecursivo xs num (cont + 1)
+
+
 addPokemon :: Pokemons -> Pokemon -> String -> IO()
 addPokemon time pokemon player = do
         let diretorio = getDiretorio player
         arq <- openFile diretorio WriteMode;
-        hPutStrLn arq (show (pokemon:time))
+        hPutStrLn arq (show ([pokemon] ++ time))
         hClose arq
 
 limpaTimes :: IO()
@@ -79,4 +89,7 @@ limpaTimes = do
         hPutStrLn arq "[]";
         hClose arq
 
+verificaPerdeu :: Pokemons -> Bool
+verificaPerdeu [] = True
+verificaPerdeu ((Pokemon nome vida s1 s2):xs) = vida <= 0 && verificaPerdeu xs
 

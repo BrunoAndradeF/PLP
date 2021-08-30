@@ -72,11 +72,9 @@ batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
                                 putStrLn ""
                                 putStrLn ("Você ataca em " ++ show (-1 * valorAtaque))
 
-                        aux <- getTime "p1"
-                        aux2 <- getTime "bot"
-
-                        let vidaAtualPlayer = getVida  aux 1
-                        let vidaAtualBot = getVida aux2 1
+                        timeP1Atualizado <- getTime "p1"
+                        timeBotAtualizado <- getTime "bot"
+                        let vidaAtualBot = getVida timeBotAtualizado 1
 
 
                         if  vidaAtualBot <= 0 then do
@@ -91,8 +89,7 @@ batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
                                 exibePokemons nomeP
                                 pausa
                                 system "cls"
-                                batalhaPvBot (Pokemon nomeP vidaAtualPlayer s1P s2P:timeP1)
-                                   (Pokemon nomeBot vidaAtualBot s1Bot s2Bot:timeBot) 2
+                                batalhaPvBot timeP1Atualizado timeBotAtualizado 2
                 else do
                         exibeOpcaoInvalida
                         pausa
@@ -113,11 +110,9 @@ batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
 
                         putStrLn ("O bot ataca em " ++ show (-1 * valorAtaque))
 
-                aux <- getTime "p1"
-                aux2 <- getTime "bot"
-
-                let vidaAtualPlayer = getVida  aux 1
-                let vidaAtualBot = getVida aux2 1
+                timeP1Atualizado <- getTime "p1"
+                timeBotAtualizado <- getTime "bot"
+                let vidaAtualPlayer = getVida timeP1Atualizado 1
 
                 if vidaAtualPlayer <= 0 then do
                         limpaTimes
@@ -131,7 +126,6 @@ batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
                         exibePokemons nomeBot
                         pausa
                         system "cls"
-                        batalhaPvBot (Pokemon nomeP vidaAtualPlayer s1P s2P:timeP1)
-                           (Pokemon nomeBot vidaAtualBot s1Bot s2Bot:timeBot) 1
+                        batalhaPvBot timeP1Atualizado timeBotAtualizado 1
 
         
