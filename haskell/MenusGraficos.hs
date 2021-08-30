@@ -416,21 +416,21 @@ exibePikachu = do
         putStrLn "|                                                                      |"
         putStrLn "|______________________________________________________________________|"
 
-exibeEstadoBatalhaPvBot :: String -> String -> IO()
+exibeEstadoBatalhaPvBot :: Int -> Int -> IO()
 exibeEstadoBatalhaPvBot playerHP botHP = do
         putStrLn "                                                                        "
         putStrLn "                            ~VEZ DO PLAYER~                             "
         putStrLn "                                                                        "
-        putStrLn ("| HP do Pokemon do player: " ++ playerHP)
-        putStrLn ("| HP do Pokemon do bot: " ++ botHP)
+        putStrLn ("| HP do Pokemon do player: " ++ show playerHP)
+        putStrLn ("| HP do Pokemon do bot: " ++ show botHP)
 
-exibeEstadoBatalhaPvp :: String -> String -> Int -> IO()
+exibeEstadoBatalhaPvp :: Int -> Int -> Int -> IO()
 exibeEstadoBatalhaPvp player1HP player2HP vez = do
         putStrLn "                                                                        "
         putStrLn ("                           ~VEZ DO PLAYER " ++ show vez ++ "~                             ")
         putStrLn "                                                                        "
-        putStrLn ("| HP do Pokemon do player 1: " ++ player1HP)
-        putStrLn ("| HP do Pokemon do player 2: " ++ player2HP)
+        putStrLn ("| HP do Pokemon do player 1: " ++ show player1HP)
+        putStrLn ("| HP do Pokemon do player 2: " ++ show player2HP)
  
 
 {-exibeAtaques :: IO()
