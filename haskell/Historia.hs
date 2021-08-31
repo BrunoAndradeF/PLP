@@ -65,8 +65,8 @@ menuDeSelecaoComVoltar timeP timeBot = do
                 let pokeDoBot = nomesPokemons !! escolhePokemonBot
                 let pokeDoPlayer = nomesPokemons !! op
 
-                addPokemon  timeP (Pokemon pokeDoPlayer 100 False False) "p1"
-                addPokemon  timeBot (Pokemon pokeDoBot 100 False False) "bot"
+                addPokemon  timeP (Pokemon pokeDoPlayer 100 ) "p1"
+                addPokemon  timeBot (Pokemon pokeDoBot 100 ) "bot"
 
                 putStrLn ("Você escolheu o: " ++ pokeDoPlayer)
                 exibePokemons pokeDoPlayer
@@ -97,8 +97,8 @@ menuDeSelecaoSemVoltar timeP timeBot = do
                 let pokeDoBot = nomesPokemons !! escolhePokemonBot
                 let pokeDoPlayer = nomesPokemons !! op
 
-                addPokemon  timeP (Pokemon pokeDoPlayer 100 False False) "p1"
-                addPokemon  timeBot (Pokemon pokeDoBot 100 False False) "bot"
+                addPokemon  timeP (Pokemon pokeDoPlayer 100) "p1"
+                addPokemon  timeBot (Pokemon pokeDoBot 100 ) "bot"
 
                 putStrLn ("Você escolheu o: " ++ pokeDoPlayer)
                 exibePokemons pokeDoPlayer
@@ -121,8 +121,8 @@ menuDeSelecaoSemVoltar timeP timeBot = do
         where nomesPokemons = ["Zeca Skull", "Pikachu", "SeaHourse", "Kakuna", "Digglet", "Eevee"]
 
 batalhaHist :: Time -> Pokemon -> Int -> Time -> Pokemon -> Int -> Int -> IO()
-batalhaHist timeP (Pokemon nomeP pHP s1P s2P) numP
-        timeBot (Pokemon nomeBot botHP s1Bot s2Bot) numBot vez = do
+batalhaHist timeP (Pokemon nomeP pHP) numP
+        timeBot (Pokemon nomeBot botHP) numBot vez = do
                
         if vez == 1 then do
                 exibePokemons nomeP
@@ -131,7 +131,7 @@ batalhaHist timeP (Pokemon nomeP pHP s1P s2P) numP
 
                 aux <- readLn :: IO Int
                 let op = aux
-                if  op >= 1 && op <= 4 then do
+                if  op >= 1 && op <= 3 then do
                         let valorAtaque = designaAtaque op nomeP nomeBot
                         if op == 1 then do
                                 setVida timeP valorAtaque "p1" numP
@@ -161,16 +161,16 @@ batalhaHist timeP (Pokemon nomeP pHP s1P s2P) numP
 
                                 if  vidaAtualBot <= 0 then do
                                         let novoPoke = getPokemon timeBotAtualizado (numBot + 1)
-                                        batalhaHist timeP1Atualizado (Pokemon nomeP vidaAtualPlayer False False) numP
+                                        batalhaHist timeP1Atualizado (Pokemon nomeP vidaAtualPlayer) numP
                                                 timeBotAtualizado novoPoke (numBot + 1) 2
                                 else do
-                                        batalhaHist timeP1Atualizado (Pokemon nomeP vidaAtualPlayer False False) numP
-                                                timeBotAtualizado (Pokemon nomeBot vidaAtualBot False False) numBot 2
+                                        batalhaHist timeP1Atualizado (Pokemon nomeP vidaAtualPlayer) numP
+                                                timeBotAtualizado (Pokemon nomeBot vidaAtualBot) numBot 2
                 else do
                         exibeOpcaoInvalida
                         pausa
-                        batalhaHist timeP (Pokemon nomeP pHP False False) numP
-                                 timeBot (Pokemon nomeBot botHP False False) numBot 1
+                        batalhaHist timeP (Pokemon nomeP pHP) numP
+                                 timeBot (Pokemon nomeBot botHP) numBot 1
         else do
 
                 if botHP + 15 <= 20 then do
@@ -208,7 +208,7 @@ batalhaHist timeP (Pokemon nomeP pHP s1P s2P) numP
                         if vidaAtualPlayer <= 0 then do
                                 let novoPoke = getPokemon timeP1Atualizado (numP + 1)
                                 batalhaHist timeP1Atualizado novoPoke (numP + 1)
-                                        timeBotAtualizado (Pokemon nomeBot vidaAtualBot False False) numBot 1
+                                        timeBotAtualizado (Pokemon nomeBot vidaAtualBot) numBot 1
                         else
-                                batalhaHist timeP1Atualizado (Pokemon nomeP vidaAtualPlayer False False) numP
-                                        timeBotAtualizado (Pokemon nomeBot vidaAtualBot False False) numBot 1
+                                batalhaHist timeP1Atualizado (Pokemon nomeP vidaAtualPlayer) numP
+                                        timeBotAtualizado (Pokemon nomeBot vidaAtualBot) numBot 1

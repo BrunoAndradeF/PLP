@@ -24,8 +24,8 @@ menuDeSelecaoPvBot pokesP1 pokesBot = do
                 let pokeDoBot = nomesPokemons !! escolhePokemonBot
                 let pokeDoPlayer = nomesPokemons !! op
 
-                addPokemon  pokesP1 (Pokemon pokeDoPlayer 100 False False) "p1"
-                addPokemon  pokesBot (Pokemon pokeDoBot 100 False False) "bot"
+                addPokemon  pokesP1 (Pokemon pokeDoPlayer 100) "p1"
+                addPokemon  pokesBot (Pokemon pokeDoBot 100) "bot"
 
                 putStrLn ("Você escolheu o: " ++ pokeDoPlayer)
                 exibePokemons pokeDoPlayer
@@ -37,8 +37,8 @@ menuDeSelecaoPvBot pokesP1 pokesBot = do
                 pausa
                 system "cls"
 
-                batalhaPvBot (Pokemon pokeDoPlayer 100 False False:pokesP1)
-                        (Pokemon pokeDoBot 100 False False:pokesBot) 1
+                batalhaPvBot (Pokemon pokeDoPlayer 100:pokesP1)
+                        (Pokemon pokeDoBot 100:pokesBot) 1
         else do
                 if op == 6 then return ()
                 else do
@@ -53,8 +53,8 @@ menuDeSelecaoPvBot pokesP1 pokesBot = do
         where nomesPokemons = ["Zeca Skull", "Pikachu", "SeaHourse", "Kakuna", "Digglet", "Eevee"]
 
 batalhaPvBot :: Time -> Time -> Vez -> IO()
-batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
-        (Pokemon nomeBot botHP s1Bot s2Bot:timeBot) vez = do
+batalhaPvBot (Pokemon nomeP playerHP :timeP1)
+        (Pokemon nomeBot botHP :timeBot) vez = do
 
         if vez == 1 then do
                 exibePokemons nomeP
@@ -63,7 +63,7 @@ batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
 
                 aux <- readLn :: IO Int
                 let op = aux
-                if  op >= 1 && op <= 4 then do
+                if  op >= 1 && op <= 3 then do
                         let valorAtaque = designaAtaque op nomeP nomeBot
                         system "cls"
                         putStrLn ""
@@ -71,11 +71,11 @@ batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
                         putStrLn ""
 
                         if op == 1 then do
-                                setVida (Pokemon nomeP playerHP s1P s2P:timeP1) valorAtaque "p1" 1
+                                setVida (Pokemon nomeP playerHP:timeP1) valorAtaque "p1" 1
                                 putStrLn ("Você se cura em " ++ show valorAtaque)
 
                         else do
-                                setVida (Pokemon nomeBot botHP s1Bot s2Bot:timeBot) valorAtaque "bot" 1                            
+                                setVida (Pokemon nomeBot botHP:timeBot) valorAtaque "bot" 1                            
                                 putStrLn ("Você ataca em " ++ show (-1 * valorAtaque))
 
                         timeP1Atualizado <- getTime "p1"
@@ -104,8 +104,8 @@ batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
                         
                         threadDelay 2000000
                         system "cls"
-                        batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
-                           (Pokemon nomeBot botHP s1Bot s2Bot:timeBot) 1
+                        batalhaPvBot (Pokemon nomeP playerHP:timeP1)
+                           (Pokemon nomeBot botHP:timeBot) 1
         else do
                 putStrLn ""
                 exibePokemons nomeBot
@@ -113,14 +113,14 @@ batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
 
                 if botHP + 15 <= 20 then do
                         let cura = designaAtaque 1 nomeP nomeBot
-                        setVida (Pokemon nomeBot botHP s1Bot s2Bot:timeBot) cura "bot" 1
+                        setVida (Pokemon nomeBot botHP :timeBot) cura "bot" 1
 
                         putStrLn ("O bot se cura em "++ show cura)
 
                 else do
                         let atq = escolheAtaqueBot
                         let valorAtaque = designaAtaque atq nomeBot nomeP
-                        setVida (Pokemon nomeP playerHP s1P s2P:timeP1) valorAtaque "p1" 1
+                        setVida (Pokemon nomeP playerHP:timeP1) valorAtaque "p1" 1
 
                         putStrLn ("O bot ataca em " ++ show (-1 * valorAtaque))
 

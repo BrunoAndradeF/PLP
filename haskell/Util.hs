@@ -7,10 +7,8 @@ import System.FilePath
 type Time = [Pokemon]
 type Nome = String
 type Vida = Int
-type PerdeTurno  =  Bool
-type TomaDano  =  Bool
 type Vez = Int
-data Pokemon = Pokemon Nome Vida PerdeTurno TomaDano
+data Pokemon = Pokemon Nome Vida
         deriving (Show, Read)
 
 --num representa o número do pokemon na fila
@@ -19,7 +17,7 @@ getVida time num = do
         getVidaRecursivo time num 1
 
 getVidaRecursivo :: Time -> Int -> Int -> Int
-getVidaRecursivo (Pokemon nome vida s1 s2:xs) num cont
+getVidaRecursivo (Pokemon nome vida :xs) num cont
         | num == cont = vida
         | otherwise = getVidaRecursivo xs num (cont + 1)
 
@@ -44,9 +42,9 @@ calculaCura vidaAtual a = do
         else 100
 
 retornaTimeAtualizado :: Time -> Int -> Int -> Int -> Time
-retornaTimeAtualizado ((Pokemon nome vida s1 s2):xs) novaVida num cont
-        | num == cont = Pokemon nome novaVida s1 s2 : xs
-        | otherwise = Pokemon nome vida s1 s2 : retornaTimeAtualizado xs novaVida num (cont + 1)
+retornaTimeAtualizado ((Pokemon nome vida ):xs) novaVida num cont
+        | num == cont = Pokemon nome novaVida : xs
+        | otherwise = Pokemon nome vida : retornaTimeAtualizado xs novaVida num (cont + 1)
 
 
 getTime :: String -> IO Time
@@ -61,8 +59,8 @@ getPokemon :: Time -> Int -> Pokemon
 getPokemon pokemons num = getPokemonRecursivo pokemons num 1
 
 getPokemonRecursivo :: Time -> Int -> Int -> Pokemon
-getPokemonRecursivo ((Pokemon nome vida s1 s2):xs) num cont
-        | cont == num = Pokemon nome vida s1 s2
+getPokemonRecursivo ((Pokemon nome vida ):xs) num cont
+        | cont == num = Pokemon nome vida
         | otherwise = getPokemonRecursivo xs num (cont + 1)
 
 
@@ -75,7 +73,7 @@ addPokemon time pokemon player = do
 
 verificaPerdeu :: Time -> Bool
 verificaPerdeu [] = True
-verificaPerdeu ((Pokemon nome vida s1 s2):xs) = vida <= 0 && verificaPerdeu xs
+verificaPerdeu ((Pokemon nome vida ):xs) = vida <= 0 && verificaPerdeu xs
 
 curaTimes :: IO()
 curaTimes = do
@@ -100,7 +98,7 @@ curaTimes = do
 
 curaTime :: Time -> Time
 curaTime [] = [];
-curaTime (Pokemon nome vida s1 s2 : xs) = Pokemon nome 100 s1 s2 : curaTime xs
+curaTime (Pokemon nome vida : xs) = Pokemon nome 100 : curaTime xs
 
 
 limpaTimes :: IO()

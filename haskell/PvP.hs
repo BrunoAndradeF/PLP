@@ -24,12 +24,12 @@ menuDeSelecaoPlayer1 pokesP1 pokesP2 = do
 
         if  op1 >= 0 && op1 <= 5 then do
                 let pokeDoPlayer1 = nomesPokemons !! op1
-                addPokemon  pokesP1 (Pokemon pokeDoPlayer1 100 False False) "p1"
+                addPokemon  pokesP1 (Pokemon pokeDoPlayer1 100) "p1"
 
                 putStrLn ("Player 1 escolheu o: " ++ pokeDoPlayer1)
                 exibePokemons pokeDoPlayer1
                 pausa
-                menuDeSelecaoPlayer2 (Pokemon pokeDoPlayer1 100 False False:pokesP1) pokesP2 pokeDoPlayer1
+                menuDeSelecaoPlayer2 (Pokemon pokeDoPlayer1 100:pokesP1) pokesP2 pokeDoPlayer1
 
         else do
                 if op1 == 6 then return ()
@@ -54,13 +54,13 @@ menuDeSelecaoPlayer2 pokesP1 pokesP2 pokeDoPlayer1 = do
 
         if  op2 >= 0 && op2 <= 5 then do
                 let pokeDoPlayer2 = nomesPokemons !! op2
-                addPokemon  pokesP2 (Pokemon pokeDoPlayer2 100 False False) "p2"
+                addPokemon  pokesP2 (Pokemon pokeDoPlayer2 100 ) "p2"
 
                 putStrLn ("Player 2 escolheu o: " ++ pokeDoPlayer2)
                 exibePokemons pokeDoPlayer2
                 pausa
                 system "cls"
-                batalhaPvP pokesP1 (Pokemon pokeDoPlayer2 100 False False:pokesP2) 1
+                batalhaPvP pokesP1 (Pokemon pokeDoPlayer2 100 :pokesP2) 1
 
         else do
                 if op2 == 6 then do
@@ -79,8 +79,8 @@ menuDeSelecaoPlayer2 pokesP1 pokesP2 pokeDoPlayer1 = do
 
 
 batalhaPvP :: Time -> Time -> Util.Vez -> IO()
-batalhaPvP (Pokemon nomeP1 player1HP s1P1 s2P1:pokesP1)
-        (Pokemon nomeP2 player2HP s1P2 s2P2:pokesP2) vez = do
+batalhaPvP (Pokemon nomeP1 player1HP :pokesP1)
+        (Pokemon nomeP2 player2HP :pokesP2) vez = do
 
         if vez == 1 then do
                 exibePokemons nomeP1
@@ -89,7 +89,7 @@ batalhaPvP (Pokemon nomeP1 player1HP s1P1 s2P1:pokesP1)
 
                 aux <- readLn :: IO Int
                 let op = aux
-                if  op >= 1 && op <= 4 then do
+                if  op >= 1 && op <= 3 then do
                         let valorAtaque = designaAtaque op nomeP1 nomeP2
                         system "cls"
                         putStrLn ""
@@ -97,11 +97,11 @@ batalhaPvP (Pokemon nomeP1 player1HP s1P1 s2P1:pokesP1)
                         putStrLn ""
 
                         if op == 1 then do
-                                setVida (Pokemon nomeP1 player1HP s1P1 s2P1:pokesP1) valorAtaque "p1" 1
+                                setVida (Pokemon nomeP1 player1HP :pokesP1) valorAtaque "p1" 1
                                 putStrLn ("Player 1 se cura em " ++ show valorAtaque)
 
                         else do
-                                setVida (Pokemon nomeP2 player2HP s1P2 s2P2:pokesP2) valorAtaque "p2" 1
+                                setVida (Pokemon nomeP2 player2HP :pokesP2) valorAtaque "p2" 1
                                 putStrLn ("Player 1 ataca em " ++ show (-1 * valorAtaque))
 
 
@@ -129,8 +129,8 @@ batalhaPvP (Pokemon nomeP1 player1HP s1P1 s2P1:pokesP1)
                         exibeOpcaoInvalida
                         threadDelay 2000000
                         system "cls"
-                        batalhaPvP (Pokemon nomeP1 player1HP s1P1 s2P1:pokesP1)
-                                (Pokemon nomeP2 player2HP s1P2 s2P2:pokesP2)  1
+                        batalhaPvP (Pokemon nomeP1 player1HP :pokesP1)
+                                (Pokemon nomeP2 player2HP :pokesP2)  1
 
         else do
                 exibePokemons nomeP2
@@ -139,7 +139,7 @@ batalhaPvP (Pokemon nomeP1 player1HP s1P1 s2P1:pokesP1)
 
                 aux <- readLn :: IO Int
                 let op = aux
-                if  op >= 1 && op <= 4 then do
+                if  op >= 1 && op <= 3 then do
                         let valorAtaque = designaAtaque op nomeP1 nomeP2
                         system "cls"
                         putStrLn ""
@@ -147,11 +147,11 @@ batalhaPvP (Pokemon nomeP1 player1HP s1P1 s2P1:pokesP1)
                         putStrLn ""
 
                         if op == 1 then do
-                                setVida (Pokemon nomeP2 player2HP s1P2 s2P2:pokesP2) valorAtaque "p2" 1
+                                setVida (Pokemon nomeP2 player2HP :pokesP2) valorAtaque "p2" 1
                                 putStrLn ("Player 2 se cura em " ++ show valorAtaque)
 
                         else do
-                                setVida (Pokemon nomeP1 player1HP s1P1 s2P1:pokesP1) valorAtaque "p1" 1
+                                setVida (Pokemon nomeP1 player1HP :pokesP1) valorAtaque "p1" 1
                                 putStrLn ("Player 2 ataca em " ++ show (-1 * valorAtaque))
 
                         timeP1Atualizado <- getTime "p1"
@@ -178,7 +178,7 @@ batalhaPvP (Pokemon nomeP1 player1HP s1P1 s2P1:pokesP1)
                         exibeOpcaoInvalida
                         threadDelay 2000000
                         system "cls"
-                        batalhaPvP (Pokemon nomeP1 player1HP s1P1 s2P1:pokesP1)
-                                (Pokemon nomeP2 player2HP s1P2 s2P2:pokesP2)  2
+                        batalhaPvP (Pokemon nomeP1 player1HP :pokesP1)
+                                (Pokemon nomeP2 player2HP :pokesP2)  2
 
 

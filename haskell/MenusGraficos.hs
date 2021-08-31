@@ -441,11 +441,11 @@ exibeAtaques = do
         putStrLn "|                                | |                                   |"
         putStrLn "|        Digite 1 para Cura      | |       Digite 2 para Ataque        |"
         putStrLn "|________________________________| |___________________________________|"
-        putStrLn " ________________________________   ___________________________________ "
-        putStrLn "|                                | |                                   |"
-        putStrLn "|      Digite 3 para Critico     | |   Digite 4 para alterar Status    |"
-        putStrLn "|________________________________| |___________________________________|"
-        putStrLn "                                                                        "               
+        putStrLn "                   ________________________________                     "
+        putStrLn "                  |                                |                    "
+        putStrLn "                  |      Digite 3 para Critico     |                    "
+        putStrLn "                  |________________________________|                    "
+        putStrLn "                                                                        "                
 
 exibeOpcaoInvalida :: IO()
 exibeOpcaoInvalida = do
