@@ -456,17 +456,12 @@ exibeAtaques = do
         putStrLn "|                                | |                                   |"
         putStrLn "|        Digite 1 para Cura      | |       Digite 2 para Ataque        |"
         putStrLn "|________________________________| |___________________________________|"
-=======
->>>>>>> 175164383c4aa50bb7856c11cf8b9a4440394022
         putStrLn "                   ________________________________                     "
         putStrLn "                  |                                |                    "
         putStrLn "                  |      Digite 3 para Critico     |                    "
         putStrLn "                  |________________________________|                    "
-<<<<<<< HEAD
         putStrLn "                                                                        "               
-=======
-        putStrLn "                                                                        "                
->>>>>>> 175164383c4aa50bb7856c11cf8b9a4440394022
+        putStrLn "                                                                        "
 
 exibeOpcaoInvalida :: IO()
 exibeOpcaoInvalida = do
