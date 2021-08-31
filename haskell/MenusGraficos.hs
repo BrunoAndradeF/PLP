@@ -433,6 +433,21 @@ exibeEstadoBatalhaPvp player1HP player2HP vez = do
         putStrLn ("| HP do Pokemon do player 2: " ++ show player2HP)
  
 
+{-exibeAtaques :: IO()
+exibeAtaques = do
+        putStrLn "                                                                        "
+        putStrLn "                         ~ESCOLHA O SEU ATAQUE~                         "
+        putStrLn " ________________________________   ___________________________________ "
+        putStrLn "|                                | |                                   |"
+        putStrLn "|        Digite 1 para Cura      | |       Digite 2 para Ataque        |"
+        putStrLn "|________________________________| |___________________________________|"
+<<<<<<< HEAD
+        putStrLn " ________________________________   ___________________________________ "
+        putStrLn "|                                | |                                   |"
+        putStrLn "|      Digite 3 para Critico     | |   Digite 4 para alterar Status    |"
+        putStrLn "|________________________________| |___________________________________|"
+        putStrLn "                                                                        "-} 
+
 exibeAtaques :: IO()
 exibeAtaques = do
         putStrLn "                                                                        "
@@ -441,11 +456,17 @@ exibeAtaques = do
         putStrLn "|                                | |                                   |"
         putStrLn "|        Digite 1 para Cura      | |       Digite 2 para Ataque        |"
         putStrLn "|________________________________| |___________________________________|"
+=======
+>>>>>>> 175164383c4aa50bb7856c11cf8b9a4440394022
         putStrLn "                   ________________________________                     "
         putStrLn "                  |                                |                    "
         putStrLn "                  |      Digite 3 para Critico     |                    "
         putStrLn "                  |________________________________|                    "
+<<<<<<< HEAD
+        putStrLn "                                                                        "               
+=======
         putStrLn "                                                                        "                
+>>>>>>> 175164383c4aa50bb7856c11cf8b9a4440394022
 
 exibeOpcaoInvalida :: IO()
 exibeOpcaoInvalida = do

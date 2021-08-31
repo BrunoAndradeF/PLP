@@ -3,7 +3,10 @@ Repositório para desenvolver projeto em Plp 2020.2
 
 - [DOC](https://docs.google.com/document/d/1WI50JorZAW0hgNbR-MqGb3jKC5XCZhh-jDRoMGqpdPc/edit)
 ## Descrição dos modos:
+<<<<<<< HEAD
+=======
 
+>>>>>>> 175164383c4aa50bb7856c11cf8b9a4440394022
 - Player vs Player: 2 jogares batalham(1 contra 1) escolhendo entre os 6 pokémons listados até um deles ter seu pokémon derrotado.
 - Player vs Bot: 1 jogador batalha contra o computador(1 contra 1) escolhendo entre os 6 pokémons listados enquanto o computador sorteia seu pokémon e escolhe qual lançar a partir dos tipos que o jogador escolher.
 - Modo História: O jogador passa por 3 batalhas contra bots para conquistar sua insígnia, tendo possibilidade de salvar o progresso das lutas para continuar depois. Um exemplo disso é o jogador ganhar uma batalha ou duas e resolver deixar para lutar o que falta posteriormente, caso ele perca para algum adversário, o modo se encerra como uma derrota.
@@ -19,4 +22,8 @@ cd PLP
 ```
 cabal update
 cabal install --lib random
+<<<<<<< HEAD
 ```
+=======
+```
+>>>>>>> 175164383c4aa50bb7856c11cf8b9a4440394022
