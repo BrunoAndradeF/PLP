@@ -416,21 +416,21 @@ exibePikachu = do
         putStrLn "|                                                                      |"
         putStrLn "|______________________________________________________________________|"
 
-exibeEstadoBatalhaPvBot :: String -> String -> IO()
+exibeEstadoBatalhaPvBot :: Int -> Int -> IO()
 exibeEstadoBatalhaPvBot playerHP botHP = do
         putStrLn "                                                                        "
         putStrLn "                            ~VEZ DO PLAYER~                             "
         putStrLn "                                                                        "
-        putStrLn ("| HP do Pokemon do player: " ++ playerHP)
-        putStrLn ("| HP do Pokemon do bot: " ++ botHP)
+        putStrLn ("| HP do Pokemon do player: " ++ show playerHP)
+        putStrLn ("| HP do Pokemon do bot: " ++ show botHP)
 
-exibeEstadoBatalhaPvp :: String -> String -> Int -> IO()
+exibeEstadoBatalhaPvp :: Int -> Int -> Int -> IO()
 exibeEstadoBatalhaPvp player1HP player2HP vez = do
         putStrLn "                                                                        "
         putStrLn ("                           ~VEZ DO PLAYER " ++ show vez ++ "~                             ")
         putStrLn "                                                                        "
-        putStrLn ("| HP do Pokemon do player 1: " ++ player1HP)
-        putStrLn ("| HP do Pokemon do player 2: " ++ player2HP)
+        putStrLn ("| HP do Pokemon do player 1: " ++ show player1HP)
+        putStrLn ("| HP do Pokemon do player 2: " ++ show player2HP)
  
 
 exibeAtaques :: IO()
@@ -441,11 +441,11 @@ exibeAtaques = do
         putStrLn "|                                | |                                   |"
         putStrLn "|        Digite 1 para Cura      | |       Digite 2 para Ataque        |"
         putStrLn "|________________________________| |___________________________________|"
-        putStrLn " ________________________________   ___________________________________ "
-        putStrLn "|                                | |                                   |"
-        putStrLn "|      Digite 3 para Critico     | |   Digite 4 para alterar Status    |"
-        putStrLn "|________________________________| |___________________________________|"
-        putStrLn "                                                                        "               
+        putStrLn "                   ________________________________                     "
+        putStrLn "                  |                                |                    "
+        putStrLn "                  |      Digite 3 para Critico     |                    "
+        putStrLn "                  |________________________________|                    "
+        putStrLn "                                                                        "                
 
 exibeOpcaoInvalida :: IO()
 exibeOpcaoInvalida = do
@@ -457,7 +457,7 @@ exibeOpcaoInvalida = do
 exibePlayerGanha :: IO()
 exibePlayerGanha = do
         putStrLn ""
-        putStrLn "Você derrotou o bot"
+        putStrLn "                         Você derrotou o bot"
         putStrLn ""
         putStrLn " ______________________________________________________________________ "
         putStrLn "|  8888888b.  888                                                      |"
@@ -482,7 +482,7 @@ exibePlayerGanha = do
 exibeBotGanha :: IO()
 exibeBotGanha = do
         putStrLn ""
-        putStrLn "O bot te derrotou"
+        putStrLn "                          O bot te derrotou"
         putStrLn ""
         putStrLn " ______________________________________________________________________ "
         putStrLn "|  888888b.    .d88888b. 88888888888                                   |"
@@ -563,6 +563,6 @@ exibePlayer2Ganha = do
 pausa :: IO()
 pausa = do
         putStrLn ""
-        putStr "Tecle Enter para continuar"
+        putStr "Tecle Enter para continuar..."
         getLine
         putStr ""

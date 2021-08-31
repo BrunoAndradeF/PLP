@@ -7,9 +7,9 @@ import MenusGraficos
 
 designaAtaque :: Int -> String -> String -> Int
 designaAtaque movimento pokemonAtacando pokemonDefendendo
-  | (movimento == 1) = curar + danoPorTipo pokemonAtacando pokemonDefendendo
-  | (movimento == 2) = atacar + danoPorTipo pokemonAtacando pokemonDefendendo
-  | (movimento == 3) = ataqueCritico + danoPorTipo pokemonAtacando pokemonDefendendo
+  | movimento == 1 = curar
+  | movimento == 2 = atacar + danoPorTipo pokemonAtacando pokemonDefendendo
+  | movimento == 3 = ataqueCritico + danoPorTipo pokemonAtacando pokemonDefendendo
 
 {- ___________________________________________________sessão de metodos de ataque___________________________________________________-}
 
@@ -18,10 +18,10 @@ curar :: Int
 curar = unsafePerformIO (getStdRandom (randomR (5, 15)))
 
 atacar :: Int
-atacar = unsafePerformIO (getStdRandom (randomR (5, 25)))
+atacar = -1 * unsafePerformIO (getStdRandom (randomR (5, 25)))
 
 ataqueCritico :: Int
-ataqueCritico = unsafePerformIO (getStdRandom (randomR (10, 35)))
+ataqueCritico = -1 * unsafePerformIO (getStdRandom (randomR (10, 35)))
 
 
 
