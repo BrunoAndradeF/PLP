@@ -28,10 +28,12 @@ fluxoHist = do
 
                 timeP <- getTime "p1"
                 timeBot <- getTime "bot"
-                times <- menuDeSelecaoSemVoltar timeP timeBot
+                menuDeSelecaoSemVoltar timeP timeBot
 
-                batalhaHist timeP (getPokemon (fst times) 1) 1
-                        timeBot (getPokemon (snd times) 1) 1 1
+                timeP <- getTime "p1"
+                timeBot <- getTime "bot"
+                batalhaHist timeP (getPokemon timeP 1) 1
+                        timeBot (getPokemon timeBot 1) 1 1
 
                 putStrLn "Você venceu a segunda batalha"
                 pausa
@@ -39,10 +41,12 @@ fluxoHist = do
 
                 timeP <- getTime "p1"
                 timeBot <- getTime "bot"
-                times <- menuDeSelecaoSemVoltar timeP timeBot
+                menuDeSelecaoSemVoltar timeP timeBot
 
-                batalhaHist timeP (getPokemon (fst times) 1) 1
-                        timeBot (getPokemon (snd times) 1) 1 1
+                timeP <- getTime "p1"
+                timeBot <- getTime "bot"
+                batalhaHist timeP (getPokemon timeP 1) 1
+                        timeBot (getPokemon timeBot 1) 1 1
 
                 limpaTimes
                 exibePlayerGanha
