@@ -5,15 +5,16 @@ import MovimentosBot
 import System.Process
 import System.IO
 import Util
+import Control.Concurrent
 
 inicioPvBot :: Time -> Time -> IO()
 inicioPvBot pokesP1 pokesBot = do
         system "cls"
-        exibeCabecalhoPvBot
         menuDeSelecaoPvBot pokesP1 pokesBot
 
 menuDeSelecaoPvBot :: Time -> Time -> IO()
 menuDeSelecaoPvBot pokesP1 pokesBot = do
+        exibeCabecalhoPvBot
         exibeMenuDeSelecao 0
         aux <- readLn :: IO Int
         system "cls"
@@ -41,8 +42,13 @@ menuDeSelecaoPvBot pokesP1 pokesBot = do
         else do
                 if op == 6 then return ()
                 else do
+                        system "cls"
+                        putStrLn ""
+                        exibeCabecalhoPvBot
                         exibeOpcaoInvalida
-                        pausa
+                        
+                        threadDelay 2000000
+                        system "cls"
                         menuDeSelecaoPvBot pokesP1 pokesBot
         where nomesPokemons = ["Zeca Skull", "Pikachu", "SeaHourse", "Kakuna", "Digglet", "Eevee"]
 
@@ -59,17 +65,17 @@ batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
                 let op = aux
                 if  op >= 1 && op <= 4 then do
                         let valorAtaque = designaAtaque op nomeP nomeBot
+                        system "cls"
+                        putStrLn ""
+                        exibePokemons nomeP
+                        putStrLn ""
 
                         if op == 1 then do
                                 setVida (Pokemon nomeP playerHP s1P s2P:timeP1) valorAtaque "p1" 1
-                                system "cls"
-                                putStrLn ""
                                 putStrLn ("Você se cura em " ++ show valorAtaque)
 
                         else do
-                                setVida (Pokemon nomeBot botHP s1Bot s2Bot:timeBot) valorAtaque "bot" 1
-                                system "cls"
-                                putStrLn ""
+                                setVida (Pokemon nomeBot botHP s1Bot s2Bot:timeBot) valorAtaque "bot" 1                            
                                 putStrLn ("Você ataca em " ++ show (-1 * valorAtaque))
 
                         timeP1Atualizado <- getTime "p1"
@@ -78,6 +84,7 @@ batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
 
 
                         if  vidaAtualBot <= 0 then do
+                                system "cls"
                                 limpaTimes
                                 exibePlayerGanha
                                 pausa
@@ -85,17 +92,24 @@ batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
                                 inicioPvBot [] []
 
                         else do
-                                putStrLn ""
-                                exibePokemons nomeP
+                                putStrLn "\n\n"
                                 pausa
                                 system "cls"
                                 batalhaPvBot timeP1Atualizado timeBotAtualizado 2
                 else do
+                        system "cls"
+                        putStrLn ""
+                        exibePokemons nomeP
                         exibeOpcaoInvalida
-                        pausa
+                        
+                        threadDelay 2000000
+                        system "cls"
                         batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
                            (Pokemon nomeBot botHP s1Bot s2Bot:timeBot) 1
         else do
+                putStrLn ""
+                exibePokemons nomeBot
+                putStrLn ""
 
                 if botHP + 15 <= 20 then do
                         let cura = designaAtaque 1 nomeP nomeBot
@@ -115,6 +129,7 @@ batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
                 let vidaAtualPlayer = getVida timeP1Atualizado 1
 
                 if vidaAtualPlayer <= 0 then do
+                        system "cls"
                         limpaTimes
                         exibeBotGanha
                         pausa
@@ -122,8 +137,7 @@ batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
                         inicioPvBot [] []
 
                 else do
-                        putStrLn ""
-                        exibePokemons nomeBot
+                        putStrLn "\n\n"
                         pausa
                         system "cls"
                         batalhaPvBot timeP1Atualizado timeBotAtualizado 1

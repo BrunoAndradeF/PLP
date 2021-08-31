@@ -457,7 +457,7 @@ exibeOpcaoInvalida = do
 exibePlayerGanha :: IO()
 exibePlayerGanha = do
         putStrLn ""
-        putStrLn "Você derrotou o bot"
+        putStrLn "                         Você derrotou o bot"
         putStrLn ""
         putStrLn " ______________________________________________________________________ "
         putStrLn "|  8888888b.  888                                                      |"
@@ -482,7 +482,7 @@ exibePlayerGanha = do
 exibeBotGanha :: IO()
 exibeBotGanha = do
         putStrLn ""
-        putStrLn "O bot te derrotou"
+        putStrLn "                          O bot te derrotou"
         putStrLn ""
         putStrLn " ______________________________________________________________________ "
         putStrLn "|  888888b.    .d88888b. 88888888888                                   |"
@@ -563,6 +563,6 @@ exibePlayer2Ganha = do
 pausa :: IO()
 pausa = do
         putStrLn ""
-        putStr "Tecle Enter para continuar"
+        putStr "Tecle Enter para continuar..."
         getLine
         putStr ""
