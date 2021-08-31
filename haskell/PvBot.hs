@@ -6,13 +6,13 @@ import System.Process
 import System.IO
 import Util
 
-inicioPvBot :: Pokemons -> Pokemons -> IO()
+inicioPvBot :: Time -> Time -> IO()
 inicioPvBot pokesP1 pokesBot = do
         system "cls"
         exibeCabecalhoPvBot
         menuDeSelecaoPvBot pokesP1 pokesBot
 
-menuDeSelecaoPvBot :: Pokemons -> Pokemons -> IO()
+menuDeSelecaoPvBot :: Time -> Time -> IO()
 menuDeSelecaoPvBot pokesP1 pokesBot = do
         exibeMenuDeSelecao 0
         aux <- readLn :: IO Int
@@ -46,7 +46,7 @@ menuDeSelecaoPvBot pokesP1 pokesBot = do
                         menuDeSelecaoPvBot pokesP1 pokesBot
         where nomesPokemons = ["Zeca Skull", "Pikachu", "SeaHourse", "Kakuna", "Digglet", "Eevee"]
 
-batalhaPvBot :: Pokemons -> Pokemons -> Vez -> IO()
+batalhaPvBot :: Time -> Time -> Vez -> IO()
 batalhaPvBot (Pokemon nomeP playerHP s1P s2P:timeP1)
         (Pokemon nomeBot botHP s1Bot s2Bot:timeBot) vez = do
 

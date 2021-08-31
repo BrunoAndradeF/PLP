@@ -2,7 +2,9 @@ module Util where
 
 import System.IO
 import MenusGraficos
-type Pokemons = [Pokemon]
+import System.Directory
+import System.FilePath
+type Time = [Pokemon]
 type Nome = String
 type Vida = Int
 type PerdeTurno  =  Bool
@@ -12,46 +14,42 @@ data Pokemon = Pokemon Nome Vida PerdeTurno TomaDano
         deriving (Show, Read)
 
 --num representa o número do pokemon na fila
-getVida :: Pokemons -> Int -> Int
+getVida :: Time -> Int -> Int
 getVida time num = do
         getVidaRecursivo time num 1
 
-getVidaRecursivo :: Pokemons -> Int -> Int -> Int
+getVidaRecursivo :: Time -> Int -> Int -> Int
 getVidaRecursivo (Pokemon nome vida s1 s2:xs) num cont
         | num == cont = vida
         | otherwise = getVidaRecursivo xs num (cont + 1)
 
-setVida :: Pokemons -> Int -> String -> Int -> IO ()
+setVida :: Time -> Int -> String -> Int -> IO ()
 setVida time alteracao player num = do
         let diretorio = getDiretorio player
         arq <- openFile diretorio WriteMode;
 
         if alteracao > 0 then do
                 let novaVida = calculaCura (getVida time num) alteracao
-                let retorno = retornaListaAtualizada time novaVida num 1
+                let retorno = retornaTimeAtualizado time novaVida num 1
                 hPutStrLn arq (show retorno);
 
         else do
-                let retorno = retornaListaAtualizada time (getVida time num + alteracao) num 1
+                let retorno = retornaTimeAtualizado time (getVida time num + alteracao) num 1
                 hPutStrLn arq (show retorno);
         hClose arq
-
-retornaListaAtualizada :: Pokemons -> Int -> Int -> Int -> Pokemons
-retornaListaAtualizada ((Pokemon nome vida s1 s2):xs) novaVida num cont
-        | num == cont = Pokemon nome novaVida s1 s2 : xs
-        | otherwise = Pokemon nome vida s1 s2 : retornaListaAtualizada xs novaVida num (cont + 1)
 
 calculaCura :: Int -> Int -> Int
 calculaCura vidaAtual a = do
         if vidaAtual + a < 100 then vidaAtual + a
         else 100
 
-getDiretorio :: String -> String
-getDiretorio "p1" = "ArquivosTimes/timePlayer1.txt"
-getDiretorio "p2" = "ArquivosTimes/timePlayer2.txt"
-getDiretorio _  = "ArquivosTimes/timeBot.txt"
+retornaTimeAtualizado :: Time -> Int -> Int -> Int -> Time
+retornaTimeAtualizado ((Pokemon nome vida s1 s2):xs) novaVida num cont
+        | num == cont = Pokemon nome novaVida s1 s2 : xs
+        | otherwise = Pokemon nome vida s1 s2 : retornaTimeAtualizado xs novaVida num (cont + 1)
 
-getTime :: String -> IO Pokemons
+
+getTime :: String -> IO Time
 getTime player = do
         let diretorio = getDiretorio player
         arq <- openFile diretorio ReadMode;
@@ -59,21 +57,51 @@ getTime player = do
         hClose arq;
         return (read time)
 
-getPokemon :: Pokemons -> Int -> Pokemon
+getPokemon :: Time -> Int -> Pokemon
 getPokemon pokemons num = getPokemonRecursivo pokemons num 1
 
-getPokemonRecursivo :: Pokemons -> Int -> Int -> Pokemon
+getPokemonRecursivo :: Time -> Int -> Int -> Pokemon
 getPokemonRecursivo ((Pokemon nome vida s1 s2):xs) num cont
         | cont == num = Pokemon nome vida s1 s2
         | otherwise = getPokemonRecursivo xs num (cont + 1)
 
 
-addPokemon :: Pokemons -> Pokemon -> String -> IO()
+addPokemon :: Time -> Pokemon -> String -> IO()
 addPokemon time pokemon player = do
         let diretorio = getDiretorio player
         arq <- openFile diretorio WriteMode;
         hPutStrLn arq (show ([pokemon] ++ time))
         hClose arq
+
+verificaPerdeu :: Time -> Bool
+verificaPerdeu [] = True
+verificaPerdeu ((Pokemon nome vida s1 s2):xs) = vida <= 0 && verificaPerdeu xs
+
+curaTimes :: IO()
+curaTimes = do
+        timeP1 <- getTime "p1"
+        timeP2 <- getTime "p2"
+        timeBot <- getTime "bot"
+
+
+        arq1 <- openFile "ArquivosTimes/timePlayer1.txt" WriteMode;
+        arq2 <- openFile "ArquivosTimes/timePlayer2.txt" WriteMode;
+        arqBot <- openFile "ArquivosTimes/timeBot.txt" WriteMode;
+
+        hPutStrLn arq1 (show  (curaTime timeP1))
+        hPutStrLn arq2 (show  (curaTime timeP2))
+        hPutStrLn arqBot (show  (curaTime timeBot))
+
+        hClose arq1
+        hClose arq2
+        hClose arqBot
+
+
+
+curaTime :: Time -> Time
+curaTime [] = [];
+curaTime (Pokemon nome vida s1 s2 : xs) = Pokemon nome 100 s1 s2 : curaTime xs
+
 
 limpaTimes :: IO()
 limpaTimes = do
@@ -89,7 +117,31 @@ limpaTimes = do
         hPutStrLn arq "[]";
         hClose arq
 
-verificaPerdeu :: Pokemons -> Bool
-verificaPerdeu [] = True
-verificaPerdeu ((Pokemon nome vida s1 s2):xs) = vida <= 0 && verificaPerdeu xs
+getDiretorio :: String -> String
+getDiretorio "p1" = "ArquivosTimes/timePlayer1.txt"
+getDiretorio "p2" = "ArquivosTimes/timePlayer2.txt"
+getDiretorio _  = "ArquivosTimes/timeBot.txt"
 
+verificaArquivos :: IO ()
+verificaArquivos = do
+        createDirectoryIfMissing True $ takeDirectory "ArquivosTimes"
+        existsP1team <- doesFileExist "ArquivosTimes/timePlayer1.txt"
+        existsP2team <- doesFileExist "ArquivosTimes/timePlayer2.txt"
+        existsBotTeam <- doesFileExist "ArquivosTimes/timeBot.txt"
+
+        if  existsP1team then putStr ""
+        else do
+                arq <- openFile "ArquivosTimes/timePlayer1.txt" WriteMode;
+                hPutStrLn arq "[]";
+                hClose arq
+        if  existsP2team then putStr ""
+        else do
+                arq <- openFile "ArquivosTimes/timePlayer2.txt" WriteMode;
+                hPutStrLn arq "[]";
+                hClose arq
+
+        if  existsBotTeam then putStr ""
+        else do
+                arq <- openFile "ArquivosTimes/timeBot.txt" WriteMode;
+                hPutStrLn arq "[]";
+                hClose arq

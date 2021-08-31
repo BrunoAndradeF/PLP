@@ -1,15 +1,10 @@
 import System.IO
-import Data.Char
 import System.Process
-import System.FilePath.Posix
 import MenusGraficos
 import PvBot
 import PvP
 import Historia
 import MovimentosBot
-import Control.Exception
-import System.IO.Error
-import System.Directory
 import Util
 
 
@@ -26,7 +21,7 @@ iniciar = do
         iniciar
 
 
-menuInicial :: Pokemons -> Pokemons -> Pokemons -> IO()
+menuInicial :: Time -> Time -> Time -> IO()
 menuInicial pokesP1 pokesP2 pokesBot = do
         exibeMenuInicial 
         op <- getChar
@@ -35,7 +30,7 @@ menuInicial pokesP1 pokesP2 pokesBot = do
 
 
 --Função que identifica e invoca o modo de jogo escolhido pelo usuário
-designaModo :: Pokemons -> Pokemons -> Pokemons -> Char -> IO()
+designaModo :: Time -> Time -> Time -> Char -> IO()
 designaModo pokesP1 pokesP2 pokesBot '1' = do
         system "cls"
         inicioPvBot pokesP1 pokesBot
@@ -51,27 +46,3 @@ designaModo pokesP1 pokesP2 pokesBot _ = do
         menuInicial pokesP1 pokesP2 pokesBot
 
 
-verificaArquivos :: IO ()
-verificaArquivos = do
-        createDirectoryIfMissing True $ takeDirectory "ArquivosTimes"
-        existsP1team <- doesFileExist "ArquivosTimes/timePlayer1.txt"
-        existsP2team <- doesFileExist "ArquivosTimes/timePlayer2.txt"
-        existsBotTeam <- doesFileExist "ArquivosTimes/timeBot.txt"
-
-        if  existsP1team then putStr ""
-        else do 
-                arq <- openFile "ArquivosTimes/timePlayer1.txt" WriteMode;
-                hPutStrLn arq "[]";
-                hClose arq
-
-        if  existsP2team then putStr ""
-        else do 
-                arq <- openFile "ArquivosTimes/timePlayer2.txt" WriteMode;
-                hPutStrLn arq "[]";
-                hClose arq
-
-        if  existsBotTeam then putStr ""
-        else do 
-                arq <- openFile "ArquivosTimes/timeBot.txt" WriteMode;
-                hPutStrLn arq "[]";
-                hClose arq

@@ -8,13 +8,13 @@ import Util
 --Define a vez de jogar (1 para Player1 e 2 para o bot)
 type Vez = Int
 
-inicioPvP :: Pokemons -> Pokemons -> IO()
+inicioPvP :: Time -> Time -> IO()
 inicioPvP pokesp1 pokesp2= do
         exibeCabecalhoPvP
         menuDeSelecaoPlayer1 pokesp1 pokesp2
 
 
-menuDeSelecaoPlayer1 :: Pokemons -> Pokemons -> IO()
+menuDeSelecaoPlayer1 :: Time -> Time -> IO()
 menuDeSelecaoPlayer1 pokesP1 pokesP2 = do
         exibeMenuDeSelecao 1
         aux <- readLn :: IO Int
@@ -39,7 +39,7 @@ menuDeSelecaoPlayer1 pokesP1 pokesP2 = do
 
         where nomesPokemons = ["Zeca Skull", "Pikachu", "SeaHourse", "Kakuna", "Digglet", "Eevee"]
 
-menuDeSelecaoPlayer2 :: Pokemons -> Pokemons -> String -> IO()
+menuDeSelecaoPlayer2 :: Time -> Time -> String -> IO()
 menuDeSelecaoPlayer2 pokesP1 pokesP2 pokeDoPlayer1 = do
         system "cls"
         exibeMenuDeSelecao 2
@@ -68,7 +68,7 @@ menuDeSelecaoPlayer2 pokesP1 pokesP2 pokeDoPlayer1 = do
         where nomesPokemons = ["Zeca Skull", "Pikachu", "SeaHourse", "Kakuna", "Digglet", "Eevee"]
 
 
-batalhaPvP :: Pokemons -> Pokemons -> Util.Vez -> IO()
+batalhaPvP :: Time -> Time -> Util.Vez -> IO()
 batalhaPvP (Pokemon nomeP1 player1HP s1P1 s2P1:pokesP1)
         (Pokemon nomeP2 player2HP s1P2 s2P2:pokesP2) vez = do
 
