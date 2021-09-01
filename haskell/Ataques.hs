@@ -28,18 +28,18 @@ ataqueCritico = -1 * unsafePerformIO (getStdRandom (randomR (10, 35)))
 
 alteraStatus :: Int
 alteraStatus = -1 * unsafePerformIO (getStdRandom (randomR (0, 10)))
-
+--Tentar deixar o status mais dinâmico
 turnosComStatus :: Int
 turnosComStatus = unsafePerformIO (getStdRandom (randomR (0,2)))
 
 perdeTurno :: String -> Bool
 perdeTurno a
-  |((a == "Digglet") || (a == "SeaHourse") || (a == "Eevee")) = True
+  |(a == "Digglet") || (a == "SeaHourse") || (a == "Eevee") = True
   |otherwise = False
 
 turnoComDano :: String -> Bool
 turnoComDano a
-  |((a == "Zeca Skull") || (a == "Kakuna") || (a == "Pikachu")) = True
+  |(a == "Zeca Skull") || (a == "Kakuna") || (a == "Pikachu") = True
   |otherwise = False
 danoPorTipo :: String -> String -> Int
 danoPorTipo a b
