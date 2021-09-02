@@ -66,7 +66,7 @@ batalhaPvBot (Pokemon nomeP playerHP :timeP1)
                 if  op >= 1 && op <= 3 then do
                         let valorAtaque = designaAtaque op nomeP nomeBot
                         system "cls"
-                        putStrLn ""
+                        putStrLn "\n"
                         exibePokemons nomeP
                         putStrLn ""
 
@@ -107,7 +107,7 @@ batalhaPvBot (Pokemon nomeP playerHP :timeP1)
                         batalhaPvBot (Pokemon nomeP playerHP:timeP1)
                            (Pokemon nomeBot botHP:timeBot) 1
         else do
-                putStrLn ""
+                putStrLn "\n"
                 exibePokemons nomeBot
                 putStrLn ""
 

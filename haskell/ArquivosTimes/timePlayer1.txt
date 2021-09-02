@@ -1,1 +1,1 @@
-[]
+[Pokemon "Pikachu" 100,Pokemon "Pikachu" 100,Pokemon "Pikachu" 100,Pokemon "Pikachu" 30]

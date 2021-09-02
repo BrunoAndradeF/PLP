@@ -92,7 +92,7 @@ batalhaPvP (Pokemon nomeP1 player1HP :pokesP1)
                 if  op >= 1 && op <= 3 then do
                         let valorAtaque = designaAtaque op nomeP1 nomeP2
                         system "cls"
-                        putStrLn ""
+                        putStrLn "\n"
                         exibePokemons nomeP1
                         putStrLn ""
 
@@ -142,7 +142,7 @@ batalhaPvP (Pokemon nomeP1 player1HP :pokesP1)
                 if  op >= 1 && op <= 3 then do
                         let valorAtaque = designaAtaque op nomeP1 nomeP2
                         system "cls"
-                        putStrLn ""
+                        putStrLn "\n"
                         exibePokemons nomeP2
                         putStrLn ""
 
