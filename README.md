@@ -22,5 +22,6 @@ cd PLP
 ```
 cabal update
 cabal install --lib random
+```
 
-A partir disso, rode o jogo com o ghci
+Feito isso, rode o jogo com o ghci via terminal
