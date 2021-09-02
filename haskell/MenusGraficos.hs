@@ -109,27 +109,20 @@ exibeCabecalhoHistoria = do
         putStrLn "|                                                                      |"
         putStrLn "|______________________________________________________________________|"
 
+exibeMenusNovoJogoHist :: IO()
+exibeMenusNovoJogoHist = do
+        putStrLn " ________________________________   ___________________________________ "
+        putStrLn "|                                | |                                   |"
+        putStrLn "|       Digite 1 começar um      | |     Digite 2 para carregar        |"
+        putStrLn "|            Novo Jogo           | |           Um Jogo                 |"
+        putStrLn "|________________________________| |___________________________________|"
+        putStrLn "                     ____________________________                       "
+        putStrLn "                    |                            |                      "
+        putStrLn "                    |    Digite 3 para Voltar    |                      "
+        putStrLn "                    |____________________________|                      "
+ 
 
 exibeMenuDeSelecao :: Int -> IO()
-exibeMenuDeSelecao 0 = do
-        putStrLn "                                                                        "
-        putStrLn "                      ~ESCOLHA O SEU POKEMON~                           "
-        putStrLn " ______________________________________________________________________ "
-        putStrLn "|                                                                      |"
-        putStrLn "|                    Digite 1 para Zeca skull                          |"
-        putStrLn "|                                                                      |"
-        putStrLn "|                    Digite 2 para Pikachu                             |"
-        putStrLn "|                                                                      |"
-        putStrLn "|                    Digite 3 para SeaHourse                           |"
-        putStrLn "|                                                                      |"
-        putStrLn "|                    Digite 4 para Kakuna                              |"
-        putStrLn "|                                                                      |"
-        putStrLn "|                    Digite 5 para Digglet                             |"
-        putStrLn "|                                                                      |"
-        putStrLn "|                    Digite 6 para Eevee                               |"
-        putStrLn "|                                                                      |"
-        putStrLn "|                    Digite 7 para voltar                              |"
-        putStrLn "|______________________________________________________________________|"
 exibeMenuDeSelecao 1 = do
         putStrLn "                                                                        "
         putStrLn "                  ~PLAYER 1 ESCOLHA O SEU POKEMON~                      "
@@ -152,6 +145,25 @@ exibeMenuDeSelecao 1 = do
 exibeMenuDeSelecao 2 = do
         putStrLn "                                                                        "
         putStrLn "                  ~PLAYER 2 ESCOLHA O SEU POKEMON~                      "
+        putStrLn " ______________________________________________________________________ "
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 1 para Zeca skull                          |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 2 para Pikachu                             |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 3 para SeaHourse                           |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 4 para Kakuna                              |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 5 para Digglet                             |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 6 para Eevee                               |"
+        putStrLn "|                                                                      |"
+        putStrLn "|                    Digite 7 para voltar                              |"
+        putStrLn "|______________________________________________________________________|"
+exibeMenuDeSelecao _ = do
+        putStrLn "                                                                        "
+        putStrLn "                      ~ESCOLHA O SEU POKEMON~                           "
         putStrLn " ______________________________________________________________________ "
         putStrLn "|                                                                      |"
         putStrLn "|                    Digite 1 para Zeca skull                          |"
@@ -431,22 +443,6 @@ exibeEstadoBatalhaPvp player1HP player2HP vez = do
         putStrLn "                                                                        "
         putStrLn ("| HP do Pokemon do player 1: " ++ show player1HP)
         putStrLn ("| HP do Pokemon do player 2: " ++ show player2HP)
- 
-
-{-exibeAtaques :: IO()
-exibeAtaques = do
-        putStrLn "                                                                        "
-        putStrLn "                         ~ESCOLHA O SEU ATAQUE~                         "
-        putStrLn " ________________________________   ___________________________________ "
-        putStrLn "|                                | |                                   |"
-        putStrLn "|        Digite 1 para Cura      | |       Digite 2 para Ataque        |"
-        putStrLn "|________________________________| |___________________________________|"
-<<<<<<< HEAD
-        putStrLn " ________________________________   ___________________________________ "
-        putStrLn "|                                | |                                   |"
-        putStrLn "|      Digite 3 para Critico     | |   Digite 4 para alterar Status    |"
-        putStrLn "|________________________________| |___________________________________|"
-        putStrLn "                                                                        "-} 
 
 exibeAtaques :: IO()
 exibeAtaques = do
@@ -468,6 +464,13 @@ exibeOpcaoInvalida = do
         putStrLn " ______________________________________________________________________ "
         putStrLn "|                                                                      |"
         putStrLn "|                    Opcao invalida, tente novamente!                  |"
+        putStrLn "|______________________________________________________________________|"
+
+exibetimeInexistente :: IO()
+exibetimeInexistente = do
+        putStrLn " ______________________________________________________________________ "
+        putStrLn "|                                                                      |"
+        putStrLn "|                   Você não possui um time carregado!                 |"
         putStrLn "|______________________________________________________________________|"
 
 exibePlayerGanha :: IO()

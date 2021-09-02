@@ -9,9 +9,11 @@ import Control.Concurrent
 --Define a vez de jogar (1 para Player1 e 2 para o bot)
 type Vez = Int
 
-inicioPvP :: Time -> Time -> IO()
-inicioPvP pokesp1 pokesp2= do
-        menuDeSelecaoPlayer1 pokesp1 pokesp2
+inicioPvP :: IO()
+inicioPvP = do
+        limpaTimes
+        system "cls"
+        menuDeSelecaoPlayer1 [] []
 
 
 menuDeSelecaoPlayer1 :: Time -> Time -> IO()
@@ -115,7 +117,7 @@ batalhaPvP (Pokemon nomeP1 player1HP :pokesP1)
                                 exibePlayer1Ganha
                                 pausa
                                 system "cls"
-                                inicioPvP [] []
+                                inicioPvP
 
                         else do
                                 putStrLn "\n\n"
@@ -164,7 +166,7 @@ batalhaPvP (Pokemon nomeP1 player1HP :pokesP1)
                                 exibePlayer2Ganha
                                 pausa
                                 system "cls"
-                                inicioPvP [] []
+                                inicioPvP 
 
                         else do
                                 putStrLn "\n\n"

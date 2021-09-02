@@ -7,10 +7,11 @@ import System.IO
 import Util
 import Control.Concurrent
 
-inicioPvBot :: Time -> Time -> IO()
-inicioPvBot pokesP1 pokesBot = do
+inicioPvBot :: IO()
+inicioPvBot = do
+        limpaTimes
         system "cls"
-        menuDeSelecaoPvBot pokesP1 pokesBot
+        menuDeSelecaoPvBot [] []
 
 menuDeSelecaoPvBot :: Time -> Time -> IO()
 menuDeSelecaoPvBot pokesP1 pokesBot = do
@@ -89,7 +90,7 @@ batalhaPvBot (Pokemon nomeP playerHP :timeP1)
                                 exibePlayerGanha
                                 pausa
                                 system "cls"
-                                inicioPvBot [] []
+                                inicioPvBot
 
                         else do
                                 putStrLn "\n\n"
@@ -134,7 +135,7 @@ batalhaPvBot (Pokemon nomeP playerHP :timeP1)
                         exibeBotGanha
                         pausa
                         system "cls"
-                        inicioPvBot [] []
+                        inicioPvBot
 
                 else do
                         putStrLn "\n\n"
