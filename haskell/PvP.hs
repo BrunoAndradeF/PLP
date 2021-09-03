@@ -49,6 +49,7 @@ menuDeSelecaoPlayer1 pokesP1 pokesP2 = do
 menuDeSelecaoPlayer2 :: Time -> Time -> String -> IO()
 menuDeSelecaoPlayer2 pokesP1 pokesP2 pokeDoPlayer1 = do
         system "cls"
+        exibeCabecalhoPvP
         exibeMenuDeSelecao 2
         aux <- readLn :: IO Int
         system "cls"

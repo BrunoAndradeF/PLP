@@ -201,9 +201,18 @@ playerVenceBatalha = do
 
         if progresso < 3 then do
                 system "cls"
-                putStrLn ("Você venceu a " ++ show progresso ++ "ª batalha!!")
-                putStrLn "O seu progresso foi salvo"
-                putStrLn ("Agora você irá escolher o seu " ++ show (progresso + 1) ++ "º Pokemon...")
+                putStrLn ("")
+                putStrLn ("")
+                putStrLn (" ______________________________________________________________________ ")
+                putStrLn ("|                                                                      |")
+                putStrLn ("|                        Você venceu a " ++ show progresso ++ "ª batalha!                     |")
+                putStrLn ("|                                                                      |")
+                putStrLn ("|                        O seu progresso foi salvo                     |")
+                putStrLn ("|                                                                      |")
+                putStrLn ("|                 Agora você irá escolher o seu " ++ show (progresso + 1) ++ "º Pokemon...          |")
+                putStrLn ("|                                                                      |")
+                putStrLn ("|______________________________________________________________________|")
+                putStrLn ("")
                 pausa
         else print ""
 
