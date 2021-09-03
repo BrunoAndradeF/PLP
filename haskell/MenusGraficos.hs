@@ -18,7 +18,7 @@ exibeMenuInicial = do
         putStrLn "| 888                  |_____] |_____|    |       |    |      |______  |"
         putStrLn "|                      |_____] |     |    |       |    |_____ |______  |"
         putStrLn "|                                                                      |"
-        putStrLn "|                                                                      |"
+     
         putStrLn "|                                                                      |"
         putStrLn "|                                                                      |"
         putStrLn "|                                                                      |"
@@ -27,7 +27,7 @@ exibeMenuInicial = do
         putStrLn "                      ~ESCOLHA O MODO DE JOGO~                          "
         putStrLn " ______________________________________________________________________ "
         putStrLn "|                                                                      |"
-        putStrLn "|                                                                      |"
+        
         putStrLn "|                  Digite 1 para Player vs Bot                         |"
         putStrLn "|                                                                      |"
         putStrLn "|                                                                      |"
@@ -38,7 +38,7 @@ exibeMenuInicial = do
         putStrLn "|                                                                      |"
         putStrLn "|                                                                      |"
         putStrLn "|                  Digite Ctrl+c para sair                             |"
-        putStrLn "|                                                                      |"
+        
         putStrLn "|______________________________________________________________________|"
 
 exibeCabecalhoPvBot :: IO()
