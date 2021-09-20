@@ -25,15 +25,22 @@ ataqueCritico = -1 * unsafePerformIO (getStdRandom (randomR (10, 35)))
 
 
 
-opcoesDeStatus=[0,0,0,10,10]
+
 alteraStatus :: Int
-alteraStatus = opcoesDeStatus !!unsafePerformIO (getStdRandom (randomR (0, 4)))
+alteraStatus = -1 * unsafePerformIO (getStdRandom (randomR (0, 10)))
+--Tentar deixar o status mais dinâmico
+turnosComStatus :: Int
+turnosComStatus = unsafePerformIO (getStdRandom (randomR (0,2)))
 
+perdeTurno :: String -> Bool
+perdeTurno a
+  |(a == "Digglet") || (a == "SeaHourse") || (a == "Eevee") = True
+  |otherwise = False
 
---Usar para rodar nos turnos e ver se o efeito sai depois nos rounds
-tiraStatus=[False,True,True,True,False]
-
---Pensar como pegar os tipos do pokemon da batalha
+turnoComDano :: String -> Bool
+turnoComDano a
+  |(a == "Zeca Skull") || (a == "Kakuna") || (a == "Pikachu") = True
+  |otherwise = False
 danoPorTipo :: String -> String -> Int
 danoPorTipo a b
   | (a=="Zeca Skull" && b=="SeaHourse") || (a=="Digglet" && b=="Zeca Skull") || ((a=="Digglet" && b=="Pikachu") || (a=="Digglet" && b=="Kakuna")) = 10
