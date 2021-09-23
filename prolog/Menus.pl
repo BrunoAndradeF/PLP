@@ -1,3 +1,33 @@
+
+
+exibePokemon(X):-
+        X = 1, exibeZeca.
+exibePokemon(X):-
+        X = 2, exibePikachu.
+exibePokemon(X):-
+        X = 3, exibeSeaHourse.
+exibePokemon(X):-
+        X = 4, exibeKakuna.
+exibePokemon(X):-
+        X = 5, exibeDigglet.
+exibePokemon(X):-
+        X = 6, exibeEevee.
+
+informacoesDeAtaque(Ataque, Vez):-
+        Ataque = 1, Vez = 1, writeln().
+informacoesDeAtaque(Ataque, Vez):-
+        Ataque = 1, Vez = 1, writeln().
+informacoesDeAtaque(Ataque, Vez):-
+        Ataque = 1, Vez = 1, writeln().
+informacoesDeAtaque(Ataque, Vez):-
+        Ataque = 1, Vez = 1, writeln().
+informacoesDeAtaque(Ataque, Vez):-
+        Ataque = 1, Vez = 1, writeln().
+informacoesDeAtaque(Ataque, Vez):-
+        Ataque = 1, Vez = 1, writeln().
+
+
+
 exibeMenuInicial:-
         writeln(" ______________________________________________________________________"),
         writeln("|                                                                      |"),
