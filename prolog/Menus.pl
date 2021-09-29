@@ -63,9 +63,6 @@ exibeMenuInicial:-
         writeln("|                                                                      |"),
         writeln("|                  Digite 3 para modo historia                         |"),
         writeln("|                                                                      |"),
-        writeln("|                                                                      |"),
-        writeln("|                  Digite Ctrl+c para sair                             |"),
-        writeln("|                                                                      |"),
         writeln("|______________________________________________________________________|").
 
 exibeCabecalhoPvBot:-

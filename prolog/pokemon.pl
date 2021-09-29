@@ -12,7 +12,7 @@ designaModo(Modo):-
     iniciaBatalhaPvBot.
 designaModo(Modo):-
     Modo = 2,
-    writeln("2").
+    iniciaBatalhaPvP.
 designaModo(Modo):-
     Modo = 3,
     writeln("3").
@@ -48,7 +48,7 @@ batalhaPvBot(PokemonPlayer, PokemonBot, Vez, VidaPlayer, VidaBot):-
 batalhaPvBot(PokemonPlayer, PokemonBot, Vez, VidaPlayer, VidaBot):-
     Vez = 2,
     VidaBot =< 0,
-    exibePlayerGanha.
+    exibePlayerGanha, pausa, main.
 
 batalhaPvBot(PokemonPlayer, PokemonBot, Vez, VidaPlayer, VidaBot):-
     Vez = 2,
@@ -69,7 +69,7 @@ batalhaPvBot(PokemonPlayer, PokemonBot, Vez, VidaPlayer, VidaBot):-
 batalhaPvBot(PokemonPlayer, PokemonBot, Vez, VidaPlayer, VidaBot):-
     Vez = 1,
     VidaPlayer =< 0,
-    exibeBotGanha.
+    exibeBotGanha, pausa, main.
 
 
 /*-----------------------------------ATAQUES-----------------------------------*/
@@ -94,3 +94,57 @@ danoPorTipo(PokemonAtaq, PokemonDef, R):-
     PokemonAtaq = "Zeca Skull", PokemonDef = "Digglet", R is -5.
 
 
+/*-----------------------------------PvP-----------------------------------*/
+iniciaBatalhaPvP:-
+    cls,
+    exibeCabecalhoPvP,
+    exibeMenuDeSelecao,
+    writeln("Player1 escolha seu pokemon"),
+    read(PokemonPlayer1),
+    writeln("Player2 escolha seu pokemon"),
+    read(PokemonPlayer2),
+    batalhaPvP(PokemonPlayer1, PokemonPlayer2, 1, 100, 100).
+
+batalhaPvP(PokemonPlayer1, PokemonPlayer2, Vez, VidaPlayer1, VidaPlayer2):-
+    Vez = 1,
+    cls,
+    write("vida do Player2: "),
+    writeln(VidaPlayer2),
+    write("vida do Player1: "),
+    writeln(VidaPlayer1),
+    exibePokemon(PokemonPlayer1),
+    exibeAtaques,
+    read(Ataque),
+    designaAtaque(Ataque, R),
+    write("Player1 ataca em: "),
+    writeln(R),
+    pausa,
+    NovaVida is VidaPlayer2-R,
+    batalhaPvP(PokemonPlayer1, PokemonPlayer2, 2, VidaPlayer1, NovaVida).
+
+batalhaPvP(PokemonPlayer1, PokemonPlayer2, Vez, VidaPlayer1, VidaPlayer2):-
+    Vez = 2,
+    VidaPlayer2 =< 0,
+    exibePlayer1Ganha, pausa, main.
+
+batalhaPvP(PokemonPlayer1, PokemonPlayer2, Vez, VidaPlayer1, VidaPlayer2):-
+    Vez = 2,
+    cls,
+    write("vida do Player2: "),
+    writeln(VidaPlayer2),
+    write("vida do Player1: "),
+    writeln(VidaPlayer1),
+    exibePokemon(PokemonPlayer2),
+    exibeAtaques,
+    read(Ataque),
+    designaAtaque(Ataque, R),
+    write("Player2 ataca em: "),
+    writeln(R),
+    pausa,
+    NovaVida is VidaPlayer1-R,
+    batalhaPvP(PokemonPlayer1, PokemonPlayer2, 1, NovaVida, VidaPlayer2).
+
+batalhaPvP(PokemonPlayer1, PokemonPlayer2, Vez, VidaPlayer1, VidaPlayer2):-
+    Vez = 1,
+    VidaPlayer1 =< 0,
+    exibePlayer2Ganha, pausa, main.
