@@ -444,3 +444,7 @@ exibePlayer2Ganha:-
         writeln("|  8888P   Y8888 888 888  888      X88                                 |"),
         writeln("|  888P     Y888 888 888  888  88888P'                                 |"),
         writeln("|______________________________________________________________________|").
+
+pausa:-
+    writeln("Digite: '1.' para continuar"),
+    read(X).
