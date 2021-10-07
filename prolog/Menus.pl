@@ -1,5 +1,3 @@
-
-
 exibePokemon(X):-
         X = 1, exibeZeca.
 exibePokemon(X):-
@@ -145,8 +143,6 @@ exibeMenuDeSelecao:-
         writeln("|                    Digite 5 para Digglet                             |"),
         writeln("|                                                                      |"),
         writeln("|                    Digite 6 para Eevee                               |"),
-        writeln("|                                                                      |"),
-        writeln("|                    Digite 7 para voltar                              |"),
         writeln("|______________________________________________________________________|").
 exibeMenuDeSelecaoPlayer1:-
         writeln("                                                                        "),
@@ -164,8 +160,6 @@ exibeMenuDeSelecaoPlayer1:-
         writeln("|                    Digite 5 para Digglet                             |"),
         writeln("|                                                                      |"),
         writeln("|                    Digite 6 para Eevee                               |"),
-        writeln("|                                                                      |"),
-        writeln("|                    Digite 7 para voltar                              |"),
         writeln("|______________________________________________________________________|").
 exibeMenuDeSelecaoPlayer2:-
         writeln("                                                                        "),
@@ -183,8 +177,6 @@ exibeMenuDeSelecaoPlayer2:-
         writeln("|                    Digite 5 para Digglet                             |"),
         writeln("|                                                                      |"),
         writeln("|                    Digite 6 para Eevee                               |"),
-        writeln("|                                                                      |"),
-        writeln("|                    Digite 7 para voltar                              |"),
         writeln("|______________________________________________________________________|").
 
 exibeZeca:-
@@ -353,7 +345,7 @@ exibeOpcaoInvalida:-
 
 exibePlayerGanha:-
         writeln(""),
-        writeln("                         Você derrotou o bot"),
+        writeln("                         Voce derrotou o bot"),
         writeln(""),
         writeln(" ______________________________________________________________________ "),
         writeln("|  8888888b.  888                                                      |"),
@@ -443,5 +435,5 @@ exibePlayer2Ganha:-
         writeln("|______________________________________________________________________|").
 
 pausa:-
-    writeln("Digite: '1.' para continuar"),
+    writeln("Digite '1.' para continuar"),
     read(X).
