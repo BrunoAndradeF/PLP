@@ -27,11 +27,11 @@ batalhaPvP(PokemonPlayer1, PokemonPlayer2, Vez, VidaPlayer1, VidaPlayer2):-
 batalhaPvP(PokemonPlayer1, PokemonPlayer2, Vez, VidaPlayer1, VidaPlayer2):-
     Vez = 1,
     cls,
-    write("vida do Player2: "),
-    writeln(VidaPlayer2),
-    write("vida do Player1: "),
-    writeln(VidaPlayer1),
     exibePokemon(PokemonPlayer1),
+    write("|  vida do Player1: "),
+    writeln(VidaPlayer1),
+    write("|  vida do Player2: "),
+    writeln(VidaPlayer2),
     exibeAtaques,
 
     read(Ataque),
@@ -56,11 +56,11 @@ batalhaPvP(PokemonPlayer1, PokemonPlayer2, Vez, VidaPlayer1, VidaPlayer2):-
 batalhaPvP(PokemonPlayer1, PokemonPlayer2, Vez, VidaPlayer1, VidaPlayer2):-
     Vez = 2,
     cls,
-    write("vida do Player2: "),
-    writeln(VidaPlayer2),
-    write("vida do Player1: "),
-    writeln(VidaPlayer1),
     exibePokemon(PokemonPlayer2),
+    write("|  vida do Player1: "),
+    writeln(VidaPlayer1),
+    write("|  vida do Player2: "),
+    writeln(VidaPlayer2),
     exibeAtaques,
 
     read(Ataque),

@@ -7,7 +7,12 @@ iniciaBatalhaPvBot:-
     exibeMenuDeSelecao,
     read(PokemonPlayer),
 
+    cls,
     random(1, 6, PokemonBot),
+    writeln("O bot escolheu :"),
+    exibePokemon(PokemonBot),
+    pausa,
+
     batalhaPvBot(PokemonPlayer, PokemonBot, 1, 100, 100).
 
 
@@ -20,11 +25,11 @@ batalhaPvBot(PokemonPlayer, PokemonBot, Vez, VidaPlayer, VidaBot):-
 batalhaPvBot(PokemonPlayer, PokemonBot, Vez, VidaPlayer, VidaBot):-
     Vez = 1,
     cls,
-    write("vida do bot: "),
-    writeln(VidaBot),
-    write("vida do Player: "),
-    writeln(VidaPlayer),
     exibePokemon(PokemonPlayer),
+    write("|  vida do Player: "),
+    writeln(VidaPlayer),
+    write("|  vida do Bot: "),
+    writeln(VidaBot),
     exibeAtaques,
 
     read(Ataque),
@@ -48,12 +53,6 @@ batalhaPvBot(PokemonPlayer, PokemonBot, Vez, VidaPlayer, VidaBot):-
 
 batalhaPvBot(PokemonPlayer, PokemonBot, Vez, VidaPlayer, VidaBot):-
     Vez = 2,
-    cls,
-    write("vida do bot: "),
-    writeln(VidaBot),
-    write("vida do Player: "),
-    writeln(VidaPlayer),
-
     random(1, 4, AtqBot),
     designaAtaque(AtqBot, R),
 

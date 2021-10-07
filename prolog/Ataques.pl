@@ -1,9 +1,9 @@
 designaAtaque(Ataque, R):-
-    Ataque = 1, random(5, 16, R).
+    Ataque = 1, random(9, 16, R).
 designaAtaque(Ataque, R):-
-    Ataque = 2, random(5, 26, R).
+    Ataque = 2, random(10, 26, R).
 designaAtaque(Ataque, R):-
-    Ataque = 3, random(10, 36, R).
+    Ataque = 3, random(0, 36, R).
     
 
 danoPorTipo(PokemonAtaq, PokemonDef, R):-
