@@ -19,4 +19,4 @@ designaModo(Modo):-
     iniciaBatalhaPvP.
 designaModo(Modo):-
     Modo = 3,
-    iniciaHistoria.
+    fluxoHist([], [], 1).

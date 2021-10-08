@@ -17,7 +17,7 @@ iniciaBatalhaPvBot:-
 
 
 /*-----------------------------------Player-----------------------------------*/
-batalhaPvBot(PokemonPlayer, PokemonBot, Vez, VidaPlayer, VidaBot):-
+batalhaPvBot(_, _, Vez, VidaPlayer, _):-
     Vez = 1,
     VidaPlayer =< 0,
     cls, exibeBotGanha, pausa.
@@ -46,7 +46,7 @@ batalhaPvBot(PokemonPlayer, PokemonBot, Vez, VidaPlayer, VidaBot):-
 
 
 /*-----------------------------------Bot-----------------------------------*/
-batalhaPvBot(PokemonPlayer, PokemonBot, Vez, VidaPlayer, VidaBot):-
+batalhaPvBot(_, _, Vez, _, VidaBot):-
     Vez = 2,
     VidaBot =< 0,
     cls, exibePlayerGanha, pausa.

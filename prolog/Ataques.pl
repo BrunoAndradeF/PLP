@@ -1,12 +1,12 @@
-designaAtaque(Ataque, R):-
-    Ataque = 1, random(9, 16, R).
-designaAtaque(Ataque, R):-
-    Ataque = 2, random(10, 26, R).
-designaAtaque(Ataque, R):-
-    Ataque = 3, random(0, 36, R).
-    
+designaAtaque(1, R):-
+    random(9, 16, R).
+designaAtaque(2, R):-
+    random(10, 26, R).
+designaAtaque(3, R):-
+    random(0, 36, R).
 
-danoPorTipo(PokemonAtaq, PokemonDef, R):-
+
+/*danoPorTipo(PokemonAtaq, PokemonDef, R):-
     PokemonAtaq = "Zeca Skull", PokemonDef = "SeaHourse";
     PokemonAtaq = "Digglet", PokemonDef = "Zeca Skull";
     PokemonAtaq = "Digglet", PokemonDef = "Pikachu";
@@ -16,5 +16,5 @@ danoPorTipo(PokemonAtaq, PokemonDef, R):-
     PokemonAtaq = "Kakuna", PokemonDef = "Digglet", R is -5.
 danoPorTipo(PokemonAtaq, PokemonDef, R):-
     PokemonAtaq = "Pikachu", PokemonDef = "Digglet";
-    PokemonAtaq = "Zeca Skull", PokemonDef = "Digglet", R is -5.
+    PokemonAtaq = "Zeca Skull", PokemonDef = "Digglet", R is -5.*/
 

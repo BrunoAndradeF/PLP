@@ -1,28 +1,15 @@
-exibePokemon(X):-
-        X = 1, exibeZeca.
-exibePokemon(X):-
-        X = 2, exibePikachu.
-exibePokemon(X):-
-        X = 3, exibeSeaHourse.
-exibePokemon(X):-
-        X = 4, exibeKakuna.
-exibePokemon(X):-
-        X = 5, exibeDigglet.
-exibePokemon(X):-
-        X = 6, exibeEevee.
-
-informacoesDeAtaque(Ataque, Vez):-
-        Ataque = 1, Vez = 1, writeln().
-informacoesDeAtaque(Ataque, Vez):-
-        Ataque = 1, Vez = 1, writeln().
-informacoesDeAtaque(Ataque, Vez):-
-        Ataque = 1, Vez = 1, writeln().
-informacoesDeAtaque(Ataque, Vez):-
-        Ataque = 1, Vez = 1, writeln().
-informacoesDeAtaque(Ataque, Vez):-
-        Ataque = 1, Vez = 1, writeln().
-informacoesDeAtaque(Ataque, Vez):-
-        Ataque = 1, Vez = 1, writeln().
+exibePokemon(1):-
+        exibeZeca.
+exibePokemon(2):-
+        exibePikachu.
+exibePokemon(3):-
+        exibeSeaHourse.
+exibePokemon(4):-
+        exibeKakuna.
+exibePokemon(5):-
+        exibeDigglet.
+exibePokemon(6):-
+        exibeEevee.
 
 
 
@@ -64,7 +51,6 @@ exibeMenuInicial:-
         writeln("|______________________________________________________________________|").
 
 exibeCabecalhoPvBot:-
-        
         writeln(" ______________________________________________________________________"),
         writeln("|  8888888b.  888                                                      |"),
         writeln("|  888   Y88b 888                                                      |"),
@@ -227,7 +213,7 @@ exibeDigglet:-
 
 exibeKakuna:-
         writeln(" ______________________________________________________________________ "),
-        writeln("|                                                                      |"),  
+        writeln("|                                                                      |"),
         writeln("|                            _.---._                                   |"),
         writeln("|                          .'       '.                                 |"),
         writeln("|                         |           |                                |"),
@@ -316,7 +302,7 @@ exibeSeaHourse:-
         writeln("|                                   (_                                 |"),
         writeln("|                                      /_s))                           |"),
         writeln("|                                    (                                 |"),
-        writeln("|                                      /))                             |"), 
+        writeln("|                                      /))                             |"),
         writeln("|______________________________________________________________________|"),
         writeln("| .                                       .                           -|"),
         writeln("|            ,       .                                     o.          |"),
@@ -334,7 +320,7 @@ exibeAtaques:-
         writeln("                  |                                |                    "),
         writeln("                  |      Digite 3 para Critico     |                    "),
         writeln("                  |________________________________|                    "),
-        writeln("                                                                        "),               
+        writeln("                                                                        "),
         writeln("                                                                        ").
 
 exibeOpcaoInvalida:-
@@ -436,4 +422,4 @@ exibePlayer2Ganha:-
 
 pausa:-
     writeln("Digite '1.' para continuar"),
-    read(X).
+    read(_).

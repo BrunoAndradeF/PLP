@@ -19,7 +19,7 @@ iniciaBatalhaPvP:-
 
 
 /*-----------------------------------Player 1-----------------------------------*/
-batalhaPvP(PokemonPlayer1, PokemonPlayer2, Vez, VidaPlayer1, VidaPlayer2):-
+batalhaPvP(_, _, Vez, VidaPlayer1, _):-
     Vez = 1,
     VidaPlayer1 =< 0,
     cls, exibePlayer2Ganha, pausa.
@@ -48,7 +48,7 @@ batalhaPvP(PokemonPlayer1, PokemonPlayer2, Vez, VidaPlayer1, VidaPlayer2):-
 
 
 /*-----------------------------------Player 2-----------------------------------*/
-batalhaPvP(PokemonPlayer1, PokemonPlayer2, Vez, VidaPlayer1, VidaPlayer2):-
+batalhaPvP(_, _, Vez, _, VidaPlayer2):-
     Vez = 2,
     VidaPlayer2 =< 0,
     cls, exibePlayer1Ganha, pausa.
