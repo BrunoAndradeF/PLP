@@ -1,6 +1,3 @@
-:-include('Menus.pl').
-:-include('Ataques.pl').
-
 iniciaBatalhaPvBot:-
     cls,
     exibeCabecalhoPvBot,

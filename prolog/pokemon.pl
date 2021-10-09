@@ -2,6 +2,9 @@
 :-include('Pvp.pl').
 :-include('PvBot.pl').
 :-include('Historia.pl').
+:-include('Ataques.pl').
+:-include('Util.pl').
+
 cls :- write('\33\[2J').
 
 main:-
@@ -19,4 +22,4 @@ designaModo(Modo):-
     iniciaBatalhaPvP.
 designaModo(Modo):-
     Modo = 3,
-    fluxoHist([], [], 1).
+    fluxoHist([], []).
