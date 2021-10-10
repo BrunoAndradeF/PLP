@@ -2,11 +2,12 @@ addPokemon(Time, Pokemon, [(Pokemon, 100)|Time]).
 
 isVivo((_, Vida)) :- Vida > 0.
 
-getPokemonVivo([], [0,0]).
-getPokemonVivo([Pokemon| _], Pokemon):-
+getPokemonVivo([], 0).
+getPokemonVivo([Pokemon| _], 1):-
     isVivo(Pokemon).
-getPokemonVivo([_| Tail], R):-
-    getPokemonVivo(Tail, R).
+getPokemonVivo([_| Tail], Posicao):-
+    getPokemonVivo(Tail, ProximoIndice),
+    Posicao is ProximoIndice + 1.
 
 tamanho([], 0).
 tamanho([_|L], T):-
@@ -37,3 +38,14 @@ alteraTime(Posicao, [Head|Tail], NewPokemon, Retorno):-
     alteraTime(Aux, Tail, NewPokemon, TimeAlterado),
     Retorno = [Head|TimeAlterado],
     Posicao is Aux + 1.
+
+verificaPerdeu([],true).
+verificaPerdeu([(_,HP)|Tail], Retorno):-
+    HP > 0 ->
+    Retorno = false;
+    verificaPerdeu(Tail, Retorno).
+
+curaTime([], []).
+curaTime([(Nome, _)|Tail], Retorno):-
+    curaTime(Tail, Aux),
+    Retorno = [(Nome, 100)|Aux].
