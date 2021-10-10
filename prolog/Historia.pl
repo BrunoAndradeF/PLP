@@ -47,14 +47,11 @@ batalhaHist(TimePlayer, TimeBot, 1, NumP, NumB):-
 
     cls,
     exibePokemon(NomeP),
-    write("Voce ataca em: "),
-    writeln(ValorAtaque),
+    exibeAtaque(ValorAtaque, "Voce"),
     pausa,
 
-    alteraHP(ValorAtaque, PokemonBot, PokemonAlterado),
-    alteraTime(NumB, TimeBot, PokemonAlterado, TimeBotAlterado),
-
-    fimDoTurno(TimePlayer, TimeBotAlterado, 1, NumP, NumB).
+    aplicaAtaqueHist(ValorAtaque, TimePlayer, TimeBot, NumP, NumB, PokemonPlayer, PokemonBot, TimePlayerAlterado, TimeBotAlterado),
+    fimDoTurno(TimePlayerAlterado, TimeBotAlterado, 1, NumP, NumB).
 
 batalhaHist(TimePlayer, TimeBot, 2, NumP, NumB):-
     random(1, 4, AtqBot),
@@ -62,18 +59,15 @@ batalhaHist(TimePlayer, TimeBot, 2, NumP, NumB):-
 
     getPokemon(NumB, TimeBot, PokemonBot),
     (NomeB, _) = PokemonBot,
+    getPokemon(NumP, TimePlayer, PokemonPlayer),
 
     cls,
     exibePokemon(NomeB),
-    write("Bot ataca em: "),
-    writeln(ValorAtaque),
+    exibeAtaque(ValorAtaque, "O bot"),
     pausa,
 
-    getPokemon(NumP, TimePlayer, PokemonPlayer),
-    alteraHP(ValorAtaque, PokemonPlayer, PokemonAlterado),
-    alteraTime(NumP, TimePlayer, PokemonAlterado, TimePlayerAlterado),
-
-    fimDoTurno(TimePlayerAlterado, TimeBot, 2, NumP, NumB).
+    aplicaAtaqueHist(ValorAtaque, TimeBot, TimePlayer, NumB, NumP, PokemonBot, PokemonPlayer, TimeBotAlterado, TimePlayerAlterado),
+    fimDoTurno(TimePlayerAlterado, TimeBotAlterado, 2, NumP, NumB).
 
 fimDoTurno(TimePlayer, TimeBot, 1, NumP, NumB):-
     verificaPerdeu(TimeBot,Retorno),

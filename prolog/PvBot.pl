@@ -30,16 +30,15 @@ batalhaPvBot(PokemonPlayer, PokemonBot, Vez, VidaPlayer, VidaBot):-
     exibeAtaques,
 
     read(Ataque),
-    designaAtaque(Ataque, R),
+    designaAtaque(Ataque, ValorAtaque),
 
     cls,
     exibePokemon(PokemonPlayer),
-    write("Player ataca em: "),
-    writeln(R),
+    exibeAtaque(ValorAtaque,"Voce"),
     pausa,
 
-    NovaVida is VidaBot-R,
-    batalhaPvBot(PokemonPlayer, PokemonBot, 2, VidaPlayer, NovaVida).
+    aplicaAtaque(ValorAtaque, VidaPlayer, VidaBot, VidaPlayerAlterada, VidaBotAlterada),
+    batalhaPvBot(PokemonPlayer, PokemonBot, 2, VidaPlayerAlterada, VidaBotAlterada).
 
 
 /*-----------------------------------Bot-----------------------------------*/
@@ -51,15 +50,14 @@ batalhaPvBot(_, _, Vez, _, VidaBot):-
 batalhaPvBot(PokemonPlayer, PokemonBot, Vez, VidaPlayer, VidaBot):-
     Vez = 2,
     random(1, 4, AtqBot),
-    designaAtaque(AtqBot, R),
+    designaAtaque(AtqBot, ValorAtaque),
 
     cls,
     exibePokemon(PokemonBot),
-    write("Bot ataca em: "),
-    writeln(R),
+    exibeAtaque(ValorAtaque,"O Bot"),
     pausa,
 
-    NovaVida is VidaPlayer-R,
-    batalhaPvBot(PokemonPlayer, PokemonBot, 1, NovaVida, VidaBot).
+    aplicaAtaque(ValorAtaque, VidaBot, VidaPlayer, VidaBotAlterada, VidaPlayerAlterada),
+    batalhaPvBot(PokemonPlayer, PokemonBot, 1, VidaPlayerAlterada, VidaBotAlterada).
 
 
