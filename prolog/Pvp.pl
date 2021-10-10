@@ -31,16 +31,15 @@ batalhaPvP(PokemonPlayer1, PokemonPlayer2, Vez, VidaPlayer1, VidaPlayer2):-
     exibeAtaques,
 
     read(Ataque),
-    designaAtaque(Ataque, R),
+    designaAtaque(Ataque, ValorAtaque),
 
     cls,
     exibePokemon(PokemonPlayer1),
-    write("Player1 ataca em: "),
-    writeln(R),
+    exibeAtaque(ValorAtaque,"Player1"),
     pausa,
 
-    NovaVida is VidaPlayer2-R,
-    batalhaPvP(PokemonPlayer1, PokemonPlayer2, 2, VidaPlayer1, NovaVida).
+    aplicaAtaque(ValorAtaque, VidaPlayer1, VidaPlayer2, VidaPlayer1Alterada, VidaPlayer2Alterada),
+    batalhaPvP(PokemonPlayer1, PokemonPlayer2, 2, VidaPlayer1Alterada, VidaPlayer2Alterada).
 
 
 /*-----------------------------------Player 2-----------------------------------*/
@@ -60,13 +59,12 @@ batalhaPvP(PokemonPlayer1, PokemonPlayer2, Vez, VidaPlayer1, VidaPlayer2):-
     exibeAtaques,
 
     read(Ataque),
-    designaAtaque(Ataque, R),
+    designaAtaque(Ataque, ValorAtaque),
 
     cls,
     exibePokemon(PokemonPlayer2),
-    write("Player2 ataca em: "),
-    writeln(R),
+    exibeAtaque(ValorAtaque,"Player2"),
     pausa,
 
-    NovaVida is VidaPlayer1-R,
-    batalhaPvP(PokemonPlayer1, PokemonPlayer2, 1, NovaVida, VidaPlayer2).
+    aplicaAtaque(ValorAtaque, VidaPlayer2, VidaPlayer1, VidaPlayer2Alterada, VidaPlayer1Alterada),
+    batalhaPvP(PokemonPlayer1, PokemonPlayer2, 1, VidaPlayer1Alterada, VidaPlayer2Alterada).
