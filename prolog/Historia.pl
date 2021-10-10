@@ -23,12 +23,10 @@ fluxoHist(TimePlayer, TimeBot) :-
     addPokemon(TimeBot, PokemonBot, NovoTimeBot),
     pausa,
 
-    batalhaHist(NovoTimePLayer, NovoTimeBot, true, 1, 1).
+    batalhaHist(NovoTimePLayer, NovoTimeBot, 1, 1, 1).
 
 
-batalhaHist(TimePlayer, TimeBot, Vez, NumP, NumB):-
-
-    Vez,
+batalhaHist(TimePlayer, TimeBot, 1, NumP, NumB):-
     cls,
 
     getPokemon(NumP, TimePlayer, PokemonPlayer),
@@ -54,13 +52,11 @@ batalhaHist(TimePlayer, TimeBot, Vez, NumP, NumB):-
     pausa,
 
     alteraHP(ValorAtaque, PokemonBot, PokemonAlterado),
-    alteraTime(NumB, TimeBot, PokemonAlterado, TimeAlterado),
+    alteraTime(NumB, TimeBot, PokemonAlterado, TimeBotAlterado),
 
-    writeln("Fim do turno"),
-    pausa.
+    fimDoTurno(TimePlayer, TimeBotAlterado, 1, NumP, NumB).
 
-batalhaHist(TimePlayer, TimeBot, Vez, NumP, NumB):-
-    not(Vez),
+batalhaHist(TimePlayer, TimeBot, 2, NumP, NumB):-
     random(1, 4, AtqBot),
     designaAtaque(AtqBot, ValorAtaque),
 
@@ -74,12 +70,43 @@ batalhaHist(TimePlayer, TimeBot, Vez, NumP, NumB):-
     pausa,
 
     getPokemon(NumP, TimePlayer, PokemonPlayer),
-
     alteraHP(ValorAtaque, PokemonPlayer, PokemonAlterado),
-    alteraTime(numB, TimePlayer, PokemonAlterado, TimeAlterado),
+    alteraTime(NumP, TimePlayer, PokemonAlterado, TimePlayerAlterado),
+
+    fimDoTurno(TimePlayerAlterado, TimeBot, 2, NumP, NumB).
+
+fimDoTurno(TimePlayer, TimeBot, 1, NumP, NumB):-
+    verificaPerdeu(TimeBot,Retorno),
+    Retorno ->
 
     cls,
-    writeln("Fim do turno"),
-    pausa.
+    writeln("voce venceu uma batalha"),
+    pausa,
 
+    curaTime(TimePlayer, TimePlayerCurado),
+    curaTime(TimeBot, TimeBotCurado),
+    fluxoHist(TimePlayerCurado, TimeBotCurado)
+    ;
+
+    getPokemon(NumB, TimeBot,PokemonBot),
+    isVivo(PokemonBot)->
+    batalhaHist(TimePlayer,TimeBot,2,NumP,NumB)
+    ;
+
+    getPokemonVivo(TimeBot, NovoNumB),
+    batalhaHist(TimePlayer,TimeBot,2,NumP,NovoNumB).
+
+fimDoTurno(TimePlayer, TimeBot, 2, NumP, NumB):-
+    verificaPerdeu(TimePlayer,Retorno),
+    Retorno ->
+    cls,exibeBotGanha,pausa
+    ;
+
+    getPokemon(NumP, TimePlayer,PokemonPlayer),
+    isVivo(PokemonPlayer)->
+    batalhaHist(TimePlayer,TimeBot,1,NumP,NumB)
+    ;
+
+    getPokemonVivo(TimePlayer,NovoNumP),
+    batalhaHist(TimePlayer,TimeBot,1,NovoNumP,NumB).
 

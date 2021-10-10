@@ -1,9 +1,11 @@
 designaAtaque(1, R):-
     random(9, 16, R).
 designaAtaque(2, R):-
-    random(10, 26, R).
+    random(10, 26, Aux),
+    R is Aux * -1.
 designaAtaque(3, R):-
-    random(0, 36, R).
+    random(0, 36, Aux),
+    R is Aux * -1.
 
 
 /*danoPorTipo(PokemonAtaq, PokemonDef, R):-
