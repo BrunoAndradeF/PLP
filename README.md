@@ -17,6 +17,7 @@ git clone https://github.com/Bruno-af/PLP
 cd PLP  
 ..
 ```
+#### Versão Haskell
 - Ter haskell instalado em sua máquina
 - Instalar a biblioteca System.Random
 ```
@@ -25,3 +26,6 @@ cabal install --lib random
 ```
 
 Feito isso, rode o jogo com o ghci via terminal
+#### Versão Prolog
+- Ter o [SWI-Prolog](https://www.swi-prolog.org/download/stable) instalado em sua máquina
+- Feito isso, execute o jogo via o SWI-Prolog.
